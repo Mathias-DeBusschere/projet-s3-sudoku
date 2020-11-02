@@ -6,8 +6,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.util.ArrayList;
-
 public class Main extends Application {
 
     @Override
@@ -22,7 +20,7 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
 
-        Grille g1 = new Grille(9);
+        GrilleController g1 = new GrilleController(9);
         System.out.println(g1.toString());
 
         int[][] matrice = {
@@ -54,8 +52,8 @@ public class Main extends Application {
         };
 
 
-        Grille g2 = new Grille(matrice);
-        Grille g3 = new Grille(matriceCorrect);
+        GrilleController g2 = new GrilleController(matrice);
+        GrilleController g3 = new GrilleController(matriceCorrect);
         System.out.println(g2.toString());
         System.out.println(g2.valueIsCorrect(0,2));
 

@@ -2,12 +2,12 @@ package sample;
 
 import java.util.ArrayList;
 
-public class Grille {
+public class GrilleController {
 
     private Case [][] grille;
     private int taille;
 
-    public Grille(int taille) {
+    public GrilleController(int taille) {
         this.taille = taille;
         this.grille = new Case[taille][taille];
         for (int i =0;i<taille; i++){
@@ -17,7 +17,7 @@ public class Grille {
         }
     }
 
-    public Grille(int[][] valeurs) {
+    public GrilleController(int[][] valeurs) {
         this.taille = valeurs.length;
         this.grille = new Case[taille][taille];
         for (int i =0;i<taille; i++){
