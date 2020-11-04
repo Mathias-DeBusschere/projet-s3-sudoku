@@ -1,14 +1,16 @@
 package sample;
 
-import javafx.event.ActionEvent;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 
-import javax.swing.*;
 import java.io.IOException;
 
-public class SudokuController {
+public class SudokuController extends Parent {
     //déclaration de la scène
     private Scene sceneSudoku;
     public void setSceneSudoku(Scene scene) {
@@ -18,18 +20,17 @@ public class SudokuController {
     @FXML
     private Button lancerPartie;
     @FXML
-    private Button quitterJeu;
+    private Button fermerJeu;
 
 
     //BoutonLancer : au click => lancerPartie()
     //BoutonQuitter : au click => quitterJeu()   (fermer la fenêtre)
 
-    public void lancerPartie(ActionEvent event) throws IOException {
-        //fonction lancer la partie
+    public void lancerPartie(MouseEvent event) throws IOException {
     }
 
-    public void quitterJeu(ActionEvent event) throws  IOException {
-        //fonction quitter le jeu
+    public void fermerJeu(MouseEvent event) throws  IOException {
+        Platform.exit();
     }
 
 }

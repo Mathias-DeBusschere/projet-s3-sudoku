@@ -1,8 +1,11 @@
 package sample;
 
+import javafx.scene.Node;
+import javafx.scene.Parent;
+
 import java.util.ArrayList;
 
-public class GrilleController {
+public class GrilleController extends Parent {
 
     private Case [][] grille;
     private int taille;
@@ -66,8 +69,8 @@ public class GrilleController {
     public boolean isCorrect(){
         boolean correct = true;
         int ligne = 0; int col = 0;
-        while(ligne < taille && correct == true){
-            while(col < taille && correct ==true){
+        while(ligne < taille && correct){
+            while(col < taille && correct){
                 correct=verifAlreadyInLine(ligne,col) && verifAlreadyInRow(ligne,col) && verifAlreadyInBlock(ligne,col);
             }
         }
@@ -116,5 +119,8 @@ public class GrilleController {
     }
 
 
-
+    @Override
+    public Node getStyleableNode() {
+        return null;
+    }
 }
