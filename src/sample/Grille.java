@@ -2,15 +2,16 @@ package sample;
 
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 
 import java.util.ArrayList;
 
-public class GrilleController extends Parent {
+public class Grille extends Parent {
 
     private Case [][] grille;
     private int taille;
 
-    public GrilleController(int taille) {
+    public Grille(int taille) {
         this.taille = taille;
         this.grille = new Case[taille][taille];
         for (int i =0;i<taille; i++){
@@ -20,7 +21,7 @@ public class GrilleController extends Parent {
         }
     }
 
-    public GrilleController(int[][] valeurs) {
+    public Grille(int[][] valeurs) {
         this.taille = valeurs.length;
         this.grille = new Case[taille][taille];
         for (int i =0;i<taille; i++){
@@ -123,4 +124,8 @@ public class GrilleController extends Parent {
     public Node getStyleableNode() {
         return null;
     }
+
+
+
+
 }

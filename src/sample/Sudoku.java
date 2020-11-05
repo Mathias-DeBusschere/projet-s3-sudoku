@@ -10,7 +10,7 @@ import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 
-public class SudokuController extends Parent {
+public class Sudoku extends Parent {
     //déclaration de la scène
     private Scene sceneSudoku;
     public void setSceneSudoku(Scene scene) {
@@ -27,6 +27,7 @@ public class SudokuController extends Parent {
     //BoutonQuitter : au click => quitterJeu()   (fermer la fenêtre)
 
     public void lancerPartie(MouseEvent event) throws IOException {
+
     }
 
     public void fermerJeu(MouseEvent event) throws  IOException {

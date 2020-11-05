@@ -11,7 +11,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("Sudoku.fxml"));
-        primaryStage.setTitle("Hello World");
+        primaryStage.setTitle("Sudoku");
         primaryStage.setScene(new Scene(root, 860, 700));
         primaryStage.show();
     }
