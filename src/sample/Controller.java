@@ -34,7 +34,6 @@ public class Controller extends Parent {
         //getScene(new Scene(grille, 860, 700));
         ((Stage) getScene().getWindow()).setScene(new Scene(grille,860,700));*/
 
-
         FXMLLoader grilleLoader = new FXMLLoader(getClass().getResource("Grille.fxml"));
         Parent firstPane = grilleLoader.load();
 
