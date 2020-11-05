@@ -1,8 +1,14 @@
 package sample;
 
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 
@@ -22,13 +28,24 @@ public class Grille extends Parent {
     }
 
     public Grille(int[][] valeurs) {
+        GridPane gridPane = new GridPane();
+        gridPane.setPrefSize(600,600);
+        gridPane.setBackground(new Background(new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY)));
+        gridPane.setGridLinesVisible(true);
         this.taille = valeurs.length;
         this.grille = new Case[taille][taille];
         for (int i =0;i<taille; i++){
             for(int j=0;j<taille;j++){
-                grille[i][j] = new Case(valeurs[i][j]);
+                Case case1 = new Case(valeurs[i][j]);
+                grille[i][j] = case1;
+                gridPane.add(case1,i,j);
             }
         }
+        getChildren().add(gridPane);
+    }
+
+    private void visualGen() {
+
     }
 
     @Override

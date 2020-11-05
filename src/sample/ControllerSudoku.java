@@ -12,13 +12,15 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class Controller extends Parent {
+public class ControllerSudoku {
 
-    /** SUDOKU */
-    private Scene scene;
-    public void setScene(Scene scene) {
-        this.scene = scene;
-    }
+//    /** SUDOKU */
+//    semble inutile, le code marche sans, je sais pas purquoi
+//    private Scene scene;
+//    public void setScene(Scene scene) {
+//        this.scene = scene;
+//    }
+
     //déclaration des "variables" utilisées
     @FXML
     private Button lancerPartie;
@@ -27,26 +29,27 @@ public class Controller extends Parent {
 
 
     //BoutonLancer : au click => lancerPartie()
-    //BoutonQuitter : au click => quitterJeu()   (fermer la fenêtre)
     @FXML
-    public void lancerPartie(MouseEvent event) throws IOException {
+    private void lancerPartie(MouseEvent event) throws IOException {
         /*Parent grille = FXMLLoader.load(getClass().getResource("Grille.fxml"));
         //getScene(new Scene(grille, 860, 700));
         ((Stage) getScene().getWindow()).setScene(new Scene(grille,860,700));*/
 
-        FXMLLoader grilleLoader = new FXMLLoader(getClass().getResource("Grille.fxml"));
+        FXMLLoader grilleLoader = new FXMLLoader(getClass().getResource("Grilletest.fxml"));
         Parent firstPane = grilleLoader.load();
 
         Scene sceneGrille = new Scene(firstPane, 860, 700);
 
-        Controller controller = (Controller) grilleLoader.getController();
-        controller.setScene(((Node)event.getSource()).getScene());
+//        Controller controller = (Controller) grilleLoader.getController();
+//        controller.setScene(((Node)event.getSource()).getScene());
 
         Stage primaryStage = (Stage)((Node)event.getSource()).getScene().getWindow();
         primaryStage.setScene(sceneGrille);
     }
 
-    public void fermerJeu(MouseEvent event) throws  IOException {
+    //BoutonQuitter : au click => quitterJeu()   (fermer la fenêtre)
+    @FXML
+    private void fermerJeu(MouseEvent event) throws  IOException {
         Platform.exit();
     }
 }
