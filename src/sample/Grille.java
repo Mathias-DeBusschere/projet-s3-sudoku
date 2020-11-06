@@ -12,6 +12,8 @@ import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 
+import static java.lang.Math.sqrt;
+
 public class Grille extends Parent {
 
     private Case [][] grille;
@@ -19,26 +21,51 @@ public class Grille extends Parent {
 
     public Grille(int taille) {
         this.taille = taille;
+        GridPane gridPane = new GridPane();
+        gridPane.setPrefSize((600/taille)*taille,(600/taille)*taille);
+        gridPane.setBackground(new Background(new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY)));
+        gridPane.setGridLinesVisible(true);
         this.grille = new Case[taille][taille];
         for (int i =0;i<taille; i++){
             for(int j=0;j<taille;j++){
-                grille[i][j] = new Case();
+                Case case1 = new Case();
+                grille[i][j] = case1;
+                gridPane.add(case1,i,j);
+                if ((i+1)%sqrt(taille)==0 && i+1!=taille){
+                    case1.addBorder("left");
+                }
+                if ((j+1)%sqrt(taille)==0 && j+1!=taille){
+                    case1.addBorder("down");
+                }
+                if ((i+1)%sqrt(taille)==0 && i+1!=taille && (j+1)%sqrt(taille)==0 && j+1!=taille) {
+                    case1.addBorder("leftdown");
+                }
             }
         }
+        getChildren().add(gridPane);
     }
 
     public Grille(int[][] valeurs) {
+        this.taille = valeurs.length;
         GridPane gridPane = new GridPane();
-        gridPane.setPrefSize(600,600);
+        gridPane.setPrefSize((600/taille)*taille,(600/taille)*taille);
         gridPane.setBackground(new Background(new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY)));
         gridPane.setGridLinesVisible(true);
-        this.taille = valeurs.length;
         this.grille = new Case[taille][taille];
         for (int i =0;i<taille; i++){
             for(int j=0;j<taille;j++){
                 Case case1 = new Case(valeurs[i][j]);
                 grille[i][j] = case1;
                 gridPane.add(case1,i,j);
+                if ((i+1)%sqrt(taille)==0 && i+1!=taille){
+                    case1.addBorder("left");
+                }
+                if ((j+1)%sqrt(taille)==0 && j+1!=taille){
+                    case1.addBorder("down");
+                }
+                if ((i+1)%sqrt(taille)==0 && i+1!=taille && (j+1)%sqrt(taille)==0 && j+1!=taille) {
+                    case1.addBorder("leftdown");
+                }
             }
         }
         getChildren().add(gridPane);

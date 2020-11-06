@@ -2,8 +2,11 @@ package sample;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 
@@ -33,13 +36,10 @@ public class Case extends Parent {
     private void paramTextField() {
 //        force l'utilisation d'un nombre
 //        https://stackoverflow.com/questions/7555564/what-is-the-recommended-way-to-make-a-numeric-textfield-in-javafx
-        valeur.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue,
-                                String newValue) {
-                if (!newValue.matches("\\d*")) {
-                    valeur.setText(newValue.replaceAll("[^\\d]", ""));
-                }
+//        regex tester : https://regex101.com/tests
+        valeur.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d")) {
+                valeur.setText(newValue.replaceAll("[^\\d]", ""));
             }
         });
         valeur.setPrefSize(600/9,600/9);
@@ -55,6 +55,24 @@ public class Case extends Parent {
 
     public void addNote(int note) {
         this.note.add(note);
+    }
+
+    public void addBorder (String cote) {
+        if (cote.matches("left")) {
+            valeur.setBorder(new Border(new BorderStroke(Color.BLACK, Color.BLACK, Color.BLACK, Color.BLACK,
+                    BorderStrokeStyle.NONE, BorderStrokeStyle.SOLID, BorderStrokeStyle.NONE, BorderStrokeStyle.NONE,
+                    CornerRadii.EMPTY, new BorderWidths(3), Insets.EMPTY)));
+        }
+        if (cote.matches("down")) {
+            valeur.setBorder(new Border(new BorderStroke(Color.BLACK, Color.BLACK, Color.BLACK, Color.BLACK,
+                    BorderStrokeStyle.NONE, BorderStrokeStyle.NONE, BorderStrokeStyle.SOLID, BorderStrokeStyle.NONE,
+                    CornerRadii.EMPTY, new BorderWidths(3), Insets.EMPTY)));
+        }
+        if (cote.matches("leftdown")) {
+            valeur.setBorder(new Border(new BorderStroke(Color.BLACK, Color.BLACK, Color.BLACK, Color.BLACK,
+                    BorderStrokeStyle.NONE, BorderStrokeStyle.SOLID, BorderStrokeStyle.SOLID, BorderStrokeStyle.NONE,
+                    CornerRadii.EMPTY, new BorderWidths(3), Insets.EMPTY)));
+        }
     }
 
 }
