@@ -71,7 +71,7 @@ public class Case extends Parent {
 
     //Permet de changer la valeur et de verifier si la valeur rentrée n'est pas fausse
     public void setValeur(int valeur) {
-        if(!initiale){
+        if(!initiale && !indice){
             this.valeur=valeur;
             text.setText(String.valueOf(valeur));
             grille.valueIsCorrect(this);}}
