@@ -10,9 +10,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
+import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+
+import static java.lang.Math.sqrt;
 
 public class ControllerGrille {
 
@@ -46,18 +49,43 @@ public class ControllerGrille {
                 {4,6,7,5,8,2,9,3,1},
         };
 
+        int[][] matrice1 = {
+                {1,2,3,4},
+                {3,4,2,1},
+                {2,1,4,3},
+                {4,3,1,2}
+        };
 
-        Grille g2 = new Grille(matrice,matriceCorrect);
+
+        g = new Grille(matrice,matriceCorrect);
+//        g = new Grille(matrice1,matrice1);
 
         //noinspection IntegerDivisionInFloatingPointContext
-        double size= (600/matrice.length)*matrice.length;
+        double size = (600/matrice.length)*matrice.length;
         this.grille.setPrefSize(size,size);
 
-        g2.setDifficulte(Difficulte.FACILE);
-        addElement(g2);
-        g2.setFocusTraversable(true);
-        g=g2;
+        g.setDifficulte(Difficulte.FACILE);
+        addElement(g);
+        g.setFocusTraversable(true);
+//        affichageLigneBlock(matrice.length);
+    }
 
+    //WIP
+    @SuppressWarnings("IntegerDivisionInFloatingPointContext")
+    private void affichageLigneBlock(int taille) {
+        for (int i = 1; i<(int)sqrt(taille); i++) {
+            Line line = new Line();
+            double space = 600/taille*sqrt(taille);
+            double size = 600/taille*taille;
+            line.setStartX(50+space);
+            line.setTranslateY(-size/2+i*space);
+//            line.setStartY(50);
+            line.setEndX(50+space+size);
+//            line.setEndY(50);
+//            line.setRotate(90);
+            line.setStrokeWidth(2);
+            addElement(line);
+        }
     }
 
     @FXML
@@ -102,7 +130,8 @@ public class ControllerGrille {
 
     @FXML
     private void indice(MouseEvent event) {
-
+        g.getCaseselectionne().setValeur(g.getSolution()[g.getCaseselectionne().getLigne()][g.getCaseselectionne().getColonne()]);
+        g.getCaseselectionne().setIndiceStyle();
     }
 
     @FXML
@@ -137,12 +166,12 @@ public class ControllerGrille {
     @FXML
     private void actionBouton_9() {if(!(g.getCaseselectionne() ==null))g.getCaseselectionne().setValeur(9);}
     @FXML
-    private void effacer() {if(!(g.getCaseselectionne() ==null))g.getCaseselectionne().setValeur(0);}
+    private void effacer() {if(!(g.getCaseselectionne() ==null))g.getCaseselectionne().deleteValeur();}
 
 
     public void addElement(Node node) {
-        grille.setAlignment(Pos.BASELINE_CENTER);
         grille.getChildren().add(node);
+//        grille.setAlignment(Pos.CENTER);
     }
 
 }

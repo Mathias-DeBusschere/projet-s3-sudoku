@@ -1,20 +1,13 @@
 package sample;
 
 
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
-import javafx.scene.input.KeyCode;
-import javafx.scene.paint.Color;
-import javafx.geometry.Insets;
 import javafx.scene.Node;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 
 public class Grille extends Parent {
 
@@ -29,11 +22,13 @@ public class Grille extends Parent {
         this.caseselectionne=null;
         this.solution=solution;
         this.difficulte=Difficulte.FACILE;
-        GridPane gridPane = new GridPane();
-        gridPane.setPrefSize((600/taille)*taille,(600/taille)*taille);
-        gridPane.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
-        gridPane.setGridLinesVisible(true);
         this.grille = new Case[taille][taille];
+
+        GridPane gridPane = new GridPane();
+        //noinspection IntegerDivisionInFloatingPointContext
+        gridPane.setPrefSize((600/taille)*taille,(600/taille)*taille);
+        gridPane.setAlignment(Pos.CENTER);
+
         boolean caseinitiale;
         for (int i =0;i<taille; i++){
             for(int j=0;j<taille;j++){
@@ -41,15 +36,6 @@ public class Grille extends Parent {
                 Case case1 = new Case(valeurs[i][j],this,i,j,caseinitiale);
                 grille[i][j] = case1;
                 gridPane.add(case1,i,j);
-                /*if ((i+1)%sqrt(taille)==0 && i+1!=taille){
-                    case1.addBorder("left");
-                }
-                if ((j+1)%sqrt(taille)==0 && j+1!=taille){
-                    case1.addBorder("down");
-                }
-                if ((i+1)%sqrt(taille)==0 && i+1!=taille && (j+1)%sqrt(taille)==0 && j+1!=taille) {
-                    case1.addBorder("leftdown");
-                }*/
             }
         }
         getChildren().add(gridPane);
@@ -137,6 +123,10 @@ public class Grille extends Parent {
 
     public Case getCase(int ligne, int colonne){
         return grille[ligne][colonne];
+    }
+
+    public int getTaille() {
+        return taille;
     }
 
     public boolean isCorrect(){
@@ -231,15 +221,12 @@ public class Grille extends Parent {
         return correct;
     }
 
-
-
-
-
     @Override
     public Node getStyleableNode() {
         return null;
     }
 
-
-
+    public int[][] getSolution() {
+        return solution;
+    }
 }

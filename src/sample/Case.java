@@ -1,13 +1,13 @@
 package sample;
 
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 import java.util.ArrayList;
-
+import java.util.Stack;
 
 public class Case extends Parent {
 
@@ -17,19 +17,23 @@ public class Case extends Parent {
     private final int ligne;
     private final int colonne;
     private final boolean initiale;
+    private boolean indice = false;
 
-    Region fond = new Region();
+//    Region fond = new Region();
+    StackPane fond = new StackPane();
     Text text = new Text();
 
-    public Case(int valeur,Grille grille1,int ligne, int colonne, boolean initiale) {
+    public Case(int valeur,Grille grille,int ligne, int colonne, boolean initiale) {
         this.valeur = valeur;
-        grille=grille1;
+        this.grille = grille;
         this.note = new ArrayList<>();
-        this.ligne =ligne;
-        this.colonne =colonne;
-        this.initiale=initiale;
+        this.ligne = ligne;
+        this.colonne = colonne;
+        this.initiale = initiale;
 
-        fond.setPrefSize(600/9,600/9);
+        //noinspection IntegerDivisionInFloatingPointContext
+        double size = 600/grille.getTaille();
+        fond.setPrefSize(size,size);
         fond.setStyle( "-fx-background-color: white; -fx-border-color: grey;");
         this.getChildren().add(fond);
 
@@ -37,15 +41,14 @@ public class Case extends Parent {
         else text.setText(String.valueOf(valeur));
 
         text.setFill(Color.BLACK);
-        text.setX(30);
-        text.setY(58);
+        text.setY(60);
         if(initiale){
             text.setStyle( "-fx-font-size: 30;-fx-font-weight: bold;");
         }else{
             text.setStyle("-fx-font-size: 30;");
         }
 
-        this.getChildren().add(text);
+        fond.getChildren().add(text);
 
         fond.setOnMouseClicked(mouseEvent -> action());
         text.setOnMouseClicked(mouseEvent -> action());
@@ -53,8 +56,6 @@ public class Case extends Parent {
         fond.setOnMouseExited(mouseEvent -> fond.setOpacity(1));
 
     }
-
-
 
     public int getValeur() {
         return valeur;
@@ -75,9 +76,10 @@ public class Case extends Parent {
             text.setText(String.valueOf(valeur));
             grille.valueIsCorrect(this);}}
 
+
     //Permet d'effacer une valeur d'une case (set 0) et d'effacer les errorStyle de chaque case concernée.
     public void deleteValeur(){
-        if(!initiale){
+        if(!initiale && !indice){
             this.valeur=0;
             text.setText("");
             //setDefaultStyle() pour les cases de la même ligne et de la même colonne
@@ -116,13 +118,19 @@ public class Case extends Parent {
     }
 
     public void setDefaultStyle(){
-
         fond.setStyle( "-fx-background-color: white; -fx-border-color: grey;" );
         if(initiale){ text.setStyle("-fx-font-size: 30; -fx-font-weight: bold ");}
         else{
             text.setStyle("-fx-font-size: 30;");
         }
 
+    }
+
+    public void setIndiceStyle(){
+        if (!initiale) {
+            text.setFill(Color.GREEN);
+            indice = true;
+        }
     }
 
 }
