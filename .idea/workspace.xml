@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+<<<<<<< HEAD
   <component name="BranchesTreeState">
     <expand>
       <path>
@@ -20,6 +21,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ddc9c9b0-1fc8-4d33-b8d1-21af911b3ef4" name="Default Changelist" comment="" />
+=======
+  <component name="ChangeListManager">
+    <list default="true" id="02bd698b-91f1-4a2c-8963-4165d7c32705" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/src/sample/Grille.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Grille.fxml" afterDir="false" />
+    </list>
+>>>>>>> c5a74b79bfb1dd8b11367648ae551268cf42b70b
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -29,13 +36,17 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="FxmlFile" />
+<<<<<<< HEAD
         <option value="Class" />
+=======
+>>>>>>> c5a74b79bfb1dd8b11367648ae551268cf42b70b
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+<<<<<<< HEAD
   <component name="ProjectId" id="1jkZBQ74wx0gMxPZcxrqwFsRxP8" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -48,6 +59,20 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
+=======
+  <component name="ProjectId" id="1jkczilK70TXfbb0FkAphVLGmSs" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$JAVA_FX$" />
+>>>>>>> c5a74b79bfb1dd8b11367648ae551268cf42b70b
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -74,6 +99,7 @@
       </list>
     </recent_temporary>
   </component>
+<<<<<<< HEAD
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -89,10 +115,28 @@
       <workItem from="1604598990204" duration="1603000" />
       <workItem from="1604742922360" duration="26000" />
       <workItem from="1604742972327" duration="138000" />
+=======
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="02bd698b-91f1-4a2c-8963-4165d7c32705" name="Default Changelist" comment="" />
+      <created>1604351794705</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1604351794705</updated>
+      <workItem from="1604351795814" duration="4678000" />
+      <workItem from="1604403146666" duration="2232000" />
+      <workItem from="1604405807658" duration="1398000" />
+      <workItem from="1604441285777" duration="253000" />
+      <workItem from="1604866777725" duration="391000" />
+>>>>>>> c5a74b79bfb1dd8b11367648ae551268cf42b70b
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
+<<<<<<< HEAD
     <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -156,5 +200,30 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="208" y="31" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1604351174716" />
+=======
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="552" y="199" key="#Project_Structure" timestamp="1604352031361">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="552" y="199" key="#Project_Structure/0.0.1920.1080@0.0.1920.1080" timestamp="1604352031361" />
+    <state x="414" y="196" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1604352003992">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="414" y="196" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1604352003992" />
+    <state x="790" y="251" key="#com.intellij.openapi.roots.ui.configuration.libraryEditor.LibraryEditorDialog" timestamp="1604352030633">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="790" y="251" key="#com.intellij.openapi.roots.ui.configuration.libraryEditor.LibraryEditorDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1604352030633" />
+    <state x="666" y="282" key="FileChooserDialogImpl" timestamp="1604352062676">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="666" y="282" key="FileChooserDialogImpl/0.0.1920.1080@0.0.1920.1080" timestamp="1604352062676" />
+    <state x="440" y="115" key="SettingsEditor" timestamp="1604352067073">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="440" y="115" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1604352067073" />
+>>>>>>> c5a74b79bfb1dd8b11367648ae551268cf42b70b
   </component>
 </project>

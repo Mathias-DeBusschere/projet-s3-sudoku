@@ -1,9 +1,16 @@
 package sample;
 
+
+import javafx.event.EventHandler;
+import javafx.scene.Parent;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.LinearGradient;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Rectangle;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
@@ -17,10 +24,12 @@ import static java.lang.Math.sqrt;
 public class Grille extends Parent {
 
     private Case [][] grille;
+    private int [][] solution;
     private int taille;
 
     public Grille(int taille) {
         this.taille = taille;
+        this.solution=null;
         GridPane gridPane = new GridPane();
         gridPane.setPrefSize((600/taille)*taille,(600/taille)*taille);
         gridPane.setBackground(new Background(new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY)));
@@ -47,6 +56,7 @@ public class Grille extends Parent {
 
     public Grille(int[][] valeurs) {
         this.taille = valeurs.length;
+        this.solution=null;
         GridPane gridPane = new GridPane();
         gridPane.setPrefSize((600/taille)*taille,(600/taille)*taille);
         gridPane.setBackground(new Background(new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY)));
@@ -54,7 +64,34 @@ public class Grille extends Parent {
         this.grille = new Case[taille][taille];
         for (int i =0;i<taille; i++){
             for(int j=0;j<taille;j++){
-                Case case1 = new Case(valeurs[i][j]);
+                Case case1 = new Case(valeurs[i][j],this);
+                grille[i][j] = case1;
+                gridPane.add(case1,i,j);
+                if ((i+1)%sqrt(taille)==0 && i+1!=taille){
+                    case1.addBorder("left");
+                }
+                if ((j+1)%sqrt(taille)==0 && j+1!=taille){
+                    case1.addBorder("down");
+                }
+                if ((i+1)%sqrt(taille)==0 && i+1!=taille && (j+1)%sqrt(taille)==0 && j+1!=taille) {
+                    case1.addBorder("leftdown");
+                }
+            }
+        }
+        getChildren().add(gridPane);
+    }
+
+    public Grille(int[][] valeurs, int[][] solution) {
+        this.taille = valeurs.length;
+        this.solution=solution;
+        GridPane gridPane = new GridPane();
+        gridPane.setPrefSize((600/taille)*taille,(600/taille)*taille);
+        gridPane.setBackground(new Background(new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY)));
+        gridPane.setGridLinesVisible(true);
+        this.grille = new Case[taille][taille];
+        for (int i =0;i<taille; i++){
+            for(int j=0;j<taille;j++){
+                Case case1 = new Case(valeurs[i][j],this);
                 grille[i][j] = case1;
                 gridPane.add(case1,i,j);
                 if ((i+1)%sqrt(taille)==0 && i+1!=taille){
@@ -98,6 +135,28 @@ public class Grille extends Parent {
         }
         return chaine ;
     }
+    public String toStringSolution() {
+        String separator =" ";
+        for (int n=0; n<taille*4;n++){
+            separator = separator + "-";
+        }
+        String chaine = separator + "\n";
+        for(int i=0;i<taille;i++){
+            for (int j=0; j<taille;j++){
+                if(j%3 == 0){
+                    chaine =chaine +" | ";
+                }
+                chaine = chaine + "[" + solution[i][j] +"]";
+            }
+            chaine = chaine + "|\n";
+
+            if((i+1)%3 == 0){
+                chaine= chaine + separator + "\n";
+            }
+
+        }
+        return chaine ;
+    }
 
     public void addValue(int i, int j, int value){
         grille[j][i].setValeur(value);
@@ -113,11 +172,9 @@ public class Grille extends Parent {
 
     public boolean isCorrect(){
         boolean correct = true;
-        int ligne = 0; int col = 0;
-        while(ligne < taille && correct){
-            while(col < taille && correct){
-                correct=verifAlreadyInLine(ligne,col) && verifAlreadyInRow(ligne,col) && verifAlreadyInBlock(ligne,col);
-            }
+        for (int i=0;i<taille;i++){
+            for (int j=0;j<taille;j++)
+                if (grille[i][j].getValeur() != solution[i][j]) correct = false;
         }
         return correct;
     }
@@ -168,7 +225,6 @@ public class Grille extends Parent {
     public Node getStyleableNode() {
         return null;
     }
-
 
 
 

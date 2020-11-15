@@ -1,7 +1,5 @@
 package sample;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.control.TextField;
@@ -16,9 +14,11 @@ public class Case extends Parent {
 
     private TextField valeur = new TextField();
     private ArrayList<Integer> note;
+    private Grille grille;
 
 
-    public Case(int nb) {
+    public Case(int nb,Grille grille) {
+        this.grille=grille;
         paramTextField();
         valeur.setText(String.valueOf(nb));
         this.note = new ArrayList<>();
@@ -38,8 +38,10 @@ public class Case extends Parent {
 //        https://stackoverflow.com/questions/7555564/what-is-the-recommended-way-to-make-a-numeric-textfield-in-javafx
 //        regex tester : https://regex101.com/tests
         valeur.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue.matches("\\d")) {
-                valeur.setText(newValue.replaceAll("[^\\d]", ""));
+            if (!newValue.matches("(?<!\\S)\\d(?![^\\s.,?!])")) {
+                valeur.setText(newValue.replaceAll("^[(?<!\\S)\\d(?![^\\s.,?!])]", ""));
+            }else{
+                System.out.println("Valeur mise a : "+ this.getValeur());
             }
         });
         valeur.setPrefSize(600/9,600/9);
@@ -47,6 +49,7 @@ public class Case extends Parent {
 
     public void setValeur(int nb) {
         valeur.setText(String.valueOf(nb));
+
     }
 
     public int getValeur() {

@@ -47,6 +47,7 @@ public class ControllerSudoku {
         primaryStage.setScene(sceneGrille);
     }
 
+
     //BoutonQuitter : au click => quitterJeu()   (fermer la fenêtre)
     @FXML
     private void fermerJeu(MouseEvent event) throws  IOException {
