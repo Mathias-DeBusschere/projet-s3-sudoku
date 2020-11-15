@@ -22,7 +22,6 @@ public class Sudoku extends Parent {
     @FXML
     private Button fermerJeu;
 
-
     //BoutonLancer : au click => lancerPartie()
     //BoutonQuitter : au click => quitterJeu()   (fermer la fenêtre)
 
