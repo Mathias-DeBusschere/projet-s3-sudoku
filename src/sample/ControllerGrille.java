@@ -19,6 +19,9 @@ import static java.lang.Math.sqrt;
 
 public class ControllerGrille {
 
+    private Difficulte difficulte;
+    private int taille;
+
     public void initialize() {
 
         int[][] matrice = {
@@ -64,10 +67,17 @@ public class ControllerGrille {
         double size = (600/matrice.length)*matrice.length;
         this.grille.setPrefSize(size,size);
 
-        g.setDifficulte(Difficulte.FACILE);
+        g.setDifficulte(difficulte);
         addElement(g);
         g.setFocusTraversable(true);
 //        affichageLigneBlock(matrice.length);
+    }
+
+    public void initDate(Difficulte difficulte, int taille) {
+        this.difficulte = difficulte;
+        this.taille = taille;
+        System.out.println(this.difficulte);
+        System.out.println(this.taille);
     }
 
     //WIP

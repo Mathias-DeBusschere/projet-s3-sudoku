@@ -1,27 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import javafx.collections.FXCollections?>
+<?import sample.Difficulte?>
 
-<AnchorPane prefHeight="700.0" prefWidth="860.0" style="-fx-background-color: &quot;lightblue&quot;;"
-            xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="sample.ControllerSudoku">
-   <Button fx:id="lancerPartie" layoutX="386.0" layoutY="350.0" mnemonicParsing="false" onMouseClicked="#lancerPartie"
-           prefHeight="36.0" prefWidth="88.0" style="-fx-background-color: white;" text="Lancer ">
+<?import java.lang.Integer?>
+<?import javafx.scene.control.SelectionMode?>
+<AnchorPane fx:id="contain" prefHeight="700.0" prefWidth="860.0" style="-fx-background-color: &quot;lightblue&quot;;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ControllerSudoku">
+   <Button fx:id="lancerPartie" layoutX="390.0" layoutY="250.0" mnemonicParsing="false" onMouseClicked="#lancerPartie" prefHeight="36.0" prefWidth="100.0" style="-fx-background-color: white;" text="Lancer ">
       <font>
-         <Font name="System Bold" size="14.0"/>
+         <Font name="System Bold" size="14.0" />
       </font>
    </Button>
    <Text layoutX="92.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sudoku">
       <font>
-         <Font name="Calibri Bold" size="36.0"/>
+         <Font name="Calibri Bold" size="36.0" />
       </font>
    </Text>
-   <Button fx:id="fermerJeu" layoutX="386.0" layoutY="417.0" mnemonicParsing="false" onMouseClicked="#fermerJeu"
-           prefHeight="36.0" prefWidth="88.0" style="-fx-background-color: white;" text="Quitter">
+   <Button fx:id="fermerJeu" layoutX="390.0" layoutY="400.0" mnemonicParsing="false" onMouseClicked="#fermerJeu" prefHeight="36.0" prefWidth="100.0" style="-fx-background-color: white;" text="Quitter">
       <font>
-         <Font size="14.0"/>
+         <Font size="14.0" />
+      </font>
+   </Button>
+   <ChoiceBox fx:id="difficulte" value="FACILE" layoutX="330.0" layoutY="300.0" onInputMethodTextChanged="#selecDifficulte" prefHeight="36.0" prefWidth="100.0" style="-fx-background-color: white;">
+      <items>
+         <FXCollections fx:factory="observableArrayList">
+            <Difficulte fx:value="FACILE"/>
+            <Difficulte fx:value="MOYEN"/>
+            <Difficulte fx:value="DIFFICILE"/>
+         </FXCollections>
+      </items>
+   </ChoiceBox>
+   <ChoiceBox fx:id="taille" value="9" layoutX="450.0" layoutY="300.0" onInputMethodTextChanged="#selecTaille" prefHeight="36.0" prefWidth="100.0" style="-fx-background-color: white;">
+      <items>
+         <FXCollections fx:factory="observableArrayList">
+            <Integer fx:value="4"/>
+            <Integer fx:value="9"/>
+            <Integer fx:value="16"/>
+         </FXCollections>
+      </items>
+   </ChoiceBox>
+   <Button fx:id="regles" layoutX="390.0" layoutY="350.0" mnemonicParsing="false" onMouseClicked="#lancerPartie" prefHeight="36.0" prefWidth="100.0" style="-fx-background-color: white;" text="Règles">
+      <font>
+         <Font name="System Bold" size="14.0" />
       </font>
    </Button>
 </AnchorPane>
