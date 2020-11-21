@@ -11,20 +11,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="02bd698b-91f1-4a2c-8963-4165d7c32705" name="Default Changelist" comment="ajout de la selection de la difficulte et taille&#10;ajout bouton regles et class correspondante (vide pour l'instant)">
-      <change afterPath="$PROJECT_DIR$/src/sample/Regles.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/sample/ReglesController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Sudoku/sample/ControllerGrille.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sudoku/sample/ControllerGrille.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Sudoku/sample/ControllerSudoku.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sudoku/sample/ControllerSudoku.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Sudoku/sample/Sudoku.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sudoku/sample/Sudoku.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/ControllerGrille.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/ControllerGrille.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/ControllerSudoku.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/ControllerSudoku.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/Sudoku.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Sudoku.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -77,17 +74,6 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -251,6 +237,10 @@
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
     <state x="433" y="303" width="925" height="617" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1792.1120@0.0.1792.1120" timestamp="1605471357167" />
+    <state x="556" y="280" key="git4idea.branch.GitSmartOperationDialog" timestamp="1605969526537">
+      <screen x="0" y="0" width="1792" height="1120" />
+    </state>
+    <state x="556" y="280" key="git4idea.branch.GitSmartOperationDialog/0.0.1792.1120@0.0.1792.1120" timestamp="1605969526537" />
     <state x="672" y="328" key="refactoring.ChangeSignatureDialog" timestamp="1605097548864">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
