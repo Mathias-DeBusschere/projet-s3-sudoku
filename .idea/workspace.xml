@@ -10,8 +10,8 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="02bd698b-91f1-4a2c-8963-4165d7c32705" name="Default Changelist" comment="merge main">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="02bd698b-91f1-4a2c-8963-4165d7c32705" name="Default Changelist" comment="ajout solveur">
+      <change beforePath="$PROJECT_DIR$/out/production/Sudoku/sample/Grille.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sudoku/sample/Grille.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sample/Grille.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Grille.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -148,7 +148,14 @@
       <option name="project" value="LOCAL" />
       <updated>1605475099111</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="ajout solveur">
+      <created>1605970896270</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1605970896270</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -173,7 +180,8 @@
     <MESSAGE value="centrer chiffres dans case&#10;Adapter pour différente taille&#10;bouton indice/effacer fonctionnelle" />
     <MESSAGE value="case indice non modifiable" />
     <MESSAGE value="ajout de la selection de la difficulte et taille&#10;ajout bouton regles et class correspondante (vide pour l'instant)" />
-    <option name="LAST_COMMIT_MESSAGE" value="ajout de la selection de la difficulte et taille&#10;ajout bouton regles et class correspondante (vide pour l'instant)" />
+    <MESSAGE value="ajout solveur" />
+    <option name="LAST_COMMIT_MESSAGE" value="ajout solveur" />
   </component>
   <component name="WindowStateProjectService">
     <state x="530" y="245" key="#Inspections" timestamp="1605552230036">
@@ -205,26 +213,26 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="666" y="282" key="FileChooserDialogImpl/0.0.1920.1080@0.0.1920.1080" timestamp="1604352062676" />
-    <state width="1750" height="230" key="GridCell.Tab.0.bottom" timestamp="1605969774170">
+    <state width="1750" height="230" key="GridCell.Tab.0.bottom" timestamp="1605970908425">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
     <state width="1750" height="230" key="GridCell.Tab.0.bottom/0.0.1792.1040@0.0.1792.1040" timestamp="1605558325259" />
-    <state width="1750" height="230" key="GridCell.Tab.0.bottom/0.0.1792.1120@0.0.1792.1120" timestamp="1605969774170" />
-    <state width="1750" height="230" key="GridCell.Tab.0.center" timestamp="1605969774169">
+    <state width="1750" height="230" key="GridCell.Tab.0.bottom/0.0.1792.1120@0.0.1792.1120" timestamp="1605970908425" />
+    <state width="1750" height="230" key="GridCell.Tab.0.center" timestamp="1605970908424">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
     <state width="1750" height="230" key="GridCell.Tab.0.center/0.0.1792.1040@0.0.1792.1040" timestamp="1605558325258" />
-    <state width="1750" height="230" key="GridCell.Tab.0.center/0.0.1792.1120@0.0.1792.1120" timestamp="1605969774169" />
-    <state width="1750" height="230" key="GridCell.Tab.0.left" timestamp="1605969774168">
+    <state width="1750" height="230" key="GridCell.Tab.0.center/0.0.1792.1120@0.0.1792.1120" timestamp="1605970908424" />
+    <state width="1750" height="230" key="GridCell.Tab.0.left" timestamp="1605970908423">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
     <state width="1750" height="230" key="GridCell.Tab.0.left/0.0.1792.1040@0.0.1792.1040" timestamp="1605558325257" />
-    <state width="1750" height="230" key="GridCell.Tab.0.left/0.0.1792.1120@0.0.1792.1120" timestamp="1605969774168" />
-    <state width="1750" height="230" key="GridCell.Tab.0.right" timestamp="1605969774169">
+    <state width="1750" height="230" key="GridCell.Tab.0.left/0.0.1792.1120@0.0.1792.1120" timestamp="1605970908423" />
+    <state width="1750" height="230" key="GridCell.Tab.0.right" timestamp="1605970908424">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
     <state width="1750" height="230" key="GridCell.Tab.0.right/0.0.1792.1040@0.0.1792.1040" timestamp="1605558325259" />
-    <state width="1750" height="230" key="GridCell.Tab.0.right/0.0.1792.1120@0.0.1792.1120" timestamp="1605969774169" />
+    <state width="1750" height="230" key="GridCell.Tab.0.right/0.0.1792.1120@0.0.1792.1120" timestamp="1605970908424" />
     <state x="180" y="101" key="MergeDialog" timestamp="1605450849555">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
@@ -237,10 +245,10 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="440" y="115" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1604352067073" />
-    <state x="496" y="300" key="Vcs.Push.Dialog.v2" timestamp="1605969594634">
+    <state x="496" y="300" key="Vcs.Push.Dialog.v2" timestamp="1605970900391">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state x="496" y="300" key="Vcs.Push.Dialog.v2/0.0.1792.1120@0.0.1792.1120" timestamp="1605969594634" />
+    <state x="496" y="300" key="Vcs.Push.Dialog.v2/0.0.1792.1120@0.0.1792.1120" timestamp="1605970900391" />
     <state x="694" y="481" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1605452760653">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>

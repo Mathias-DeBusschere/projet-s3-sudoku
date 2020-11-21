@@ -277,4 +277,17 @@ public class Grille extends Parent {
         }
         return false;
     }
+
+//    public boolean remplis() {
+//        boolean b=true;
+//        for (int l = 0; l < 9; l++) {
+//            for (int c = 0; c < 9; c++) {
+//                if (sudoku.getPosition(l, c) == 0) {
+//                    return false;
+//                }
+//            }
+//
+//        }
+//        return b;
+//    }
 }
