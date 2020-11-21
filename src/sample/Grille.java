@@ -229,4 +229,52 @@ public class Grille extends Parent {
     public int[][] getSolution() {
         return solution;
     }
+
+    public int ligneSimple(){
+        int fin=0;
+        int temp=0;
+        int min=1000;
+        for (int l = 0; l <9 ; l++) {
+            for (int c = 0; c < 9 ; c++) {
+                if (grille[l][c].getValeur() == 0) {
+                    temp++;
+                }
+            }
+            if (temp!=0){
+                if (temp<min){
+                    min=temp;
+                    fin=l;
+                }
+            }
+            temp=0;
+        }
+        return  fin;
+    }
+
+    public boolean soluc(int l, int c){
+//        if (isSolved()){return true;}
+        if (l==8 && c==9){
+            return true;
+        }
+        if (c==9){
+//            l++;
+            l=ligneSimple();
+            c=0;
+        }
+        if (grille[l][c].getValeur()!=0){
+            return soluc(l,c+1);
+        }
+        for (int i = 1; i < 10; i++) {
+            grille[l][c].setValeur(i);
+            if (valueIsCorrect(grille[l][c])){
+                if (soluc(l,c+1)){
+                    return true;
+                }
+            } else {
+                grille[l][c].setValeur(0);
+            }
+            grille[l][c].setValeur(0);
+        }
+        return false;
+    }
 }

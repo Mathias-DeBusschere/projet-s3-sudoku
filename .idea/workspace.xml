@@ -10,10 +10,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="02bd698b-91f1-4a2c-8963-4165d7c32705" name="Default Changelist" comment="ajout de la selection de la difficulte et taille&#10;ajout bouton regles et class correspondante (vide pour l'instant)">
+    <list default="true" id="02bd698b-91f1-4a2c-8963-4165d7c32705" name="Default Changelist" comment="merge main">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Sudoku/sample/ControllerGrille.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sudoku/sample/ControllerGrille.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Sudoku/sample/Sudoku.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sudoku/sample/Sudoku.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/Grille.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Grille.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,6 +73,19 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -193,26 +205,26 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="666" y="282" key="FileChooserDialogImpl/0.0.1920.1080@0.0.1920.1080" timestamp="1604352062676" />
-    <state width="1750" height="230" key="GridCell.Tab.0.bottom" timestamp="1605560046765">
+    <state width="1750" height="230" key="GridCell.Tab.0.bottom" timestamp="1605969774170">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
     <state width="1750" height="230" key="GridCell.Tab.0.bottom/0.0.1792.1040@0.0.1792.1040" timestamp="1605558325259" />
-    <state width="1750" height="230" key="GridCell.Tab.0.bottom/0.0.1792.1120@0.0.1792.1120" timestamp="1605560046765" />
-    <state width="1750" height="230" key="GridCell.Tab.0.center" timestamp="1605560046764">
+    <state width="1750" height="230" key="GridCell.Tab.0.bottom/0.0.1792.1120@0.0.1792.1120" timestamp="1605969774170" />
+    <state width="1750" height="230" key="GridCell.Tab.0.center" timestamp="1605969774169">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
     <state width="1750" height="230" key="GridCell.Tab.0.center/0.0.1792.1040@0.0.1792.1040" timestamp="1605558325258" />
-    <state width="1750" height="230" key="GridCell.Tab.0.center/0.0.1792.1120@0.0.1792.1120" timestamp="1605560046764" />
-    <state width="1750" height="230" key="GridCell.Tab.0.left" timestamp="1605560046764">
+    <state width="1750" height="230" key="GridCell.Tab.0.center/0.0.1792.1120@0.0.1792.1120" timestamp="1605969774169" />
+    <state width="1750" height="230" key="GridCell.Tab.0.left" timestamp="1605969774168">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
     <state width="1750" height="230" key="GridCell.Tab.0.left/0.0.1792.1040@0.0.1792.1040" timestamp="1605558325257" />
-    <state width="1750" height="230" key="GridCell.Tab.0.left/0.0.1792.1120@0.0.1792.1120" timestamp="1605560046764" />
-    <state width="1750" height="230" key="GridCell.Tab.0.right" timestamp="1605560046765">
+    <state width="1750" height="230" key="GridCell.Tab.0.left/0.0.1792.1120@0.0.1792.1120" timestamp="1605969774168" />
+    <state width="1750" height="230" key="GridCell.Tab.0.right" timestamp="1605969774169">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
     <state width="1750" height="230" key="GridCell.Tab.0.right/0.0.1792.1040@0.0.1792.1040" timestamp="1605558325259" />
-    <state width="1750" height="230" key="GridCell.Tab.0.right/0.0.1792.1120@0.0.1792.1120" timestamp="1605560046765" />
+    <state width="1750" height="230" key="GridCell.Tab.0.right/0.0.1792.1120@0.0.1792.1120" timestamp="1605969774169" />
     <state x="180" y="101" key="MergeDialog" timestamp="1605450849555">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
@@ -225,10 +237,10 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="440" y="115" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1604352067073" />
-    <state x="496" y="300" key="Vcs.Push.Dialog.v2" timestamp="1605475102262">
+    <state x="496" y="300" key="Vcs.Push.Dialog.v2" timestamp="1605969594634">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state x="496" y="300" key="Vcs.Push.Dialog.v2/0.0.1792.1120@0.0.1792.1120" timestamp="1605475102262" />
+    <state x="496" y="300" key="Vcs.Push.Dialog.v2/0.0.1792.1120@0.0.1792.1120" timestamp="1605969594634" />
     <state x="694" y="481" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1605452760653">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
