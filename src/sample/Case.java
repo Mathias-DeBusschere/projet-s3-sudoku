@@ -2,6 +2,8 @@ package sample;
 
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -114,16 +116,18 @@ public class Case extends Parent {
             }
             //setSelectionStyle() pour this puisque elle est encore sélectionnée
             this.setSelectionStyle();
-            Clip sonEcriture;
+            Clip sonEfface;
             try {
-                sonEcriture = AudioSystem.getClip();
+                sonEfface = AudioSystem.getClip();
                 AudioInputStream inputStream = AudioSystem.getAudioInputStream(getClass().getResourceAsStream("/sons/efface.wav"));
-                sonEcriture.open(inputStream);
-                sonEcriture.start();
+                sonEfface.open(inputStream);
+                sonEfface.start();
             } catch (LineUnavailableException | UnsupportedAudioFileException | IOException e) {
                 e.printStackTrace();
             }
         }
+        ImageView img = new ImageView(new Image(getClass().getResource("congratulations.png").toExternalForm()));
+        this.getChildren().add(img);
     }
 
     /*

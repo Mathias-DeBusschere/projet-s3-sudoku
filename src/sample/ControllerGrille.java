@@ -8,6 +8,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.shape.Line;
@@ -59,7 +61,7 @@ public class ControllerGrille {
         };
 
 
-        g = new Grille(matrice,matriceCorrect);
+        g = new Grille(matriceCorrect,matriceCorrect);
 //        g = new Grille(matrice1,matrice1);
 
         //noinspection IntegerDivisionInFloatingPointContext
@@ -69,6 +71,8 @@ public class ControllerGrille {
         addElement(g);
         g.setFocusTraversable(true);
 //        affichageLigneBlock(matrice.length);
+
+
     }
 
     public void initDate(Difficulte difficulte, int taille) {
@@ -150,6 +154,7 @@ public class ControllerGrille {
     private void valider(MouseEvent event) {
         System.out.println("Validation Grille");
         System.out.println(g.isCorrect());
+
     }
 
     @FXML

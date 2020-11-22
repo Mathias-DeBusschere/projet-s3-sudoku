@@ -1,13 +1,23 @@
 package sample;
 
 
+import javafx.concurrent.Task;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 
+import javax.lang.model.element.Element;
+import javax.sound.sampled.*;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
+import java.util.concurrent.TimeUnit;
+
 
 public class Grille extends Parent {
 
@@ -41,6 +51,7 @@ public class Grille extends Parent {
         getChildren().add(gridPane);
 
 
+
         //PROBLEME DE PERTE DE FOCUS
         this.setOnKeyPressed(keyEvent -> {
             String caractere = keyEvent.getText();
@@ -68,6 +79,7 @@ public class Grille extends Parent {
             }
 
         });
+
     }
 
     @Override
@@ -132,7 +144,7 @@ public class Grille extends Parent {
         return taille;
     }
 
-    public boolean isCorrect(){
+    public boolean isCorrect() {
         boolean correct = true;
         for (int i=0;i<taille;i++){
             for (int j=0;j<taille;j++)
@@ -140,6 +152,74 @@ public class Grille extends Parent {
                     correct = false;
                     break;
                 }
+        }
+
+
+
+        if(correct){
+            Clip sonVictoire;
+            try {
+                sonVictoire = AudioSystem.getClip();
+                AudioInputStream inputStream = AudioSystem.getAudioInputStream(getClass().getResourceAsStream("/sons/victoire.wav"));
+                sonVictoire.open(inputStream);
+                sonVictoire.start();
+            } catch (LineUnavailableException | UnsupportedAudioFileException | IOException e) {
+                e.printStackTrace();
+            }
+
+
+            ImageView img = new ImageView(new Image(getClass().getResourceAsStream("congratulations.png")));
+            img.setPreserveRatio(true);
+            img.setFitWidth(600-600/taille);
+            img.setX((600/taille)/2);
+            img.setY(600/6);
+
+            Label labelTimer = new Label();
+            labelTimer.setText("39.56 min");
+            labelTimer.setStyle("-fx-background-color:rgba(31,31,31,0.95);-fx-font-size:30px;-fx-padding: 20;-fx-text-fill: white;-fx-border-width: 3px;-fx-border-color: white");
+            labelTimer.setTranslateX((600/taille)*((taille)/2.5));
+            labelTimer.setTranslateY((600/2)+ 20);
+
+            Label labelScore = new Label();
+            labelScore.setText("9670 points");
+            labelScore.setStyle("-fx-background-color:rgba(31,31,31,0.95);-fx-font-size:30px;-fx-padding: 20;-fx-text-fill: white;-fx-border-width: 3px;-fx-border-color: white");
+            labelScore.setTranslateX((600/taille)*((taille)/2.5));
+            labelScore.setTranslateY((600/2)+ 120);
+
+
+            Task<Void> sleep500ms = new Task<>() {
+                @Override
+                protected Void call() {
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    return null;
+                }
+            };
+            sleep500ms.setOnSucceeded(workerStateEvent -> {
+                this.getChildren().add(labelTimer);
+            });
+
+            Task<Void> sleep1000ms = new Task<>() {
+                @Override
+                protected Void call() {
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    return null;
+                }
+            };
+            sleep1000ms.setOnSucceeded(workerStateEvent -> {
+                this.getChildren().add(labelScore);
+            });
+
+            this.getChildren().add(img);
+            new Thread(sleep500ms).start();
+            new Thread(sleep1000ms).start();
         }
         return correct;
     }
