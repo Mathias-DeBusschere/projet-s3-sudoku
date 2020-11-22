@@ -12,6 +12,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("Sudoku.fxml"));
         primaryStage.setTitle("Sudoku");
+
         primaryStage.setScene(new Scene(root, 880, 700));
         primaryStage.show();
     }
