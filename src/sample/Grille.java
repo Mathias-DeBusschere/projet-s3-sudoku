@@ -8,6 +8,7 @@ import javafx.scene.layout.GridPane;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
 
 public class Grille extends Parent {
 
@@ -30,10 +31,26 @@ public class Grille extends Parent {
         gridPane.setAlignment(Pos.CENTER);
 
         boolean caseinitiale;
-        for (int i =0;i<taille; i++){
+       /* for (int i =0;i<taille; i++){
             for(int j=0;j<taille;j++){
                 caseinitiale= valeurs[i][j] != 0;
                 Case case1 = new Case(valeurs[i][j],this,i,j,caseinitiale);
+                grille[i][j] = case1;
+                gridPane.add(case1,i,j);
+            }
+        } */
+        for (int i =0;i<taille; i++){
+            for(int j=0;j<taille;j++){
+                Case case1 = new Case(0,this,i,j,false);
+                grille[i][j] = case1;
+                gridPane.add(case1,i,j);
+            }
+        }
+        generateur();
+        for (int i =0;i<taille; i++){
+            for(int j=0;j<taille;j++){
+                caseinitiale= grille[i][j].getValeur() != 0;
+                Case case1 = new Case(grille[i][j].getValeur(),this,i,j,caseinitiale);
                 grille[i][j] = case1;
                 gridPane.add(case1,i,j);
             }
@@ -257,37 +274,106 @@ public class Grille extends Parent {
             return true;
         }
         if (c==9){
-//            l++;
-            l=ligneSimple();
+            l++;
+            //l=ligneSimple();
             c=0;
         }
         if (grille[l][c].getValeur()!=0){
             return soluc(l,c+1);
         }
         for (int i = 1; i < 10; i++) {
-            grille[l][c].setValeur(i);
+            grille[l][c].setValeurgene(i);
             if (valueIsCorrect(grille[l][c])){
                 if (soluc(l,c+1)){
                     return true;
                 }
             } else {
-                grille[l][c].setValeur(0);
+                grille[l][c].setValeurgene(0);
             }
-            grille[l][c].setValeur(0);
+            grille[l][c].setValeurgene(0);
         }
         return false;
     }
 
-//    public boolean remplis() {
-//        boolean b=true;
-//        for (int l = 0; l < 9; l++) {
-//            for (int c = 0; c < 9; c++) {
-//                if (sudoku.getPosition(l, c) == 0) {
-//                    return false;
-//                }
-//            }
-//
-//        }
-//        return b;
-//    }
+    public boolean remplis() {
+        boolean b=true;
+        for (int l = 0; l < 9; l++) {
+            for (int c = 0; c < 9; c++) {
+                if (grille[l][c].getValeur() == 0) {
+                    return false;
+                }
+            }
+
+       }
+       return b;
+    }
+
+    public String toString2(){
+        String sudoOut = " ";
+        for(int j = 0; j<9; j++){
+            sudoOut = sudoOut+" | ";
+            for(int z = 0; z<9; z++){
+                sudoOut = sudoOut+grille[j][z].getValeur()+" ";
+
+                if(z != 0 && (z+1)%3 == 0 && z+1 < 9){
+                    sudoOut = sudoOut + "| ";
+                }
+            }
+            sudoOut = sudoOut+"|\n";
+
+            if(j != 0 && (j+1)%3 == 0 && j+1 < 9){
+                sudoOut = sudoOut;
+            }
+
+        }
+        sudoOut = sudoOut;
+        return sudoOut;
+    }
+    public void generateur(){
+        int NBcaseVide=0;
+        int aleatoireValeur=0;
+        int aleatoireLigne=0;
+        int aleatoireColr=0;
+        int i =0;
+        Random r= new Random();
+        if (difficulte==Difficulte.FACILE){
+            NBcaseVide=45;
+        }
+        if (difficulte==Difficulte.MOYEN){
+            NBcaseVide=52;
+        }
+        if (difficulte==Difficulte.DIFFICILE){
+            NBcaseVide=60;
+        }
+
+        while( i < 10) {
+            aleatoireValeur=r.nextInt((9 - 1) + 1);
+            aleatoireLigne=r.nextInt((9 - 1) + 1);
+            aleatoireColr=r.nextInt((9 - 1) + 1);
+            grille[aleatoireLigne][aleatoireColr].setValeurgene(aleatoireValeur);
+            i++;
+            if (!valueIsCorrect(grille[aleatoireLigne][aleatoireColr])){
+                grille[aleatoireLigne][aleatoireColr].setValeurgene(0);
+                i--;
+            }
+        }
+        i=0;
+
+        System.out.println(soluc(0,0));
+        System.out.println(remplis());
+        System.out.println(toString2());
+
+        while (i < NBcaseVide ) {
+            aleatoireLigne=r.nextInt((9 - 1) + 1);
+            aleatoireColr=r.nextInt((9 - 1) + 1);
+            if (grille[aleatoireLigne][aleatoireColr].getValeur()!=0){
+                grille[aleatoireLigne][aleatoireColr].setValeurgene(0);
+                i++;
+                System.out.println(toString2());
+            }
+        }
+        System.out.println(toString2());
+
+    }
+
 }

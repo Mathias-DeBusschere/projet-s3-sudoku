@@ -76,6 +76,9 @@ public class Case extends Parent {
             text.setText(String.valueOf(valeur));
             grille.valueIsCorrect(this);}}
 
+    public void setValeurgene(int valeur) {
+            this.valeur=valeur;
+            }
 
     //Permet d'effacer une valeur d'une case (set 0) et d'effacer les errorStyle de chaque case concernée.
     public void deleteValeur(){
