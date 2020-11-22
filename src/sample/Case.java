@@ -6,7 +6,10 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
+import javax.sound.sampled.*;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Stack;
 
 public class Case extends Parent {
@@ -74,7 +77,24 @@ public class Case extends Parent {
         if(!initiale && !indice){
             this.valeur=valeur;
             text.setText(String.valueOf(valeur));
-            grille.valueIsCorrect(this);}}
+            grille.valueIsCorrect(this);
+
+            //Génére un int aléatoire entre 1 et 4 inclus, puis joue un des 4 sons d'écriture
+            Clip sonEcriture;
+            try {
+
+                Random random = new Random();
+                int randomInt = random.nextInt(5 - 1) + 1;
+
+                sonEcriture = AudioSystem.getClip();
+                AudioInputStream inputStream = AudioSystem.getAudioInputStream(getClass().getResourceAsStream("/sons/"+randomInt+".wav"));
+                sonEcriture.open(inputStream);
+                sonEcriture.start();
+            } catch (LineUnavailableException | UnsupportedAudioFileException | IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
 
     //Permet d'effacer une valeur d'une case (set 0) et d'effacer les errorStyle de chaque case concernée.
@@ -93,7 +113,17 @@ public class Case extends Parent {
                 caseblock.setDefaultStyle();
             }
             //setSelectionStyle() pour this puisque elle est encore sélectionnée
-            this.setSelectionStyle();}
+            this.setSelectionStyle();
+            Clip sonEcriture;
+            try {
+                sonEcriture = AudioSystem.getClip();
+                AudioInputStream inputStream = AudioSystem.getAudioInputStream(getClass().getResourceAsStream("/sons/efface.wav"));
+                sonEcriture.open(inputStream);
+                sonEcriture.start();
+            } catch (LineUnavailableException | UnsupportedAudioFileException | IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     /*
