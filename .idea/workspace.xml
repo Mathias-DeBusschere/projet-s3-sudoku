@@ -10,19 +10,8 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="02bd698b-91f1-4a2c-8963-4165d7c32705" name="Default Changelist" comment="affiche ligne vertical et horrizontal sur les 3 tailles&#10;léger bug sur les taille 4 et 16">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Sudoku/sample/Case.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sudoku/sample/Case.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Sudoku/sample/ControllerGrille.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sudoku/sample/ControllerGrille.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Sudoku/sample/ControllerSudoku.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sudoku/sample/ControllerSudoku.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Sudoku/sample/Grille$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sudoku/sample/Grille$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Sudoku/sample/Grille.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sudoku/sample/Grille.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Sudoku/sample/Sudoku.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sudoku/sample/Sudoku.fxml" afterDir="false" />
+    <list default="true" id="02bd698b-91f1-4a2c-8963-4165d7c32705" name="Default Changelist" comment="ligne en dessous du congrats, congrats centré">
       <change beforePath="$PROJECT_DIR$/src/sample/Case.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Case.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/ControllerGrille.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/ControllerGrille.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/ControllerSudoku.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/ControllerSudoku.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/Grille.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Grille.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/Sudoku.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Sudoku.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -116,7 +105,7 @@
       <workItem from="1605451355916" duration="10048000" />
       <workItem from="1605534617689" duration="826000" />
       <workItem from="1605551804347" duration="6849000" />
-      <workItem from="1606680956815" duration="4656000" />
+      <workItem from="1606680956815" duration="4966000" />
     </task>
     <task id="LOCAL-00001" summary="fusion design et méthod, léger clean up">
       <created>1605109526465</created>
@@ -174,7 +163,14 @@
       <option name="project" value="LOCAL" />
       <updated>1606683991239</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="ligne en dessous du congrats, congrats centré">
+      <created>1606686009709</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1606686009709</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -201,7 +197,8 @@
     <MESSAGE value="ajout de la selection de la difficulte et taille&#10;ajout bouton regles et class correspondante (vide pour l'instant)" />
     <MESSAGE value="ajout solveur" />
     <MESSAGE value="affiche ligne vertical et horrizontal sur les 3 tailles&#10;léger bug sur les taille 4 et 16" />
-    <option name="LAST_COMMIT_MESSAGE" value="affiche ligne vertical et horrizontal sur les 3 tailles&#10;léger bug sur les taille 4 et 16" />
+    <MESSAGE value="ligne en dessous du congrats, congrats centré" />
+    <option name="LAST_COMMIT_MESSAGE" value="ligne en dessous du congrats, congrats centré" />
   </component>
   <component name="WindowStateProjectService">
     <state x="670" y="407" key="#Configure_Path_Variables" timestamp="1606681065095">
@@ -237,26 +234,26 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="666" y="282" key="FileChooserDialogImpl/0.0.1920.1080@0.0.1920.1080" timestamp="1604352062676" />
-    <state width="1750" height="230" key="GridCell.Tab.0.bottom" timestamp="1606685849757">
+    <state width="1750" height="230" key="GridCell.Tab.0.bottom" timestamp="1606686033977">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
     <state width="1750" height="230" key="GridCell.Tab.0.bottom/0.0.1792.1040@0.0.1792.1040" timestamp="1606685835961" />
-    <state width="1750" height="230" key="GridCell.Tab.0.bottom/0.0.1792.1120@0.0.1792.1120" timestamp="1606685849757" />
-    <state width="1750" height="230" key="GridCell.Tab.0.center" timestamp="1606685849756">
+    <state width="1750" height="230" key="GridCell.Tab.0.bottom/0.0.1792.1120@0.0.1792.1120" timestamp="1606686033977" />
+    <state width="1750" height="230" key="GridCell.Tab.0.center" timestamp="1606686033976">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
     <state width="1750" height="230" key="GridCell.Tab.0.center/0.0.1792.1040@0.0.1792.1040" timestamp="1606685835959" />
-    <state width="1750" height="230" key="GridCell.Tab.0.center/0.0.1792.1120@0.0.1792.1120" timestamp="1606685849756" />
-    <state width="1750" height="230" key="GridCell.Tab.0.left" timestamp="1606685849755">
+    <state width="1750" height="230" key="GridCell.Tab.0.center/0.0.1792.1120@0.0.1792.1120" timestamp="1606686033976" />
+    <state width="1750" height="230" key="GridCell.Tab.0.left" timestamp="1606686033975">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
     <state width="1750" height="230" key="GridCell.Tab.0.left/0.0.1792.1040@0.0.1792.1040" timestamp="1606685835958" />
-    <state width="1750" height="230" key="GridCell.Tab.0.left/0.0.1792.1120@0.0.1792.1120" timestamp="1606685849755" />
-    <state width="1750" height="230" key="GridCell.Tab.0.right" timestamp="1606685849756">
+    <state width="1750" height="230" key="GridCell.Tab.0.left/0.0.1792.1120@0.0.1792.1120" timestamp="1606686033975" />
+    <state width="1750" height="230" key="GridCell.Tab.0.right" timestamp="1606686033976">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
     <state width="1750" height="230" key="GridCell.Tab.0.right/0.0.1792.1040@0.0.1792.1040" timestamp="1606685835960" />
-    <state width="1750" height="230" key="GridCell.Tab.0.right/0.0.1792.1120@0.0.1792.1120" timestamp="1606685849756" />
+    <state width="1750" height="230" key="GridCell.Tab.0.right/0.0.1792.1120@0.0.1792.1120" timestamp="1606686033976" />
     <state x="180" y="101" key="MergeDialog" timestamp="1605450849555">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
@@ -282,10 +279,10 @@
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
     <state x="433" y="303" width="925" height="617" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1792.1120@0.0.1792.1120" timestamp="1605471357167" />
-    <state x="556" y="280" key="git4idea.branch.GitSmartOperationDialog" timestamp="1605969526537">
+    <state x="556" y="280" key="git4idea.branch.GitSmartOperationDialog" timestamp="1606686184710">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state x="556" y="280" key="git4idea.branch.GitSmartOperationDialog/0.0.1792.1120@0.0.1792.1120" timestamp="1605969526537" />
+    <state x="556" y="280" key="git4idea.branch.GitSmartOperationDialog/0.0.1792.1120@0.0.1792.1120" timestamp="1606686184710" />
     <state x="672" y="328" key="refactoring.ChangeSignatureDialog" timestamp="1605097548864">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
