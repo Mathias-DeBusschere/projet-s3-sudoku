@@ -335,8 +335,9 @@ public class Grille extends Parent {
         int aleatoireValeur=0;
         int aleatoireLigne=0;
         int aleatoireColr=0;
-        int i =0;
         Random r= new Random();
+        int i =aleatoireColr=r.nextInt((10 - 5) + 1);;
+
         if (difficulte==Difficulte.FACILE){
             NBcaseVide=45;
         }
