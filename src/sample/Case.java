@@ -42,16 +42,18 @@ public class Case extends Parent {
         fond.setStyle( "-fx-background-color: white; -fx-border-color: grey;");
         this.getChildren().add(fond);
 
-        if (valeur == 0) text.setText("");
-        else text.setText(String.valueOf(valeur));
+        if (valeur == 0)
+            text.setText("");
+        else
+            text.setText(String.valueOf(valeur));
 
         text.setFill(Color.BLACK);
         text.setY(60);
-        if(initiale){
+        if(initiale)
             text.setStyle( "-fx-font-size: 30;-fx-font-weight: bold;");
-        }else{
+        else
             text.setStyle("-fx-font-size: 30;");
-        }
+
 
         fond.getChildren().add(text);
 
