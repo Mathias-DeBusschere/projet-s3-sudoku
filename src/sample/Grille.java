@@ -171,6 +171,13 @@ public class Grille extends Parent {
         return correct;
     }
 
+    public boolean valueIsCorrectgen(Case cas){
+        boolean correct = verifAlreadyInRow(cas);
+        correct = verifAlreadyInLine(cas) && correct;
+        correct = verifAlreadyInBlock(cas) && correct;
+        return correct;
+    }
+
     public boolean verifAlreadyInRow(Case cas){
         boolean correct = true;
         int colonne = cas.getColonne();
@@ -283,7 +290,7 @@ public class Grille extends Parent {
         }
         for (int i = 1; i < 10; i++) {
             grille[l][c].setValeurgene(i);
-            if (valueIsCorrect(grille[l][c])){
+            if (valueIsCorrectgen(grille[l][c])){
                 System.out.println(toString2());
                 if (soluc(l,c+1)){
                     return true;
@@ -336,8 +343,8 @@ public class Grille extends Parent {
         int aleatoireLigne=0;
         int aleatoireColr=0;
         Random r= new Random();
-        int i =aleatoireColr=r.nextInt((10 - 5) + 1);;
-
+        int i =0;
+        int o=aleatoireColr=r.nextInt((10 - 5) + 1);
         if (difficulte==Difficulte.FACILE){
             NBcaseVide=45;
         }
@@ -347,7 +354,7 @@ public class Grille extends Parent {
         if (difficulte==Difficulte.DIFFICILE){
             NBcaseVide=60;
         }
-        while( i < 10 ) {
+        while( i < 13 ) {
             aleatoireValeur=r.nextInt((9 - 1) + 1);
             aleatoireLigne=r.nextInt((9 - 1) + 1);
             aleatoireColr=r.nextInt((9 - 1) + 1);
@@ -357,7 +364,7 @@ public class Grille extends Parent {
                 aleatoireColr=r.nextInt((9 - 1) + 1);}
             grille[aleatoireLigne][aleatoireColr].setValeurgene(aleatoireValeur);
             i++;
-            if (!valueIsCorrect(grille[aleatoireLigne][aleatoireColr])){
+            if (!valueIsCorrectgen(grille[aleatoireLigne][aleatoireColr])){
                 grille[aleatoireLigne][aleatoireColr].setValeurgene(0);
                 i--;
             }
