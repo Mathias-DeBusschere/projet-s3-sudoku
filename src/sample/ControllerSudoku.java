@@ -12,6 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Control;
 import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.MouseEvent;
@@ -48,10 +49,11 @@ public class ControllerSudoku {
     @FXML
     private void lancerPartie(MouseEvent event) throws IOException {
         FXMLLoader grilleLoader = new FXMLLoader(getClass().getResource("Grille.fxml"));
-        Parent firstPane = grilleLoader.load();
 
-        ControllerGrille controllerGrille = grilleLoader.getController();
-        controllerGrille.initDate(difficulte.getValue(),taille.getValue());
+        ControllerGrille controllerGrille = new ControllerGrille(taille.getValue(),difficulte.getValue());
+        grilleLoader.setController(controllerGrille);
+
+        Parent firstPane = grilleLoader.load();
 
         Scene sceneGrille = new Scene(firstPane, 880, 700);
         Stage primaryStage = (Stage)((Node)event.getSource()).getScene().getWindow();

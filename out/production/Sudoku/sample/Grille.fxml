@@ -6,8 +6,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0"
             prefWidth="880.0" style="-fx-background-color: &quot;lightblue&quot;;"
-            xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="sample.ControllerGrille">
+            xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <StackPane fx:id="grille" layoutX="50.0" layoutY="50.0" prefHeight="600.0" prefWidth="600.0"
                style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 3px; -fx-arc-width: 5; -fx-arc-height: 5;"/>
 

@@ -11,9 +11,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="02bd698b-91f1-4a2c-8963-4165d7c32705" name="Default Changelist" comment="ajout solveur">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_21_11_2020_14_18_[Default_Changelist]/shelved.patch" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Sudoku/sample/Case.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sudoku/sample/Case.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Sudoku/sample/ControllerGrille.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sudoku/sample/ControllerGrille.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Sudoku/sample/ControllerSudoku.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sudoku/sample/ControllerSudoku.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Sudoku/sample/Grille.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sudoku/sample/Grille.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sample/ControllerGrille.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/ControllerGrille.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/ControllerSudoku.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/ControllerSudoku.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/Grille.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Grille.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,6 +112,7 @@
       <workItem from="1605451355916" duration="10048000" />
       <workItem from="1605534617689" duration="826000" />
       <workItem from="1605551804347" duration="6849000" />
+      <workItem from="1606680956815" duration="2738000" />
     </task>
     <task id="LOCAL-00001" summary="fusion design et méthod, léger clean up">
       <created>1605109526465</created>
@@ -186,6 +192,10 @@
     <option name="LAST_COMMIT_MESSAGE" value="ajout solveur" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="670" y="407" key="#Configure_Path_Variables" timestamp="1606681065095">
+      <screen x="0" y="0" width="1792" height="1120" />
+    </state>
+    <state x="670" y="407" key="#Configure_Path_Variables/0.0.1792.1120@0.0.1792.1120" timestamp="1606681065095" />
     <state x="530" y="245" key="#Inspections" timestamp="1605552230036">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
@@ -215,26 +225,26 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="666" y="282" key="FileChooserDialogImpl/0.0.1920.1080@0.0.1920.1080" timestamp="1604352062676" />
-    <state width="1750" height="230" key="GridCell.Tab.0.bottom" timestamp="1605972244384">
+    <state width="1750" height="230" key="GridCell.Tab.0.bottom" timestamp="1606683840342">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state width="1750" height="230" key="GridCell.Tab.0.bottom/0.0.1792.1040@0.0.1792.1040" timestamp="1605971879352" />
-    <state width="1750" height="230" key="GridCell.Tab.0.bottom/0.0.1792.1120@0.0.1792.1120" timestamp="1605972244384" />
-    <state width="1750" height="230" key="GridCell.Tab.0.center" timestamp="1605972244383">
+    <state width="1750" height="230" key="GridCell.Tab.0.bottom/0.0.1792.1040@0.0.1792.1040" timestamp="1606683550577" />
+    <state width="1750" height="230" key="GridCell.Tab.0.bottom/0.0.1792.1120@0.0.1792.1120" timestamp="1606683840342" />
+    <state width="1750" height="230" key="GridCell.Tab.0.center" timestamp="1606683840340">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state width="1750" height="230" key="GridCell.Tab.0.center/0.0.1792.1040@0.0.1792.1040" timestamp="1605971879351" />
-    <state width="1750" height="230" key="GridCell.Tab.0.center/0.0.1792.1120@0.0.1792.1120" timestamp="1605972244383" />
-    <state width="1750" height="230" key="GridCell.Tab.0.left" timestamp="1605972244382">
+    <state width="1750" height="230" key="GridCell.Tab.0.center/0.0.1792.1040@0.0.1792.1040" timestamp="1606683550576" />
+    <state width="1750" height="230" key="GridCell.Tab.0.center/0.0.1792.1120@0.0.1792.1120" timestamp="1606683840340" />
+    <state width="1750" height="230" key="GridCell.Tab.0.left" timestamp="1606683840338">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state width="1750" height="230" key="GridCell.Tab.0.left/0.0.1792.1040@0.0.1792.1040" timestamp="1605971879350" />
-    <state width="1750" height="230" key="GridCell.Tab.0.left/0.0.1792.1120@0.0.1792.1120" timestamp="1605972244382" />
-    <state width="1750" height="230" key="GridCell.Tab.0.right" timestamp="1605972244383">
+    <state width="1750" height="230" key="GridCell.Tab.0.left/0.0.1792.1040@0.0.1792.1040" timestamp="1606683550576" />
+    <state width="1750" height="230" key="GridCell.Tab.0.left/0.0.1792.1120@0.0.1792.1120" timestamp="1606683840338" />
+    <state width="1750" height="230" key="GridCell.Tab.0.right" timestamp="1606683840341">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state width="1750" height="230" key="GridCell.Tab.0.right/0.0.1792.1040@0.0.1792.1040" timestamp="1605971879351" />
-    <state width="1750" height="230" key="GridCell.Tab.0.right/0.0.1792.1120@0.0.1792.1120" timestamp="1605972244383" />
+    <state width="1750" height="230" key="GridCell.Tab.0.right/0.0.1792.1040@0.0.1792.1040" timestamp="1606683550577" />
+    <state width="1750" height="230" key="GridCell.Tab.0.right/0.0.1792.1120@0.0.1792.1120" timestamp="1606683840341" />
     <state x="180" y="101" key="MergeDialog" timestamp="1605450849555">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>

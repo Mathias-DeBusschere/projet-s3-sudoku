@@ -18,10 +18,18 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 import static java.lang.Math.sqrt;
+import static java.lang.Math.toIntExact;
 
 public class ControllerGrille {
 
     private int taille;
+    private Difficulte difficulte;
+
+    public ControllerGrille(int taille, Difficulte difficulte) {
+        this.difficulte = difficulte;
+        this.taille = taille;
+
+    }
 
     public void initialize() {
 
@@ -60,42 +68,65 @@ public class ControllerGrille {
                 {4,3,1,2}
         };
 
+        int[][] matric16x16 = {
+                {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16},
+                {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16},
+                {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16},
+                {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16},
+                {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16},
+                {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16},
+                {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16},
+                {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16},
+                {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16},
+                {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16},
+                {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16},
+                {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16},
+                {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16},
+                {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16},
+                {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16},
+                {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16},
+        };
 
-        g = new Grille(matriceCorrect,matriceCorrect);
-//        g = new Grille(matrice1,matrice1);
+        if (taille == 4)
+            g = new Grille(matrice1,matrice1);
+        else if (taille == 9)
+            g = new Grille(matrice,matriceCorrect);
+        else if (taille == 16) {
+            g = new Grille(matric16x16,matric16x16);
+            System.out.println("grille taille 16");
+        }
 
         //noinspection IntegerDivisionInFloatingPointContext
-        double size = (600/matrice.length)*matrice.length;
+        double size = (600/taille)*taille;
         this.grille.setPrefSize(size,size);
 
         addElement(g);
         g.setFocusTraversable(true);
-//        affichageLigneBlock(matrice.length);
+        affichageLigneBlock();
 
 
     }
 
-    public void initDate(Difficulte difficulte, int taille) {
-        g.setDifficulte(difficulte);
-        this.taille = taille;
-        System.out.println(this.taille);
-    }
-
-    //WIP
     @SuppressWarnings("IntegerDivisionInFloatingPointContext")
-    private void affichageLigneBlock(int taille) {
+    private void affichageLigneBlock() {
+        double block = 600/taille*sqrt(taille);
+        double size = (600/taille)*taille;
+
         for (int i = 1; i<(int)sqrt(taille); i++) {
-            Line line = new Line();
-            double space = 600/taille*sqrt(taille);
-            double size = 600/taille*taille;
-            line.setStartX(50+space);
-            line.setTranslateY(-size/2+i*space);
-//            line.setStartY(50);
-            line.setEndX(50+space+size);
-//            line.setEndY(50);
-//            line.setRotate(90);
-            line.setStrokeWidth(2);
-            addElement(line);
+            System.out.println("test   " + i + "  " + sqrt(taille) + "   " + taille);
+            Line linev = new Line();
+            Line lineh = new Line();
+
+            linev.setEndY(size-4);
+            linev.setTranslateX(-size/2+i*block);
+            linev.setStrokeWidth(3);
+
+            lineh.setEndX(size-4);
+            lineh.setTranslateY(-size/2+i*block);
+            lineh.setStrokeWidth(3);
+
+            addElement(linev);
+            addElement(lineh);
         }
     }
 
