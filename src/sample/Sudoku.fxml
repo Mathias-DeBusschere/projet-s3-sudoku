@@ -25,7 +25,7 @@
          <Font size="14.0" />
       </font>
    </Button>
-   <ChoiceBox fx:id="difficulte" value="FACILE" layoutX="330.0" layoutY="300.0" onInputMethodTextChanged="#selecDifficulte" prefHeight="36.0" prefWidth="100.0" style="-fx-background-color: white;">
+   <ChoiceBox fx:id="difficulte" value="FACILE" layoutX="330.0" layoutY="300.0" prefHeight="36.0" prefWidth="100.0" style="-fx-background-color: white;">
       <items>
          <FXCollections fx:factory="observableArrayList">
             <Difficulte fx:value="FACILE"/>
@@ -34,7 +34,7 @@
          </FXCollections>
       </items>
    </ChoiceBox>
-   <ChoiceBox fx:id="taille" value="9" layoutX="450.0" layoutY="300.0" onInputMethodTextChanged="#selecTaille" prefHeight="36.0" prefWidth="100.0" style="-fx-background-color: white;">
+   <ChoiceBox fx:id="taille" value="9" layoutX="450.0" layoutY="300.0" prefHeight="36.0" prefWidth="100.0" style="-fx-background-color: white;">
       <items>
          <FXCollections fx:factory="observableArrayList">
             <Integer fx:value="4"/>

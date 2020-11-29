@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 
 import javax.lang.model.element.Element;
 import javax.sound.sampled.*;
@@ -26,6 +27,7 @@ public class Grille extends Parent {
     private final int taille;
     private Case caseselectionne;
     private Difficulte difficulte;
+    private ControllerGrille parent;
 
     public Grille(int[][] valeurs, int[][] solution) {
         this.taille = valeurs.length;
@@ -80,6 +82,10 @@ public class Grille extends Parent {
 
         });
 
+    }
+
+    public void setParent(ControllerGrille parent) {
+        this.parent = parent;
     }
 
     @Override
@@ -170,21 +176,24 @@ public class Grille extends Parent {
 
             ImageView img = new ImageView(new Image(getClass().getResourceAsStream("congratulations.png")));
             img.setPreserveRatio(true);
+            //noinspection IntegerDivisionInFloatingPointContext
             img.setFitWidth(600-600/taille);
-            img.setX((600/taille)/2);
-            img.setY(600/6);
+            img.setTranslateY(-100);
+//            img.setY(600/9);
 
             Label labelTimer = new Label();
             labelTimer.setText("39.56 min");
             labelTimer.setStyle("-fx-background-color:rgba(31,31,31,0.95);-fx-font-size:30px;-fx-padding: 20;-fx-text-fill: white;-fx-border-width: 3px;-fx-border-color: white");
-            labelTimer.setTranslateX((600/taille)*((taille)/2.5));
-            labelTimer.setTranslateY((600/2)+ 20);
+            labelTimer.setTranslateY(50);
+//            labelTimer.setTranslateX((600/taille)*((taille)/2.5));
+//            labelTimer.setTranslateY((600/2)+ 20);
 
             Label labelScore = new Label();
             labelScore.setText("9670 points");
             labelScore.setStyle("-fx-background-color:rgba(31,31,31,0.95);-fx-font-size:30px;-fx-padding: 20;-fx-text-fill: white;-fx-border-width: 3px;-fx-border-color: white");
-            labelScore.setTranslateX((600/taille)*((taille)/2.5));
-            labelScore.setTranslateY((600/2)+ 120);
+            labelScore.setTranslateY(150);
+//            labelScore.setTranslateX((600/taille)*((taille)/2.5));
+//            labelScore.setTranslateY((600/2)+ 120);
 
 
             Task<Void> sleep500ms = new Task<>() {
@@ -198,9 +207,7 @@ public class Grille extends Parent {
                     return null;
                 }
             };
-            sleep500ms.setOnSucceeded(workerStateEvent -> {
-                this.getChildren().add(labelTimer);
-            });
+            sleep500ms.setOnSucceeded(workerStateEvent -> parent.addElement(labelTimer));
 
             Task<Void> sleep1000ms = new Task<>() {
                 @Override
@@ -213,11 +220,9 @@ public class Grille extends Parent {
                     return null;
                 }
             };
-            sleep1000ms.setOnSucceeded(workerStateEvent -> {
-                this.getChildren().add(labelScore);
-            });
+            sleep1000ms.setOnSucceeded(workerStateEvent -> parent.addElement(labelScore));
 
-            this.getChildren().add(img);
+            parent.addElement(img);
             new Thread(sleep500ms).start();
             new Thread(sleep1000ms).start();
         }

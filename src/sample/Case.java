@@ -126,8 +126,8 @@ public class Case extends Parent {
                 e.printStackTrace();
             }
         }
-        ImageView img = new ImageView(new Image(getClass().getResource("congratulations.png").toExternalForm()));
-        this.getChildren().add(img);
+//        ImageView img = new ImageView(new Image(getClass().getResource("congratulations.png").toExternalForm()));
+//        this.getChildren().add(img);
     }
 
     /*
