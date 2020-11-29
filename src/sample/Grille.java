@@ -284,6 +284,7 @@ public class Grille extends Parent {
         for (int i = 1; i < 10; i++) {
             grille[l][c].setValeurgene(i);
             if (valueIsCorrect(grille[l][c])){
+                System.out.println(toString2());
                 if (soluc(l,c+1)){
                     return true;
                 }
@@ -340,16 +341,19 @@ public class Grille extends Parent {
             NBcaseVide=45;
         }
         if (difficulte==Difficulte.MOYEN){
-            NBcaseVide=52;
+            NBcaseVide=50;
         }
         if (difficulte==Difficulte.DIFFICILE){
             NBcaseVide=60;
         }
-
-        while( i < 10) {
+        while( i < 10 ) {
             aleatoireValeur=r.nextInt((9 - 1) + 1);
             aleatoireLigne=r.nextInt((9 - 1) + 1);
             aleatoireColr=r.nextInt((9 - 1) + 1);
+            while (grille[aleatoireLigne][aleatoireColr].getValeur()!=0){
+                aleatoireValeur=r.nextInt((9 - 1) + 1);
+                aleatoireLigne=r.nextInt((9 - 1) + 1);
+                aleatoireColr=r.nextInt((9 - 1) + 1);}
             grille[aleatoireLigne][aleatoireColr].setValeurgene(aleatoireValeur);
             i++;
             if (!valueIsCorrect(grille[aleatoireLigne][aleatoireColr])){
@@ -358,10 +362,10 @@ public class Grille extends Parent {
             }
         }
         i=0;
-
+        System.out.println("r");
         System.out.println(soluc(0,0));
-        System.out.println(remplis());
         System.out.println(toString2());
+
 
         while (i < NBcaseVide ) {
             aleatoireLigne=r.nextInt((9 - 1) + 1);
@@ -369,11 +373,9 @@ public class Grille extends Parent {
             if (grille[aleatoireLigne][aleatoireColr].getValeur()!=0){
                 grille[aleatoireLigne][aleatoireColr].setValeurgene(0);
                 i++;
-                System.out.println(toString2());
             }
         }
         System.out.println(toString2());
-
     }
 
 }
