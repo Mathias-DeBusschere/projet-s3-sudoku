@@ -90,7 +90,7 @@ public class ControllerGrille {
         if (taille == 4)
             g = new Grille(matrice1);
         else if (taille == 9)
-            g = new Grille(matriceCorrect);
+            g = new Grille(matrice);
         else if (taille == 16) {
             g = new Grille(matric16x16);
         }
@@ -146,11 +146,17 @@ public class ControllerGrille {
     private Button reprendre;
     @FXML
     private Button indice;
+    @FXML
+    private Button abandonner;
 
 
     @FXML
     private void recommencer(MouseEvent event) throws IOException {
         FXMLLoader grilleLoader = new FXMLLoader(getClass().getResource("Grille.fxml"));
+
+        ControllerGrille controllerGrille = new ControllerGrille(taille,difficulte);
+        grilleLoader.setController(controllerGrille);
+
         Parent firstPane = grilleLoader.load();
 
         Scene sceneGrille = new Scene(firstPane, 880, 700);
@@ -174,6 +180,11 @@ public class ControllerGrille {
     private void indice(MouseEvent event) {
 //        g.getCaseselectionne().setValeur(g.getSolution()[g.getCaseselectionne().getLigne()][g.getCaseselectionne().getColonne()]);
         g.getCaseselectionne().setIndiceStyle();
+    }
+
+    @FXML
+    private void abandonner(MouseEvent event) {
+        g.soluc(0,0);
     }
 
     @FXML

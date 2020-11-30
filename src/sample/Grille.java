@@ -45,7 +45,7 @@ public class Grille extends Parent {
                 caseinitiale= valeurs[i][j] != 0;
                 Case case1 = new Case(valeurs[i][j],this,i,j,caseinitiale);
                 grille[i][j] = case1;
-                gridPane.add(case1,i,j);
+                gridPane.add(case1,j,i);
             }
         }
         getChildren().add(gridPane);
@@ -309,29 +309,27 @@ public class Grille extends Parent {
         return  fin;
     }
 
-    public boolean soluc(int l, int c){
-//        if (isSolved()){return true;}
-        if (l==8 && c==9){
-            return true;
-        }
+    public boolean soluc(int l, int c) {
+        if (ligneSimple() == -1) return true;
+//        if (l==8 && c==9) return true;
         if (c==9){
 //            l++;
             l=ligneSimple();
             c=0;
         }
-        if (grille[l][c].getValeur()!=0){
+        if (grille[l][c].getValeur()!=0)
             return soluc(l,c+1);
-        }
+
         for (int i = 1; i < 10; i++) {
-            grille[l][c].setValeur(i);
+            grille[l][c].setValeurNoCheck(i);
             if (valueIsCorrect(grille[l][c])){
                 if (soluc(l,c+1)){
                     return true;
                 }
             } else {
-                grille[l][c].setValeur(0);
+                grille[l][c].setValeurNoCheck(0);
             }
-            grille[l][c].setValeur(0);
+            grille[l][c].setValeurNoCheck(0);
         }
         return false;
     }
