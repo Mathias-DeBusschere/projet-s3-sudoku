@@ -88,11 +88,11 @@ public class ControllerGrille {
         };
 
         if (taille == 4)
-            g = new Grille(matrice1,matrice1);
+            g = new Grille(matrice1);
         else if (taille == 9)
-            g = new Grille(matriceCorrect,matriceCorrect);
+            g = new Grille(matriceCorrect);
         else if (taille == 16) {
-            g = new Grille(matric16x16,matric16x16);
+            g = new Grille(matric16x16);
         }
 
         g.setParent(this);
@@ -172,7 +172,7 @@ public class ControllerGrille {
 
     @FXML
     private void indice(MouseEvent event) {
-        g.getCaseselectionne().setValeur(g.getSolution()[g.getCaseselectionne().getLigne()][g.getCaseselectionne().getColonne()]);
+//        g.getCaseselectionne().setValeur(g.getSolution()[g.getCaseselectionne().getLigne()][g.getCaseselectionne().getColonne()]);
         g.getCaseselectionne().setIndiceStyle();
     }
 
@@ -185,6 +185,7 @@ public class ControllerGrille {
     private void valider(MouseEvent event) {
         System.out.println("Validation Grille");
         System.out.println(g.isCorrect());
+        g.isCorrectAnimation(g.isCorrect());
 
     }
 

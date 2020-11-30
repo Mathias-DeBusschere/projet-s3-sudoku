@@ -12,6 +12,8 @@
   <component name="ChangeListManager">
     <list default="true" id="02bd698b-91f1-4a2c-8963-4165d7c32705" name="Default Changelist" comment="ligne en dessous du congrats, congrats centré">
       <change beforePath="$PROJECT_DIR$/src/sample/Case.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Case.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/ControllerGrille.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/ControllerGrille.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/Grille.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Grille.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,7 +34,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="focusErrorTests" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -106,6 +108,7 @@
       <workItem from="1605534617689" duration="826000" />
       <workItem from="1605551804347" duration="6849000" />
       <workItem from="1606680956815" duration="4966000" />
+      <workItem from="1606723517931" duration="1535000" />
     </task>
     <task id="LOCAL-00001" summary="fusion design et méthod, léger clean up">
       <created>1605109526465</created>
@@ -170,7 +173,14 @@
       <option name="project" value="LOCAL" />
       <updated>1606686009709</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="test non fructueux, pause temporaire">
+      <created>1606723680003</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1606723680003</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -198,7 +208,8 @@
     <MESSAGE value="ajout solveur" />
     <MESSAGE value="affiche ligne vertical et horrizontal sur les 3 tailles&#10;léger bug sur les taille 4 et 16" />
     <MESSAGE value="ligne en dessous du congrats, congrats centré" />
-    <option name="LAST_COMMIT_MESSAGE" value="ligne en dessous du congrats, congrats centré" />
+    <MESSAGE value="test non fructueux, pause temporaire" />
+    <option name="LAST_COMMIT_MESSAGE" value="test non fructueux, pause temporaire" />
   </component>
   <component name="WindowStateProjectService">
     <state x="670" y="407" key="#Configure_Path_Variables" timestamp="1606681065095">

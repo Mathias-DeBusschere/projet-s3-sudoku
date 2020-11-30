@@ -23,16 +23,14 @@ import java.util.concurrent.TimeUnit;
 public class Grille extends Parent {
 
     private Case [][] grille;
-    private final int [][] solution;
     private final int taille;
     private Case caseselectionne;
     private Difficulte difficulte;
     private ControllerGrille parent;
 
-    public Grille(int[][] valeurs, int[][] solution) {
+    public Grille(int[][] valeurs) {
         this.taille = valeurs.length;
         this.caseselectionne=null;
-        this.solution=solution;
         this.difficulte=Difficulte.FACILE;
         this.grille = new Case[taille][taille];
 
@@ -109,26 +107,6 @@ public class Grille extends Parent {
         }
         return chaine.toString();
     }
-    public String toStringSolution() {
-        StringBuilder separator = new StringBuilder(" ");
-        separator.append("-".repeat(Math.max(0, taille * 4)));
-        StringBuilder chaine = new StringBuilder(separator + "\n");
-        for(int i=0;i<taille;i++){
-            for (int j=0; j<taille;j++){
-                if(j%3 == 0){
-                    chaine.append(" | ");
-                }
-                chaine.append("[").append(solution[i][j]).append("]");
-            }
-            chaine.append("|\n");
-
-            if((i+1)%3 == 0){
-                chaine.append(separator).append("\n");
-            }
-
-        }
-        return chaine.toString();
-    }
 
     public void setDifficulte(Difficulte difficulte){
         this.difficulte=difficulte;
@@ -152,16 +130,15 @@ public class Grille extends Parent {
 
     public boolean isCorrect() {
         boolean correct = true;
-        for (int i=0;i<taille;i++){
-            for (int j=0;j<taille;j++)
-                if (grille[i][j].getValeur() != solution[i][j]) {
-                    correct = false;
-                    break;
-                }
+        for (int i=0;i<taille && correct;i++){
+            for (int j=0;j<taille && correct;j++)
+                correct = verifAlreadyInRow(grille[i][j]) && verifAlreadyInLine(grille[i][j]) && verifAlreadyInBlock(grille[i][j]);
         }
 
+        return correct;
+    }
 
-
+    public void isCorrectAnimation(boolean correct) {
         if(correct){
             Clip sonVictoire;
             try {
@@ -226,7 +203,6 @@ public class Grille extends Parent {
             new Thread(sleep500ms).start();
             new Thread(sleep1000ms).start();
         }
-        return correct;
     }
 
     //Obligé de faire de la concaténation, car java si il voit un False, il n'exécute pas le reste
@@ -235,9 +211,10 @@ public class Grille extends Parent {
         correct = verifAlreadyInLine(cas) && correct;
         correct = verifAlreadyInBlock(cas) && correct;
         if (difficulte == Difficulte.MOYEN || difficulte == Difficulte.FACILE) {
-            if(!correct) {cas.setErrorStyle();}else{
+            if(!correct)
+                cas.setErrorStyle();
+            else
                 cas.setDefaultStyle();
-            }
         }
         return correct;
     }
@@ -314,27 +291,20 @@ public class Grille extends Parent {
         return null;
     }
 
-    public int[][] getSolution() {
-        return solution;
-    }
-
     public int ligneSimple(){
-        int fin=0;
-        int temp=0;
+        int fin=-1;
         int min=1000;
-        for (int l = 0; l <9 ; l++) {
-            for (int c = 0; c < 9 ; c++) {
-                if (grille[l][c].getValeur() == 0) {
+        for (int l = 0; l < taille ; l++) {
+            int temp = 0;
+            for (int c = 0; c < taille ; c++) {
+                if (grille[l][c].getValeur() == 0)
                     temp++;
-                }
             }
-            if (temp!=0){
+            if (temp!=0)
                 if (temp<min){
                     min=temp;
                     fin=l;
                 }
-            }
-            temp=0;
         }
         return  fin;
     }
