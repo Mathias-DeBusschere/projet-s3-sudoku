@@ -10,12 +10,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="02bd698b-91f1-4a2c-8963-4165d7c32705" name="Default Changelist" comment="Réglage problème clavier">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Sudoku/sample/Grille$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sudoku/sample/Grille$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Sudoku/sample/Grille.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sudoku/sample/Grille.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/Grille.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Grille.java" afterDir="false" />
-    </list>
+    <list default="true" id="02bd698b-91f1-4a2c-8963-4165d7c32705" name="Default Changelist" comment="Réglage problème clavier FINI + AJOUT TOUCHES" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -110,7 +105,7 @@
       <workItem from="1605551804347" duration="6849000" />
       <workItem from="1606680956815" duration="4966000" />
       <workItem from="1606723517931" duration="4829000" />
-      <workItem from="1607886765505" duration="815000" />
+      <workItem from="1607886765505" duration="1603000" />
     </task>
     <task id="LOCAL-00001" summary="fusion design et méthod, léger clean up">
       <created>1605109526465</created>
@@ -196,7 +191,14 @@
       <option name="project" value="LOCAL" />
       <updated>1607887218981</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Réglage problème clavier FINI + AJOUT TOUCHES">
+      <created>1607887768545</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1607887768545</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -227,7 +229,8 @@
     <MESSAGE value="test non fructueux, pause temporaire" />
     <MESSAGE value="solution retirer" />
     <MESSAGE value="Réglage problème clavier" />
-    <option name="LAST_COMMIT_MESSAGE" value="Réglage problème clavier" />
+    <MESSAGE value="Réglage problème clavier FINI + AJOUT TOUCHES" />
+    <option name="LAST_COMMIT_MESSAGE" value="Réglage problème clavier FINI + AJOUT TOUCHES" />
   </component>
   <component name="WindowStateProjectService">
     <state x="670" y="407" key="#Configure_Path_Variables" timestamp="1606681065095">
@@ -263,30 +266,30 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="666" y="282" key="FileChooserDialogImpl/0.0.1920.1080@0.0.1920.1080" timestamp="1604352062676" />
-    <state width="1877" height="218" key="GridCell.Tab.0.bottom" timestamp="1607887554717">
+    <state width="1877" height="218" key="GridCell.Tab.0.bottom" timestamp="1607887745066">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1750" height="230" key="GridCell.Tab.0.bottom/0.0.1792.1040@0.0.1792.1040" timestamp="1606685835961" />
     <state width="1750" height="230" key="GridCell.Tab.0.bottom/0.0.1792.1120@0.0.1792.1120" timestamp="1606728373286" />
-    <state width="1877" height="218" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1607887554717" />
-    <state width="1877" height="218" key="GridCell.Tab.0.center" timestamp="1607887554717">
+    <state width="1877" height="218" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1607887745066" />
+    <state width="1877" height="218" key="GridCell.Tab.0.center" timestamp="1607887745066">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1750" height="230" key="GridCell.Tab.0.center/0.0.1792.1040@0.0.1792.1040" timestamp="1606685835959" />
     <state width="1750" height="230" key="GridCell.Tab.0.center/0.0.1792.1120@0.0.1792.1120" timestamp="1606728373285" />
-    <state width="1877" height="218" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1607887554717" />
-    <state width="1877" height="218" key="GridCell.Tab.0.left" timestamp="1607887554717">
+    <state width="1877" height="218" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1607887745066" />
+    <state width="1877" height="218" key="GridCell.Tab.0.left" timestamp="1607887745066">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1750" height="230" key="GridCell.Tab.0.left/0.0.1792.1040@0.0.1792.1040" timestamp="1606685835958" />
     <state width="1750" height="230" key="GridCell.Tab.0.left/0.0.1792.1120@0.0.1792.1120" timestamp="1606728373285" />
-    <state width="1877" height="218" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1607887554717" />
-    <state width="1877" height="218" key="GridCell.Tab.0.right" timestamp="1607887554717">
+    <state width="1877" height="218" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1607887745066" />
+    <state width="1877" height="218" key="GridCell.Tab.0.right" timestamp="1607887745066">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1750" height="230" key="GridCell.Tab.0.right/0.0.1792.1040@0.0.1792.1040" timestamp="1606685835960" />
     <state width="1750" height="230" key="GridCell.Tab.0.right/0.0.1792.1120@0.0.1792.1120" timestamp="1606728373286" />
-    <state width="1877" height="218" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1607887554717" />
+    <state width="1877" height="218" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1607887745066" />
     <state x="180" y="101" key="MergeDialog" timestamp="1605450849555">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
@@ -300,11 +303,11 @@
     </state>
     <state x="411" y="119" key="SettingsEditor/0.0.1792.1120@0.0.1792.1120" timestamp="1605971109018" />
     <state x="440" y="115" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1604352067073" />
-    <state x="531" y="279" key="Vcs.Push.Dialog.v2" timestamp="1607887220228">
+    <state x="531" y="279" key="Vcs.Push.Dialog.v2" timestamp="1607888724101">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="496" y="300" key="Vcs.Push.Dialog.v2/0.0.1792.1120@0.0.1792.1120" timestamp="1605971232736" />
-    <state x="531" y="279" key="Vcs.Push.Dialog.v2/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1607887220228" />
+    <state x="531" y="279" key="Vcs.Push.Dialog.v2/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1607888724101" />
     <state x="694" y="481" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1605452760653">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
