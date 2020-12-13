@@ -67,14 +67,14 @@ public class Grille extends Parent {
                 case "8" -> caseselectionne.setValeur(8);
                 case "9" -> caseselectionne.setValeur(9);
             }
-            System.out.println(caseselectionne.getLigne()+"|"+caseselectionne.getColonne());
+            System.out.println(caseselectionne.getColonne()+"|"+caseselectionne.getLigne());
             if(caseselectionne!=null) {
                 switch (keyEvent.getCode()) {
                     case BACK_SPACE -> caseselectionne.deleteValeur();
-                    case UP -> {if(caseselectionne.getColonne() >= 1)grille[caseselectionne.getLigne()][caseselectionne.getColonne() - 1].action();}
-                    case DOWN -> {if(caseselectionne.getColonne() < taille-1) grille[caseselectionne.getLigne()][caseselectionne.getColonne() + 1].action();}
-                    case RIGHT -> {if(caseselectionne.getLigne() < taille-1)grille[caseselectionne.getLigne() + 1][caseselectionne.getColonne()].action();}
-                    case LEFT -> {if(caseselectionne.getLigne() >= 1) grille[caseselectionne.getLigne() - 1][caseselectionne.getColonne()].action();}
+                    case UP -> {if(caseselectionne.getLigne() >= 1)grille[caseselectionne.getLigne()-1][caseselectionne.getColonne()].action();}
+                    case DOWN -> {if(caseselectionne.getLigne() < taille-1) grille[caseselectionne.getLigne()+1][caseselectionne.getColonne()].action();}
+                    case RIGHT -> {if(caseselectionne.getColonne() < taille-1)grille[caseselectionne.getLigne()][caseselectionne.getColonne()+1].action();}
+                    case LEFT -> {if(caseselectionne.getColonne() >= 1) grille[caseselectionne.getLigne()][caseselectionne.getColonne()-1].action();}
                 }
             }
 
