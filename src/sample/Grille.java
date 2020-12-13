@@ -74,8 +74,25 @@ public class Grille extends Parent {
                     case UP -> {if(caseselectionne.getLigne() >= 1)grille[caseselectionne.getLigne()-1][caseselectionne.getColonne()].action();}
                     case DOWN -> {if(caseselectionne.getLigne() < taille-1) grille[caseselectionne.getLigne()+1][caseselectionne.getColonne()].action();}
                     case RIGHT -> {if(caseselectionne.getColonne() < taille-1)grille[caseselectionne.getLigne()][caseselectionne.getColonne()+1].action();}
+
                     case LEFT -> {if(caseselectionne.getColonne() >= 1) grille[caseselectionne.getLigne()][caseselectionne.getColonne()-1].action();}
+
+                    case Z -> {if(caseselectionne.getLigne() >= 1)grille[caseselectionne.getLigne()-1][caseselectionne.getColonne()].action();}
+                    case S -> {if(caseselectionne.getLigne() < taille-1) grille[caseselectionne.getLigne()+1][caseselectionne.getColonne()].action();}
+                    case D -> {if(caseselectionne.getColonne() < taille-1)grille[caseselectionne.getLigne()][caseselectionne.getColonne()+1].action();}
+                    case Q -> {if(caseselectionne.getColonne() >= 1) grille[caseselectionne.getLigne()][caseselectionne.getColonne()-1].action();}
+
+                    case TAB -> {
+                        if(caseselectionne.getColonne() < taille-1){
+                            grille[caseselectionne.getLigne()][caseselectionne.getColonne()+1].action();
+                        }else if(caseselectionne.getLigne() < taille-1)
+                            grille[caseselectionne.getLigne()+1][0].action();
+                        else
+                            grille[0][0].action();
+                    }
+
                 }
+                keyEvent.consume();
             }
 
         });
