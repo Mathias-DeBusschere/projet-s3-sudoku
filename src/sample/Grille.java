@@ -30,9 +30,10 @@ public class Grille extends Parent {
 
     public Grille(int[][] valeurs) {
         this.taille = valeurs.length;
-        this.caseselectionne=null;
         this.difficulte=Difficulte.FACILE;
         this.grille = new Case[taille][taille];
+        this.caseselectionne=null;
+
 
         GridPane gridPane = new GridPane();
         //noinspection IntegerDivisionInFloatingPointContext
@@ -49,6 +50,7 @@ public class Grille extends Parent {
             }
         }
         getChildren().add(gridPane);
+        grille[0][0].action();
 
 
 
@@ -71,16 +73,17 @@ public class Grille extends Parent {
             if(caseselectionne!=null) {
                 switch (keyEvent.getCode()) {
                     case BACK_SPACE -> caseselectionne.deleteValeur();
-                    case UP -> {if(caseselectionne.getLigne() >= 1)grille[caseselectionne.getLigne()-1][caseselectionne.getColonne()].action();}
-                    case DOWN -> {if(caseselectionne.getLigne() < taille-1) grille[caseselectionne.getLigne()+1][caseselectionne.getColonne()].action();}
-                    case RIGHT -> {if(caseselectionne.getColonne() < taille-1)grille[caseselectionne.getLigne()][caseselectionne.getColonne()+1].action();}
+                    case UP, Z -> {if(caseselectionne.getLigne() >= 1)grille[caseselectionne.getLigne()-1][caseselectionne.getColonne()].action();
+                    else grille[taille-1][caseselectionne.getColonne()].action();}
 
-                    case LEFT -> {if(caseselectionne.getColonne() >= 1) grille[caseselectionne.getLigne()][caseselectionne.getColonne()-1].action();}
+                    case DOWN, S -> {if(caseselectionne.getLigne() < taille-1) grille[caseselectionne.getLigne()+1][caseselectionne.getColonne()].action();
+                    else grille[0][caseselectionne.getColonne()].action();}
 
-                    case Z -> {if(caseselectionne.getLigne() >= 1)grille[caseselectionne.getLigne()-1][caseselectionne.getColonne()].action();}
-                    case S -> {if(caseselectionne.getLigne() < taille-1) grille[caseselectionne.getLigne()+1][caseselectionne.getColonne()].action();}
-                    case D -> {if(caseselectionne.getColonne() < taille-1)grille[caseselectionne.getLigne()][caseselectionne.getColonne()+1].action();}
-                    case Q -> {if(caseselectionne.getColonne() >= 1) grille[caseselectionne.getLigne()][caseselectionne.getColonne()-1].action();}
+                    case RIGHT, D -> {if(caseselectionne.getColonne() < taille-1)grille[caseselectionne.getLigne()][caseselectionne.getColonne()+1].action();
+                    else grille[caseselectionne.getLigne()][0].action();}
+
+                    case LEFT, Q -> {if(caseselectionne.getColonne() >= 1) grille[caseselectionne.getLigne()][caseselectionne.getColonne()-1].action();
+                    else grille[caseselectionne.getLigne()][taille-1].action();}
 
                     case TAB -> {
                         if(caseselectionne.getColonne() < taille-1){
