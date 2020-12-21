@@ -11,7 +11,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="02bd698b-91f1-4a2c-8963-4165d7c32705" name="Default Changelist" comment="Réglage problème clavier FINI + AJOUT TOUCHES">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Sudoku/sample/Case.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Sudoku/sample/ControllerGrille.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Sudoku/sample/ControllerSudoku.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Sudoku/sample/Difficulte.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Sudoku/sample/Grille$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Sudoku/sample/Grille.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Sudoku/sample/Grille.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Sudoku/sample/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Sudoku/sample/Regles.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Sudoku/sample/ReglesController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Sudoku/sample/Sudoku.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Sudoku/sample/congratulations.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Sudoku/sons/1.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Sudoku/sons/2.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Sudoku/sons/3.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Sudoku/sons/4.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Sudoku/sons/efface.wav" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sample/Grille.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Grille.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -84,7 +100,7 @@
       </list>
     </recent_temporary>
   </component>
-  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="false" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -329,10 +345,10 @@
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
     <state x="433" y="303" width="925" height="617" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1792.1120@0.0.1792.1120" timestamp="1605471357167" />
-    <state x="556" y="280" key="git4idea.branch.GitSmartOperationDialog" timestamp="1606686184710">
+    <state x="556" y="280" key="git4idea.branch.GitSmartOperationDialog" timestamp="1608560818762">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state x="556" y="280" key="git4idea.branch.GitSmartOperationDialog/0.0.1792.1120@0.0.1792.1120" timestamp="1606686184710" />
+    <state x="556" y="280" key="git4idea.branch.GitSmartOperationDialog/0.0.1792.1120@0.0.1792.1120" timestamp="1608560818762" />
     <state x="672" y="328" key="refactoring.ChangeSignatureDialog" timestamp="1605097548864">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>

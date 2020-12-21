@@ -57,7 +57,7 @@ public class Grille extends Parent {
         //PROBLEME DE PERTE DE FOCUS
         this.setOnKeyPressed(keyEvent -> {
             String caractere = keyEvent.getText();
-            System.out.println(keyEvent.getCode());
+//            System.out.println(keyEvent.getCode());
             switch (caractere) {
                 case "1" -> caseselectionne.setValeur(1);
                 case "2" -> caseselectionne.setValeur(2);
@@ -69,7 +69,7 @@ public class Grille extends Parent {
                 case "8" -> caseselectionne.setValeur(8);
                 case "9" -> caseselectionne.setValeur(9);
             }
-            System.out.println(caseselectionne.getColonne()+"|"+caseselectionne.getLigne());
+//            System.out.println(caseselectionne.getColonne()+"|"+caseselectionne.getLigne());
             if(caseselectionne!=null) {
                 switch (keyEvent.getCode()) {
                     case BACK_SPACE -> caseselectionne.deleteValeur();
