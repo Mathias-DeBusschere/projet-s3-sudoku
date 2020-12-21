@@ -41,12 +41,28 @@ public class Grille extends Parent {
         gridPane.setAlignment(Pos.CENTER);
 
         boolean caseinitiale;
-        for (int i =0;i<taille; i++){
+       /* for (int i =0;i<taille; i++){
             for(int j=0;j<taille;j++){
                 caseinitiale= valeurs[i][j] != 0;
                 Case case1 = new Case(valeurs[i][j],this,i,j,caseinitiale);
                 grille[i][j] = case1;
                 gridPane.add(case1,j,i);
+            }
+        } */
+        for (int i =0;i<taille; i++){
+            for(int j=0;j<taille;j++){
+                Case case1 = new Case(0,this,i,j,false);
+                grille[i][j] = case1;
+                gridPane.add(case1,i,j);
+            }
+        }
+        generateur();
+        for (int i =0;i<taille; i++){
+            for(int j=0;j<taille;j++){
+                caseinitiale= grille[i][j].getValeur() != 0;
+                Case case1 = new Case(grille[i][j].getValeur(),this,i,j,caseinitiale);
+                grille[i][j] = case1;
+                gridPane.add(case1,i,j);
             }
         }
         getChildren().add(gridPane);
@@ -239,6 +255,13 @@ public class Grille extends Parent {
         return correct;
     }
 
+    public boolean valueIsCorrectgen(Case cas){
+        boolean correct = verifAlreadyInRow(cas);
+        correct = verifAlreadyInLine(cas) && correct;
+        correct = verifAlreadyInBlock(cas) && correct;
+        return correct;
+    }
+
     public boolean verifAlreadyInRow(Case cas){
         boolean correct = true;
         int colonne = cas.getColonne();
@@ -329,41 +352,108 @@ public class Grille extends Parent {
         return  fin;
     }
 
-    public boolean soluc(int l, int c) {
-        if (ligneSimple() == -1) return true;
-//        if (l==8 && c==9) return true;
+    public boolean soluc(int l, int c){
+        if (l==8 && c==9){
+            return true;
+        }
         if (c==9){
-//            l++;
-            l=ligneSimple();
+            l++;
             c=0;
         }
         if (grille[l][c].getValeur()!=0)
             return soluc(l,c+1);
 
         for (int i = 1; i < 10; i++) {
-            grille[l][c].setValeurNoCheck(i);
-            if (valueIsCorrect(grille[l][c])){
+            grille[l][c].setValeurGen(i);
+            if (valueIsCorrectgen(grille[l][c])){
                 if (soluc(l,c+1)){
                     return true;
                 }
             } else {
-                grille[l][c].setValeurNoCheck(0);
+                grille[l][c].setValeurGen(0);
             }
-            grille[l][c].setValeurNoCheck(0);
+            grille[l][c].setValeurGen(0);
         }
         return false;
     }
 
-//    public boolean remplis() {
-//        boolean b=true;
-//        for (int l = 0; l < 9; l++) {
-//            for (int c = 0; c < 9; c++) {
-//                if (sudoku.getPosition(l, c) == 0) {
-//                    return false;
-//                }
-//            }
-//
-//        }
-//        return b;
-//    }
+    public boolean remplis() {
+        boolean b=true;
+        for (int l = 0; l < 9; l++) {
+            for (int c = 0; c < 9; c++) {
+                if (grille[l][c].getValeur() == 0) {
+                    return false;
+                }
+            }
+
+       }
+       return b;
+    }
+
+    public String toString2(){
+        StringBuilder sudoOut = new StringBuilder(" ");
+        for(int j = 0; j<9; j++){
+            sudoOut.append(" | ");
+            for(int z = 0; z<9; z++){
+                sudoOut.append(grille[j][z].getValeur()).append(" ");
+
+                if(z != 0 && (z+1)%3 == 0 && z+1 < 9){
+                    sudoOut.append("| ");
+                }
+            }
+            sudoOut.append("|\n");
+
+            if(j != 0 && (j+1)%3 == 0 && j+1 < 9){
+                sudoOut = new StringBuilder(sudoOut.toString());
+            }
+
+        }
+        sudoOut = new StringBuilder(sudoOut.toString());
+        return sudoOut.toString();
+    }
+    public void generateur(){
+        int NBcaseVide;
+        int aleatoireValeur;
+        int aleatoireLigne;
+        int aleatoireColr;
+        Random r= new Random();
+
+        if (difficulte==Difficulte.FACILE){
+            NBcaseVide=45;
+        } else if (difficulte==Difficulte.MOYEN){
+            NBcaseVide=50;
+        } else if (difficulte==Difficulte.DIFFICILE){
+            NBcaseVide=60;
+        } else {
+            NBcaseVide=45;
+        }
+
+        int i =0;
+        int quanOfRanNb = r.nextInt(8) + 2;
+        while( i < quanOfRanNb) {
+            aleatoireValeur=r.nextInt(9) + 1;
+            aleatoireLigne=r.nextInt(9);
+            aleatoireColr=r.nextInt(9);
+            if (grille[aleatoireLigne][aleatoireColr].getValeur() == 0) {
+                grille[aleatoireLigne][aleatoireColr].setValeurGen(aleatoireValeur);
+                i++;
+                if (!valueIsCorrectgen(grille[aleatoireLigne][aleatoireColr])){
+                    grille[aleatoireLigne][aleatoireColr].setValeurGen(0);
+                    i--;
+                }
+            }
+        }
+        soluc(0,0);
+
+        i=0;
+        while (i < NBcaseVide ) {
+            aleatoireLigne=r.nextInt(9);
+            aleatoireColr=r.nextInt(9);
+            if (grille[aleatoireLigne][aleatoireColr].getValeur()!=0){
+                grille[aleatoireLigne][aleatoireColr].setValeurGen(0);
+                i++;
+            }
+        }
+    }
+
 }
