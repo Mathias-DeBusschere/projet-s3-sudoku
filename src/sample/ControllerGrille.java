@@ -159,9 +159,8 @@ public class ControllerGrille {
 
         Parent firstPane = grilleLoader.load();
 
-        Scene sceneGrille = new Scene(firstPane, 880, 700);
         Stage primaryStage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        primaryStage.setScene(sceneGrille);
+        primaryStage.getScene().setRoot(firstPane);
     }
 
     @FXML
