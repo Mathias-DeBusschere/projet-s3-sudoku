@@ -275,13 +275,11 @@ public class Grille extends Parent {
     }
 
     public boolean soluc(int l, int c){
-//        if (isSolved()){return true;}
         if (l==8 && c==9){
             return true;
         }
         if (c==9){
             l++;
-            //l=ligneSimple();
             c=0;
         }
         if (grille[l][c].getValeur()!=0){
@@ -290,7 +288,6 @@ public class Grille extends Parent {
         for (int i = 1; i < 10; i++) {
             grille[l][c].setValeurGen(i);
             if (valueIsCorrectgen(grille[l][c])){
-//                System.out.println(toString2());
                 if (soluc(l,c+1)){
                     return true;
                 }
@@ -316,68 +313,62 @@ public class Grille extends Parent {
     }
 
     public String toString2(){
-        String sudoOut = " ";
+        StringBuilder sudoOut = new StringBuilder(" ");
         for(int j = 0; j<9; j++){
-            sudoOut = sudoOut+" | ";
+            sudoOut.append(" | ");
             for(int z = 0; z<9; z++){
-                sudoOut = sudoOut+grille[j][z].getValeur()+" ";
+                sudoOut.append(grille[j][z].getValeur()).append(" ");
 
                 if(z != 0 && (z+1)%3 == 0 && z+1 < 9){
-                    sudoOut = sudoOut + "| ";
+                    sudoOut.append("| ");
                 }
             }
-            sudoOut = sudoOut+"|\n";
+            sudoOut.append("|\n");
 
             if(j != 0 && (j+1)%3 == 0 && j+1 < 9){
-                sudoOut = sudoOut;
+                sudoOut = new StringBuilder(sudoOut.toString());
             }
 
         }
-        sudoOut = sudoOut;
-        return sudoOut;
+        sudoOut = new StringBuilder(sudoOut.toString());
+        return sudoOut.toString();
     }
     public void generateur(){
-        int NBcaseVide=0;
+        int NBcaseVide;
         int aleatoireValeur;
         int aleatoireLigne;
         int aleatoireColr;
         Random r= new Random();
-        int i =0;
-//        int o=aleatoireColr=r.nextInt((10 - 5) + 1);
+
         if (difficulte==Difficulte.FACILE){
             NBcaseVide=45;
-        }
-        if (difficulte==Difficulte.MOYEN){
+        } else if (difficulte==Difficulte.MOYEN){
             NBcaseVide=50;
-        }
-        if (difficulte==Difficulte.DIFFICILE){
+        } else if (difficulte==Difficulte.DIFFICILE){
             NBcaseVide=60;
+        } else {
+            NBcaseVide=45;
         }
-        while( i < 13 ) {
+
+        int i =0;
+        int quanOfRanNb = r.nextInt(8) + 2;
+        while( i < quanOfRanNb) {
             aleatoireValeur=r.nextInt(9) + 1;
-//            System.out.println(aleatoireValeur);
             aleatoireLigne=r.nextInt(9);
             aleatoireColr=r.nextInt(9);
-            while (grille[aleatoireLigne][aleatoireColr].getValeur()!=0){
-                aleatoireValeur=r.nextInt(9) + 1;
-                aleatoireLigne=r.nextInt(9);
-                aleatoireColr=r.nextInt(9);}
-            grille[aleatoireLigne][aleatoireColr].setValeurGen(aleatoireValeur);
-            i++;
-            if (!valueIsCorrectgen(grille[aleatoireLigne][aleatoireColr])){
-//                System.out.println("entered!");
-                grille[aleatoireLigne][aleatoireColr].setValeurGen(0);
-                i--;
+            if (grille[aleatoireLigne][aleatoireColr].getValeur() == 0) {
+                grille[aleatoireLigne][aleatoireColr].setValeurGen(aleatoireValeur);
+                i++;
+                if (!valueIsCorrectgen(grille[aleatoireLigne][aleatoireColr])){
+                    grille[aleatoireLigne][aleatoireColr].setValeurGen(0);
+                    i--;
+                }
             }
         }
+        soluc(0,0);
+
         i=0;
-//        System.out.println("r");
-        System.out.println("soluc : " + soluc(0,0));
-//        System.out.println(toString2());
-
-
         while (i < NBcaseVide ) {
-            System.out.println("NEI! " + i);
             aleatoireLigne=r.nextInt(9);
             aleatoireColr=r.nextInt(9);
             if (grille[aleatoireLigne][aleatoireColr].getValeur()!=0){
@@ -385,7 +376,6 @@ public class Grille extends Parent {
                 i++;
             }
         }
-//        System.out.println(toString2());
     }
 
 }

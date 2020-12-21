@@ -11,21 +11,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="02bd698b-91f1-4a2c-8963-4165d7c32705" name="Default Changelist" comment="clean up">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/lib2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sudoku.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Sudoku.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Sudoku/sample/Case.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sudoku/sample/Case.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Sudoku/sample/ControllerGrille.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sudoku/sample/ControllerGrille.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Sudoku/sample/ControllerSudoku.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sudoku/sample/ControllerSudoku.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Sudoku/sample/Difficulte.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sudoku/sample/Difficulte.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Sudoku/sample/Grille$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sudoku/sample/Grille$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Sudoku/sample/Grille.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sudoku/sample/Grille.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Sudoku/sample/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sudoku/sample/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Sudoku/sample/ReglesController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sudoku/sample/ReglesController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/Case.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Case.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/ControllerGrille.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/ControllerGrille.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/ControllerSudoku.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/ControllerSudoku.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sample/Grille.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Grille.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -271,33 +260,33 @@
     </state>
     <state x="666" y="272" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1606060056400" />
     <state x="666" y="282" key="FileChooserDialogImpl/0.0.1920.1080@0.0.1920.1080" timestamp="1604352062676" />
-    <state width="1750" height="252" key="GridCell.Tab.0.bottom" timestamp="1608563312562">
+    <state width="1750" height="252" key="GridCell.Tab.0.bottom" timestamp="1608582512732">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state width="1750" height="252" key="GridCell.Tab.0.bottom/0.0.1792.1035@0.0.1792.1035" timestamp="1608563225340" />
+    <state width="1750" height="252" key="GridCell.Tab.0.bottom/0.0.1792.1035@0.0.1792.1035" timestamp="1608581203052" />
     <state width="1750" height="230" key="GridCell.Tab.0.bottom/0.0.1792.1040@0.0.1792.1040" timestamp="1605971879352" />
-    <state width="1750" height="252" key="GridCell.Tab.0.bottom/0.0.1792.1120@0.0.1792.1120" timestamp="1608563312562" />
+    <state width="1750" height="252" key="GridCell.Tab.0.bottom/0.0.1792.1120@0.0.1792.1120" timestamp="1608582512732" />
     <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1606680261481" />
-    <state width="1750" height="252" key="GridCell.Tab.0.center" timestamp="1608563312561">
+    <state width="1750" height="252" key="GridCell.Tab.0.center" timestamp="1608582512730">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state width="1750" height="252" key="GridCell.Tab.0.center/0.0.1792.1035@0.0.1792.1035" timestamp="1608563225339" />
+    <state width="1750" height="252" key="GridCell.Tab.0.center/0.0.1792.1035@0.0.1792.1035" timestamp="1608581203051" />
     <state width="1750" height="230" key="GridCell.Tab.0.center/0.0.1792.1040@0.0.1792.1040" timestamp="1605971879351" />
-    <state width="1750" height="252" key="GridCell.Tab.0.center/0.0.1792.1120@0.0.1792.1120" timestamp="1608563312561" />
+    <state width="1750" height="252" key="GridCell.Tab.0.center/0.0.1792.1120@0.0.1792.1120" timestamp="1608582512730" />
     <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1606680261481" />
-    <state width="1750" height="252" key="GridCell.Tab.0.left" timestamp="1608563312561">
+    <state width="1750" height="252" key="GridCell.Tab.0.left" timestamp="1608582512730">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state width="1750" height="252" key="GridCell.Tab.0.left/0.0.1792.1035@0.0.1792.1035" timestamp="1608563225338" />
+    <state width="1750" height="252" key="GridCell.Tab.0.left/0.0.1792.1035@0.0.1792.1035" timestamp="1608581203050" />
     <state width="1750" height="230" key="GridCell.Tab.0.left/0.0.1792.1040@0.0.1792.1040" timestamp="1605971879350" />
-    <state width="1750" height="252" key="GridCell.Tab.0.left/0.0.1792.1120@0.0.1792.1120" timestamp="1608563312561" />
+    <state width="1750" height="252" key="GridCell.Tab.0.left/0.0.1792.1120@0.0.1792.1120" timestamp="1608582512730" />
     <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1606680261481" />
-    <state width="1750" height="252" key="GridCell.Tab.0.right" timestamp="1608563312562">
+    <state width="1750" height="252" key="GridCell.Tab.0.right" timestamp="1608582512731">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state width="1750" height="252" key="GridCell.Tab.0.right/0.0.1792.1035@0.0.1792.1035" timestamp="1608563225339" />
+    <state width="1750" height="252" key="GridCell.Tab.0.right/0.0.1792.1035@0.0.1792.1035" timestamp="1608581203051" />
     <state width="1750" height="230" key="GridCell.Tab.0.right/0.0.1792.1040@0.0.1792.1040" timestamp="1605971879351" />
-    <state width="1750" height="252" key="GridCell.Tab.0.right/0.0.1792.1120@0.0.1792.1120" timestamp="1608563312562" />
+    <state width="1750" height="252" key="GridCell.Tab.0.right/0.0.1792.1120@0.0.1792.1120" timestamp="1608582512731" />
     <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1606680261481" />
     <state x="180" y="101" key="MergeDialog" timestamp="1605450849555">
       <screen x="0" y="0" width="1792" height="1120" />
