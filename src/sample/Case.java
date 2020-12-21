@@ -100,15 +100,11 @@ public class Case extends Parent {
         }
     }
 
-    public void setValeurNoCheck(int valeur) {
-        this.valeur = valeur;
+    public void setValeurGen(int valeur) {
+            this.valeur=valeur;
         if (valeur != 0)
             text.setText(String.valueOf(valeur));
     }
-
-    public void setValeurGen(int valeur) {
-            this.valeur=valeur;
-            }
 
     //Permet d'effacer une valeur d'une case (set 0) et d'effacer les errorStyle de chaque case concernée.
     public void deleteValeur(){
