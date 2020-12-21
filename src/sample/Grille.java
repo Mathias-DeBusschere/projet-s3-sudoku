@@ -61,7 +61,6 @@ public class Grille extends Parent {
         //PROBLEME DE PERTE DE FOCUS
         this.setOnKeyPressed(keyEvent -> {
             String caractere = keyEvent.getText();
-            System.out.println(keyEvent.getCode());
             switch (caractere) {
                 case "1" -> caseselectionne.setValeur(1);
                 case "2" -> caseselectionne.setValeur(2);
@@ -289,16 +288,16 @@ public class Grille extends Parent {
             return soluc(l,c+1);
         }
         for (int i = 1; i < 10; i++) {
-            grille[l][c].setValeurgene(i);
+            grille[l][c].setValeurGen(i);
             if (valueIsCorrectgen(grille[l][c])){
-                System.out.println(toString2());
+//                System.out.println(toString2());
                 if (soluc(l,c+1)){
                     return true;
                 }
             } else {
-                grille[l][c].setValeurgene(0);
+                grille[l][c].setValeurGen(0);
             }
-            grille[l][c].setValeurgene(0);
+            grille[l][c].setValeurGen(0);
         }
         return false;
     }
@@ -339,12 +338,12 @@ public class Grille extends Parent {
     }
     public void generateur(){
         int NBcaseVide=0;
-        int aleatoireValeur=0;
-        int aleatoireLigne=0;
-        int aleatoireColr=0;
+        int aleatoireValeur;
+        int aleatoireLigne;
+        int aleatoireColr;
         Random r= new Random();
         int i =0;
-        int o=aleatoireColr=r.nextInt((10 - 5) + 1);
+//        int o=aleatoireColr=r.nextInt((10 - 5) + 1);
         if (difficulte==Difficulte.FACILE){
             NBcaseVide=45;
         }
@@ -355,35 +354,38 @@ public class Grille extends Parent {
             NBcaseVide=60;
         }
         while( i < 13 ) {
-            aleatoireValeur=r.nextInt((9 - 1) + 1);
-            aleatoireLigne=r.nextInt((9 - 1) + 1);
-            aleatoireColr=r.nextInt((9 - 1) + 1);
+            aleatoireValeur=r.nextInt(9) + 1;
+//            System.out.println(aleatoireValeur);
+            aleatoireLigne=r.nextInt(9);
+            aleatoireColr=r.nextInt(9);
             while (grille[aleatoireLigne][aleatoireColr].getValeur()!=0){
-                aleatoireValeur=r.nextInt((9 - 1) + 1);
-                aleatoireLigne=r.nextInt((9 - 1) + 1);
-                aleatoireColr=r.nextInt((9 - 1) + 1);}
-            grille[aleatoireLigne][aleatoireColr].setValeurgene(aleatoireValeur);
+                aleatoireValeur=r.nextInt(9) + 1;
+                aleatoireLigne=r.nextInt(9);
+                aleatoireColr=r.nextInt(9);}
+            grille[aleatoireLigne][aleatoireColr].setValeurGen(aleatoireValeur);
             i++;
             if (!valueIsCorrectgen(grille[aleatoireLigne][aleatoireColr])){
-                grille[aleatoireLigne][aleatoireColr].setValeurgene(0);
+//                System.out.println("entered!");
+                grille[aleatoireLigne][aleatoireColr].setValeurGen(0);
                 i--;
             }
         }
         i=0;
-        System.out.println("r");
-        System.out.println(soluc(0,0));
-        System.out.println(toString2());
+//        System.out.println("r");
+        System.out.println("soluc : " + soluc(0,0));
+//        System.out.println(toString2());
 
 
         while (i < NBcaseVide ) {
-            aleatoireLigne=r.nextInt((9 - 1) + 1);
-            aleatoireColr=r.nextInt((9 - 1) + 1);
+            System.out.println("NEI! " + i);
+            aleatoireLigne=r.nextInt(9);
+            aleatoireColr=r.nextInt(9);
             if (grille[aleatoireLigne][aleatoireColr].getValeur()!=0){
-                grille[aleatoireLigne][aleatoireColr].setValeurgene(0);
+                grille[aleatoireLigne][aleatoireColr].setValeurGen(0);
                 i++;
             }
         }
-        System.out.println(toString2());
+//        System.out.println(toString2());
     }
 
 }

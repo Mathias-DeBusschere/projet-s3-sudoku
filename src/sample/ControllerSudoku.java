@@ -66,8 +66,6 @@ public class ControllerSudoku {
 
     @FXML
     public void selecDifficulte(InputMethodEvent inputMethodEvent) {
-        System.out.println("test");
-        System.out.println(difficulte);
     }
 
     @FXML

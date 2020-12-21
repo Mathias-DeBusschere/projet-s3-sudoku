@@ -76,7 +76,7 @@ public class Case extends Parent {
             text.setText(String.valueOf(valeur));
             grille.valueIsCorrect(this);}}
 
-    public void setValeurgene(int valeur) {
+    public void setValeurGen(int valeur) {
             this.valeur=valeur;
             }
 

@@ -74,7 +74,7 @@ public class ControllerGrille {
     public void initDate(Difficulte difficulte, int taille) {
         g.setDifficulte(difficulte);
         this.taille = taille;
-        System.out.println(this.taille);
+//        System.out.println(this.taille);
     }
 
     //WIP
