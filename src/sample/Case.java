@@ -101,9 +101,11 @@ public class Case extends Parent {
     }
 
     public void setValeurGen(int valeur) {
-            this.valeur=valeur;
+        this.valeur=valeur;
         if (valeur != 0)
             text.setText(String.valueOf(valeur));
+        else
+            text.setText("");
     }
 
     //Permet d'effacer une valeur d'une case (set 0) et d'effacer les errorStyle de chaque case concernée.
@@ -174,4 +176,11 @@ public class Case extends Parent {
         }
     }
 
+    @Override
+    public String toString() {
+        return "Case{" +
+                "valeur=" + valeur +
+                ", text=" + text +
+                '}';
+    }
 }

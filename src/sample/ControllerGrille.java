@@ -3,13 +3,9 @@ package sample;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.shape.Line;
@@ -18,7 +14,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 import static java.lang.Math.sqrt;
-import static java.lang.Math.toIntExact;
 
 public class ControllerGrille {
 
@@ -32,68 +27,7 @@ public class ControllerGrille {
     }
 
     public void initialize() {
-
-        int[][] matrice = {
-                {0,0,3,0,0,4,5,0,2},
-                {0,5,0,0,0,3,0,0,0},
-                {0,0,8,0,0,5,3,6,0},
-
-                {0,0,0,2,0,0,7,4,3},
-                {2,7,0,3,0,0,0,8,0},
-                {3,4,0,7,5,0,0,0,0},
-
-                {0,0,5,4,0,0,0,0,6},
-                {9,0,2,0,0,0,0,5,0},
-                {4,0,0,0,0,2,9,0,0},
-        };
-
-        int[][] matriceCorrect = {
-                {7,9,3,8,6,4,5,1,2},
-                {6,5,4,1,2,3,8,9,7},
-                {1,2,8,9,7,5,3,6,4},
-
-                {5,8,6,2,1,9,7,4,3},
-                {2,7,9,3,4,6,1,8,5},
-                {3,4,1,7,5,8,6,2,9},
-
-                {8,3,5,4,9,1,2,7,6},
-                {9,1,2,6,3,7,4,5,8},
-                {4,6,7,5,8,2,9,3,1},
-        };
-
-        int[][] matrice1 = {
-                {1,2,3,4},
-                {3,4,2,1},
-                {2,1,4,3},
-                {4,3,1,2}
-        };
-
-        int[][] matric16x16 = {
-                {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16},
-                {2,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16},
-                {3,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16},
-                {4,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16},
-                {5,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16},
-                {6,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16},
-                {7,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16},
-                {8,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16},
-                {9,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16},
-                {10,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16},
-                {11,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16},
-                {12,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16},
-                {13,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16},
-                {14,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16},
-                {15,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16},
-                {16,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16},
-        };
-
-        if (taille == 4)
-            g = new Grille(matrice1);
-        else if (taille == 9)
-            g = new Grille(matrice);
-        else if (taille == 16) {
-            g = new Grille(matric16x16);
-        }
+        g = new Grille(taille, difficulte);
 
         g.setParent(this);
 
@@ -104,8 +38,6 @@ public class ControllerGrille {
         addElement(g);
         g.setFocusTraversable(true);
         affichageLigneBlock();
-
-
     }
 
     @SuppressWarnings("IntegerDivisionInFloatingPointContext")
@@ -183,7 +115,7 @@ public class ControllerGrille {
 
     @FXML
     private void abandonner(MouseEvent event) {
-        g.soluc(0,0);
+        g.solve(0,0);
     }
 
     @FXML
@@ -198,6 +130,7 @@ public class ControllerGrille {
         g.isCorrectAnimation(g.isCorrect());
 
     }
+
 
     @FXML
     private void actionBouton_1() {if(!(g.getCaseselectionne() ==null))g.getCaseselectionne().setValeur(1);}

@@ -9,15 +9,12 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
 
-import javax.lang.model.element.Element;
 import javax.sound.sampled.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
 
 
 public class Grille extends Parent {
@@ -28,9 +25,9 @@ public class Grille extends Parent {
     private Difficulte difficulte;
     private ControllerGrille parent;
 
-    public Grille(int[][] valeurs) {
-        this.taille = valeurs.length;
-        this.difficulte=Difficulte.FACILE;
+    public Grille(int length, Difficulte difficulte) {
+        this.taille = length;
+        this.difficulte=difficulte;
         this.grille = new Case[taille][taille];
         this.caseselectionne=null;
 
@@ -41,39 +38,24 @@ public class Grille extends Parent {
         gridPane.setAlignment(Pos.CENTER);
 
         boolean caseinitiale;
-       /* for (int i =0;i<taille; i++){
-            for(int j=0;j<taille;j++){
-                caseinitiale= valeurs[i][j] != 0;
-                Case case1 = new Case(valeurs[i][j],this,i,j,caseinitiale);
-                grille[i][j] = case1;
-                gridPane.add(case1,j,i);
-            }
-        } */
-        for (int i =0;i<taille; i++){
-            for(int j=0;j<taille;j++){
-                Case case1 = new Case(0,this,i,j,false);
-                grille[i][j] = case1;
-                gridPane.add(case1,i,j);
-            }
-        }
-        generateur();
-        for (int i =0;i<taille; i++){
-            for(int j=0;j<taille;j++){
-                caseinitiale= grille[i][j].getValeur() != 0;
-                Case case1 = new Case(grille[i][j].getValeur(),this,i,j,caseinitiale);
-                grille[i][j] = case1;
-                gridPane.add(case1,i,j);
+
+        generateNewSudoku();
+
+        for (int i = 0; i < taille; i++) {
+            for (int j = 0; j < taille; j++) {
+                gridPane.add(grille[j][i],i,j);
             }
         }
         getChildren().add(gridPane);
         grille[0][0].action();
 
 
-
         //PROBLEME DE PERTE DE FOCUS
         this.setOnKeyPressed(keyEvent -> {
             String caractere = keyEvent.getText();
-//            System.out.println(keyEvent.getCode());
+//            System.out.println("code: " + keyEvent.getCode());
+//            System.out.println("text: " + keyEvent.getText().equals(" "));
+//            System.out.println("char: " + keyEvent.getCharacter());
             switch (caractere) {
                 case "1" -> caseselectionne.setValeur(1);
                 case "2" -> caseselectionne.setValeur(2);
@@ -85,20 +67,21 @@ public class Grille extends Parent {
                 case "8" -> caseselectionne.setValeur(8);
                 case "9" -> caseselectionne.setValeur(9);
             }
+
 //            System.out.println(caseselectionne.getColonne()+"|"+caseselectionne.getLigne());
             if(caseselectionne!=null) {
                 switch (keyEvent.getCode()) {
                     case BACK_SPACE -> caseselectionne.deleteValeur();
-                    case UP, Z -> {if(caseselectionne.getLigne() >= 1)grille[caseselectionne.getLigne()-1][caseselectionne.getColonne()].action();
+                    case LEFT, Q -> {if(caseselectionne.getLigne() >= 1)grille[caseselectionne.getLigne()-1][caseselectionne.getColonne()].action();
                     else grille[taille-1][caseselectionne.getColonne()].action();}
 
-                    case DOWN, S -> {if(caseselectionne.getLigne() < taille-1) grille[caseselectionne.getLigne()+1][caseselectionne.getColonne()].action();
+                    case RIGHT, D -> {if(caseselectionne.getLigne() < taille-1) grille[caseselectionne.getLigne()+1][caseselectionne.getColonne()].action();
                     else grille[0][caseselectionne.getColonne()].action();}
 
-                    case RIGHT, D -> {if(caseselectionne.getColonne() < taille-1)grille[caseselectionne.getLigne()][caseselectionne.getColonne()+1].action();
+                    case DOWN, S -> {if(caseselectionne.getColonne() < taille-1)grille[caseselectionne.getLigne()][caseselectionne.getColonne()+1].action();
                     else grille[caseselectionne.getLigne()][0].action();}
 
-                    case LEFT, Q -> {if(caseselectionne.getColonne() >= 1) grille[caseselectionne.getLigne()][caseselectionne.getColonne()-1].action();
+                    case UP, Z -> {if(caseselectionne.getColonne() >= 1) grille[caseselectionne.getLigne()][caseselectionne.getColonne()-1].action();
                     else grille[caseselectionne.getLigne()][taille-1].action();}
 
                     case TAB -> {
@@ -352,21 +335,70 @@ public class Grille extends Parent {
         return  fin;
     }
 
-    public boolean soluc(int l, int c){
-        if (l==8 && c==9){
+    public int coloneSimple() {
+        int fin=-1;
+        int min=1000;
+        for (int c = 0; c < taille ; c++) {
+            int temp = 0;
+            for (int l = 0; l < taille ; l++) {
+                if (grille[l][c].getValeur() == 0)
+                    temp++;
+            }
+            if (temp!=0)
+                if (temp<min){
+                    min=temp;
+                    fin=c;
+                }
+        }
+        return  fin;
+    }
+
+    public int carreSimple() {
+        int min = 1000;
+        int fin=-1;
+        int sqrtTaille = (int)Math.sqrt(taille);
+        int[][] sumPerBlock = new int[sqrtTaille][sqrtTaille];
+
+        for (int l = 0; l < taille ; l++) {
+            for (int c = 0; c < taille ; c++) {
+                if (grille[l][c].getValeur() == 0)
+                    sumPerBlock[l/sqrtTaille][c/sqrtTaille] ++;
+            }
+        }
+        for (int i = 0; i < sqrtTaille; i++) {
+            for (int j = 0; j < sqrtTaille; j++) {
+                if (min > sumPerBlock[i][j]) {
+                    min = sumPerBlock[i][j];
+                    fin = i*3 + j;
+                }
+            }
+        }
+
+        return fin;
+    }
+
+    private boolean isFilled() {
+        boolean bool = true;
+        for (int i = 0; i < taille && bool; i++) {
+            for (int j = 0; j < taille && bool; j++) {
+                bool = grille[i][j].getValeur() == 0;
+            }
+        }
+        return bool;
+    }
+
+    public boolean solve(int l, int c){
+        if (isFilled()){
             return true;
         }
-        if (c==9){
-            l++;
-            c=0;
+        if (c==taille){
+            return solve(ligneSimple(),0);
         }
-        if (grille[l][c].getValeur()!=0)
-            return soluc(l,c+1);
 
-        for (int i = 1; i < 10; i++) {
+        for (int i = 1; i <= taille; i++) {
             grille[l][c].setValeurGen(i);
             if (valueIsCorrectgen(grille[l][c])){
-                if (soluc(l,c+1)){
+                if (solve(l,c+1)){
                     return true;
                 }
             } else {
@@ -391,7 +423,7 @@ public class Grille extends Parent {
     }
 
     public String toString2(){
-        StringBuilder sudoOut = new StringBuilder(" ");
+        StringBuilder sudoOut = new StringBuilder();
         for(int j = 0; j<9; j++){
             sudoOut.append(" | ");
             for(int z = 0; z<9; z++){
@@ -411,25 +443,34 @@ public class Grille extends Parent {
         sudoOut = new StringBuilder(sudoOut.toString());
         return sudoOut.toString();
     }
-    public void generateur(){
+
+    public void generateNewSudoku(){
         int NBcaseVide;
         int aleatoireValeur;
         int aleatoireLigne;
         int aleatoireColr;
         Random r= new Random();
 
+
+        for (int i =0;i<taille; i++){
+            for(int j=0;j<taille;j++){
+                Case case1 = new Case(0,this,i,j,false);
+                grille[i][j] = case1;
+            }
+        }
+
         if (difficulte==Difficulte.FACILE){
-            NBcaseVide=45;
+            NBcaseVide=taille*taille/2;
         } else if (difficulte==Difficulte.MOYEN){
-            NBcaseVide=50;
+            NBcaseVide=taille*taille*6/10;
         } else if (difficulte==Difficulte.DIFFICILE){
-            NBcaseVide=60;
+            NBcaseVide=taille*taille*7/10;
         } else {
-            NBcaseVide=45;
+            NBcaseVide=taille*taille/2;
         }
 
         int i =0;
-        int quanOfRanNb = r.nextInt(8) + 2;
+        int quanOfRanNb = r.nextInt(9) + 2;
         while( i < quanOfRanNb) {
             aleatoireValeur=r.nextInt(9) + 1;
             aleatoireLigne=r.nextInt(9);
@@ -443,7 +484,8 @@ public class Grille extends Parent {
                 }
             }
         }
-        soluc(0,0);
+
+        solve(ligneSimple(),0);
 
         i=0;
         while (i < NBcaseVide ) {
