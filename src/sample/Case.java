@@ -2,10 +2,12 @@ package sample;
 
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 import javax.sound.sampled.*;
@@ -21,12 +23,13 @@ public class Case extends Parent {
     private final Grille grille;
     private final int ligne;
     private final int colonne;
-    private final boolean initiale;
+    private boolean initiale;
     private boolean indice = false;
 
 //    Region fond = new Region();
     StackPane fond = new StackPane();
     Text text = new Text();
+    GridPane notes = new GridPane();
 
     public Case(int valeur,Grille grille,int ligne, int colonne, boolean initiale) {
         this.valeur = valeur;
@@ -64,6 +67,14 @@ public class Case extends Parent {
 
     }
 
+    public boolean isInitiale() {
+        return initiale;
+    }
+
+    public void setInitiale(boolean initiale) {
+        this.initiale = initiale;
+    }
+
     public int getValeur() {
         return valeur;
     }
@@ -78,10 +89,57 @@ public class Case extends Parent {
 
     //Permet de changer la valeur et de verifier si la valeur rentrée n'est pas fausse
     public void setValeur(int valeur) {
-        if(!initiale && !indice){
+        if(!initiale && !indice && !grille.isNoteMode()){
             this.valeur=valeur;
+            fond.getChildren().remove(0);
             text.setText(String.valueOf(valeur));
+            fond.getChildren().add(text);
             grille.valueIsCorrect(this);
+
+            //Génére un int aléatoire entre 1 et 4 inclus, puis joue un des 4 sons d'écriture
+            Clip sonEcriture;
+            try {
+
+                Random random = new Random();
+                int randomInt = random.nextInt(5 - 1) + 1;
+
+                sonEcriture = AudioSystem.getClip();
+                AudioInputStream inputStream = AudioSystem.getAudioInputStream(getClass().getResourceAsStream("/sons/"+randomInt+".wav"));
+                sonEcriture.open(inputStream);
+                sonEcriture.start();
+            } catch (LineUnavailableException | UnsupportedAudioFileException | IOException e) {
+                e.printStackTrace();
+            }
+        } else if (!initiale && !indice && grille.isNoteMode()) {
+            note.add(valeur);
+
+            Text textNote = new Text();
+            textNote.setText(String.valueOf(valeur));
+            textNote.setFill(Color.BLACK);
+            textNote.setFont(new Font(10));
+
+            int sqrtTaille = (int) Math.sqrt(grille.getTaille());
+            int size = 600/grille.getTaille()-5;
+            notes.setPrefSize(size, size);
+
+            fond.getChildren().remove(0);
+            fond.getChildren().add(notes);
+
+            switch (valeur) {
+                case 1 -> notes.add(textNote,0,0);
+                case 2 -> notes.add(textNote,1,0);
+                case 3 -> notes.add(textNote,2,0);
+                case 4 -> notes.add(textNote,0,1);
+                case 5 -> notes.add(textNote,1,1);
+                case 6 -> notes.add(textNote,2,1);
+                case 7 -> notes.add(textNote,0,2);
+                case 8 -> notes.add(textNote,1,2);
+                case 9 -> notes.add(textNote,2,2);
+            }
+
+            System.out.println(notes.getChildren());
+
+//            displayNote();
 
             //Génére un int aléatoire entre 1 et 4 inclus, puis joue un des 4 sons d'écriture
             Clip sonEcriture;

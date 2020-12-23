@@ -24,6 +24,7 @@ public class Grille extends Parent {
     private Case caseselectionne;
     private Difficulte difficulte;
     private ControllerGrille parent;
+    private boolean noteMode = false;
 
     public Grille(int length, Difficulte difficulte) {
         this.taille = length;
@@ -99,6 +100,14 @@ public class Grille extends Parent {
 
         });
 
+    }
+
+    public boolean isNoteMode() {
+        return noteMode;
+    }
+
+    public void setNoteMode(boolean noteMode) {
+        this.noteMode = noteMode;
     }
 
     public void setParent(ControllerGrille parent) {
@@ -381,7 +390,7 @@ public class Grille extends Parent {
         boolean bool = true;
         for (int i = 0; i < taille && bool; i++) {
             for (int j = 0; j < taille && bool; j++) {
-                bool = grille[i][j].getValeur() == 0;
+                bool = grille[i][j].getValeur() != 0;
             }
         }
         return bool;
@@ -470,11 +479,11 @@ public class Grille extends Parent {
         }
 
         int i =0;
-        int quanOfRanNb = r.nextInt(9) + 2;
+        int quanOfRanNb = r.nextInt(taille) + 2;
         while( i < quanOfRanNb) {
-            aleatoireValeur=r.nextInt(9) + 1;
-            aleatoireLigne=r.nextInt(9);
-            aleatoireColr=r.nextInt(9);
+            aleatoireValeur=r.nextInt(taille) + 1;
+            aleatoireLigne=r.nextInt(taille);
+            aleatoireColr=r.nextInt(taille);
             if (grille[aleatoireLigne][aleatoireColr].getValeur() == 0) {
                 grille[aleatoireLigne][aleatoireColr].setValeurGen(aleatoireValeur);
                 i++;
@@ -489,12 +498,20 @@ public class Grille extends Parent {
 
         i=0;
         while (i < NBcaseVide ) {
-            aleatoireLigne=r.nextInt(9);
-            aleatoireColr=r.nextInt(9);
+            aleatoireLigne=r.nextInt(taille);
+            aleatoireColr=r.nextInt(taille);
             if (grille[aleatoireLigne][aleatoireColr].getValeur()!=0){
                 grille[aleatoireLigne][aleatoireColr].setValeurGen(0);
                 i++;
             }
+        }
+
+        for (int i2 = 0; i2 < taille; i2++) {
+            for (int j = 0; j < taille; j++) {
+                if (grille[i2][j].getValeur()!=0)
+                    grille[i2][j].setInitiale(true);
+            }
+
         }
     }
 

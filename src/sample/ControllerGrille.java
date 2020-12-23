@@ -131,6 +131,11 @@ public class ControllerGrille {
 
     }
 
+    @FXML
+    private void note(MouseEvent event) {
+        g.setNoteMode(!g.isNoteMode());
+    };
+
 
     @FXML
     private void actionBouton_1() {if(!(g.getCaseselectionne() ==null))g.getCaseselectionne().setValeur(1);}
