@@ -39,8 +39,7 @@ public class Case extends Parent {
         this.colonne = colonne;
         this.initiale = initiale;
 
-        //noinspection IntegerDivisionInFloatingPointContext
-        double size = 600/grille.getTaille();
+        double size = 600.0/grille.getTaille();
         fond.setPrefSize(size,size);
         fond.setStyle( "-fx-background-color: white; -fx-border-color: grey;");
         this.getChildren().add(fond);
@@ -111,33 +110,40 @@ public class Case extends Parent {
                 e.printStackTrace();
             }
         } else if (!initiale && !indice && grille.isNoteMode()) {
+            int sqrtTaille = (int) Math.sqrt(grille.getTaille());
+            int size = 600/grille.getTaille()-5;
+
             note.add(valeur);
 
             Text textNote = new Text();
+            StackPane stackPane = new StackPane();
+            stackPane.getChildren().add(textNote);
+            //noinspection IntegerDivisionInFloatingPointContext
+            stackPane.setPrefSize(size/3,size/3);
+
             textNote.setText(String.valueOf(valeur));
             textNote.setFill(Color.BLACK);
-            textNote.setFont(new Font(10));
+            textNote.setFont(new Font(15));
 
-            int sqrtTaille = (int) Math.sqrt(grille.getTaille());
-            int size = 600/grille.getTaille()-5;
             notes.setPrefSize(size, size);
+//            notes.setMinSize(size,size);
 
             fond.getChildren().remove(0);
             fond.getChildren().add(notes);
 
             switch (valeur) {
-                case 1 -> notes.add(textNote,0,0);
-                case 2 -> notes.add(textNote,1,0);
-                case 3 -> notes.add(textNote,2,0);
-                case 4 -> notes.add(textNote,0,1);
-                case 5 -> notes.add(textNote,1,1);
-                case 6 -> notes.add(textNote,2,1);
-                case 7 -> notes.add(textNote,0,2);
-                case 8 -> notes.add(textNote,1,2);
-                case 9 -> notes.add(textNote,2,2);
+                case 1 -> notes.add(stackPane,0,0);
+                case 2 -> notes.add(stackPane,1,0);
+                case 3 -> notes.add(stackPane,2,0);
+                case 4 -> notes.add(stackPane,0,1);
+                case 5 -> notes.add(stackPane,1,1);
+                case 6 -> notes.add(stackPane,2,1);
+                case 7 -> notes.add(stackPane,0,2);
+                case 8 -> notes.add(stackPane,1,2);
+                case 9 -> notes.add(stackPane,2,2);
             }
 
-            System.out.println(notes.getChildren());
+//            System.out.println(notes.getChildren());
 
 //            displayNote();
 

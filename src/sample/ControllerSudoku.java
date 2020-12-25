@@ -29,6 +29,8 @@ public class ControllerSudoku {
         difficulte.valueProperty().addListener((observableValue, d, d1) -> difficulte.getSelectionModel().select(d1));
         taille.getSelectionModel().select(1);
         taille.valueProperty().addListener(((observableValue, integer, t1) -> taille.getSelectionModel().select(t1)));
+
+
     }
 
     //déclaration des "variables" utilisées

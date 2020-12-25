@@ -40,20 +40,19 @@ public class ControllerGrille {
         affichageLigneBlock();
     }
 
-    @SuppressWarnings("IntegerDivisionInFloatingPointContext")
     private void affichageLigneBlock() {
-        double block = 600/taille*sqrt(taille);
-        double size = (600/taille)*taille;
+        double block = 600.0/taille*sqrt(taille);
+        double size = (600.0/taille)*taille;
 
         for (int i = 1; i<(int)sqrt(taille); i++) {
             Line linev = new Line();
             Line lineh = new Line();
 
-            linev.setEndY(size-4);
+            linev.setEndY(size);
             linev.setTranslateX(-size/2+i*block);
             linev.setStrokeWidth(3);
 
-            lineh.setEndX(size-4);
+            lineh.setEndX(size);
             lineh.setTranslateY(-size/2+i*block);
             lineh.setStrokeWidth(3);
 
@@ -80,6 +79,8 @@ public class ControllerGrille {
     private Button indice;
     @FXML
     private Button abandonner;
+    @FXML
+    private Button note;
 
 
     @FXML
@@ -134,6 +135,11 @@ public class ControllerGrille {
     @FXML
     private void note(MouseEvent event) {
         g.setNoteMode(!g.isNoteMode());
+        if (g.isNoteMode())
+            note.setStyle("-fx-background-color: grey");
+        else
+            note.setStyle("-fx-background-color: white");
+
     };
 
 

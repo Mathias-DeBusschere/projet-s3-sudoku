@@ -8,7 +8,11 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Paint;
 
 import javax.sound.sampled.*;
 import java.io.IOException;
@@ -47,6 +51,9 @@ public class Grille extends Parent {
                 gridPane.add(grille[j][i],i,j);
             }
         }
+        System.out.println(gridPane);
+//        gridPane.setStyle("-fx-border-color: red; -fx-border-width: 5");
+
         getChildren().add(gridPane);
         grille[0][0].action();
 
@@ -73,16 +80,16 @@ public class Grille extends Parent {
             if(caseselectionne!=null) {
                 switch (keyEvent.getCode()) {
                     case BACK_SPACE -> caseselectionne.deleteValeur();
-                    case LEFT, Q -> {if(caseselectionne.getLigne() >= 1)grille[caseselectionne.getLigne()-1][caseselectionne.getColonne()].action();
+                    case UP, Z -> {if(caseselectionne.getLigne() >= 1)grille[caseselectionne.getLigne()-1][caseselectionne.getColonne()].action();
                     else grille[taille-1][caseselectionne.getColonne()].action();}
 
-                    case RIGHT, D -> {if(caseselectionne.getLigne() < taille-1) grille[caseselectionne.getLigne()+1][caseselectionne.getColonne()].action();
+                    case DOWN, S -> {if(caseselectionne.getLigne() < taille-1) grille[caseselectionne.getLigne()+1][caseselectionne.getColonne()].action();
                     else grille[0][caseselectionne.getColonne()].action();}
 
-                    case DOWN, S -> {if(caseselectionne.getColonne() < taille-1)grille[caseselectionne.getLigne()][caseselectionne.getColonne()+1].action();
+                    case RIGHT, D -> {if(caseselectionne.getColonne() < taille-1)grille[caseselectionne.getLigne()][caseselectionne.getColonne()+1].action();
                     else grille[caseselectionne.getLigne()][0].action();}
 
-                    case UP, Z -> {if(caseselectionne.getColonne() >= 1) grille[caseselectionne.getLigne()][caseselectionne.getColonne()-1].action();
+                    case LEFT, Q -> {if(caseselectionne.getColonne() >= 1) grille[caseselectionne.getLigne()][caseselectionne.getColonne()-1].action();
                     else grille[caseselectionne.getLigne()][taille-1].action();}
 
                     case TAB -> {
@@ -291,17 +298,12 @@ public class Grille extends Parent {
     //Pré-requis : taille grille = 9
     public ArrayList<Case> getCaseInBlock(Case cas){
         ArrayList<Case> liste = new ArrayList<>();
-        int lig,col;
-        if(cas.getLigne()<3) lig = 0;
-        else if(cas.getLigne()>5) lig = 6;
-        else lig = 3;
+        int sqrtTaille = (int) Math.sqrt(taille);
+        int lig = (cas.getLigne()/sqrtTaille)*sqrtTaille;
+        int col = (cas.getColonne()/sqrtTaille)*sqrtTaille;
 
-        if(cas.getColonne()<3) col = 0;
-        else if(cas.getColonne()>5) col = 6;
-        else col = 3;
-
-        for(int i = lig; i< lig+3; i++ ){
-            liste.addAll(Arrays.asList(grille[i]).subList(col, col + 3));
+        for(int i = lig; i< lig+sqrtTaille; i++ ){
+            liste.addAll(Arrays.asList(grille[i]).subList(col, col + sqrtTaille));
         }
         return liste;
     }
@@ -315,8 +317,10 @@ public class Grille extends Parent {
             if (cas != caseverif) {
                 if (caseverif.getValeur() == cas.getValeur()) {
                     correct = false;
-                    if (difficulte==Difficulte.FACILE)caseverif.setErrorStyle();
-                } else caseverif.setDefaultStyle();
+                    if (difficulte==Difficulte.FACILE)
+                        caseverif.setErrorStyle();
+                } else
+                    caseverif.setDefaultStyle();
             }
         return correct;
     }
@@ -469,13 +473,13 @@ public class Grille extends Parent {
         }
 
         if (difficulte==Difficulte.FACILE){
-            NBcaseVide=taille*taille/2;
+            NBcaseVide=taille*taille*4/10;
         } else if (difficulte==Difficulte.MOYEN){
-            NBcaseVide=taille*taille*6/10;
+            NBcaseVide=taille*taille*5/10;
         } else if (difficulte==Difficulte.DIFFICILE){
-            NBcaseVide=taille*taille*7/10;
+            NBcaseVide=taille*taille*6/10;
         } else {
-            NBcaseVide=taille*taille/2;
+            NBcaseVide=taille*taille*5/10;
         }
 
         int i =0;
