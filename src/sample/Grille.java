@@ -8,11 +8,8 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Border;
-import javafx.scene.layout.BorderStroke;
-import javafx.scene.layout.BorderStrokeStyle;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Paint;
+import sample.solver.BackTrackingSolver;
 
 import javax.sound.sampled.*;
 import java.io.IOException;
@@ -23,7 +20,7 @@ import java.util.Random;
 
 public class Grille extends Parent {
 
-    private Case [][] grille;
+    private Case [][] tableau;
     private final int taille;
     private Case caseselectionne;
     private Difficulte difficulte;
@@ -33,13 +30,12 @@ public class Grille extends Parent {
     public Grille(int length, Difficulte difficulte) {
         this.taille = length;
         this.difficulte=difficulte;
-        this.grille = new Case[taille][taille];
+        this.tableau = new Case[taille][taille];
         this.caseselectionne=null;
 
 
         GridPane gridPane = new GridPane();
-        //noinspection IntegerDivisionInFloatingPointContext
-        gridPane.setPrefSize((600/taille)*taille,(600/taille)*taille);
+        gridPane.setPrefSize((600.0/taille)*taille,(600.0/taille)*taille);
         gridPane.setAlignment(Pos.CENTER);
 
         boolean caseinitiale;
@@ -48,14 +44,14 @@ public class Grille extends Parent {
 
         for (int i = 0; i < taille; i++) {
             for (int j = 0; j < taille; j++) {
-                gridPane.add(grille[j][i],i,j);
+                gridPane.add(tableau[j][i],i,j);
             }
         }
         System.out.println(gridPane);
 //        gridPane.setStyle("-fx-border-color: red; -fx-border-width: 5");
 
         getChildren().add(gridPane);
-        grille[0][0].action();
+        tableau[0][0].action();
 
 
         //PROBLEME DE PERTE DE FOCUS
@@ -80,25 +76,25 @@ public class Grille extends Parent {
             if(caseselectionne!=null) {
                 switch (keyEvent.getCode()) {
                     case BACK_SPACE -> caseselectionne.deleteValeur();
-                    case UP, Z -> {if(caseselectionne.getLigne() >= 1)grille[caseselectionne.getLigne()-1][caseselectionne.getColonne()].action();
-                    else grille[taille-1][caseselectionne.getColonne()].action();}
+                    case UP, Z -> {if(caseselectionne.getLigne() >= 1) tableau[caseselectionne.getLigne()-1][caseselectionne.getColonne()].action();
+                    else tableau[taille-1][caseselectionne.getColonne()].action();}
 
-                    case DOWN, S -> {if(caseselectionne.getLigne() < taille-1) grille[caseselectionne.getLigne()+1][caseselectionne.getColonne()].action();
-                    else grille[0][caseselectionne.getColonne()].action();}
+                    case DOWN, S -> {if(caseselectionne.getLigne() < taille-1) tableau[caseselectionne.getLigne()+1][caseselectionne.getColonne()].action();
+                    else tableau[0][caseselectionne.getColonne()].action();}
 
-                    case RIGHT, D -> {if(caseselectionne.getColonne() < taille-1)grille[caseselectionne.getLigne()][caseselectionne.getColonne()+1].action();
-                    else grille[caseselectionne.getLigne()][0].action();}
+                    case RIGHT, D -> {if(caseselectionne.getColonne() < taille-1) tableau[caseselectionne.getLigne()][caseselectionne.getColonne()+1].action();
+                    else tableau[caseselectionne.getLigne()][0].action();}
 
-                    case LEFT, Q -> {if(caseselectionne.getColonne() >= 1) grille[caseselectionne.getLigne()][caseselectionne.getColonne()-1].action();
-                    else grille[caseselectionne.getLigne()][taille-1].action();}
+                    case LEFT, Q -> {if(caseselectionne.getColonne() >= 1) tableau[caseselectionne.getLigne()][caseselectionne.getColonne()-1].action();
+                    else tableau[caseselectionne.getLigne()][taille-1].action();}
 
                     case TAB -> {
                         if(caseselectionne.getColonne() < taille-1){
-                            grille[caseselectionne.getLigne()][caseselectionne.getColonne()+1].action();
+                            tableau[caseselectionne.getLigne()][caseselectionne.getColonne()+1].action();
                         }else if(caseselectionne.getLigne() < taille-1)
-                            grille[caseselectionne.getLigne()+1][0].action();
+                            tableau[caseselectionne.getLigne()+1][0].action();
                         else
-                            grille[0][0].action();
+                            tableau[0][0].action();
                     }
 
                 }
@@ -107,6 +103,10 @@ public class Grille extends Parent {
 
         });
 
+    }
+
+    public Case[][] getTableau() {
+        return tableau;
     }
 
     public boolean isNoteMode() {
@@ -131,7 +131,7 @@ public class Grille extends Parent {
                 if(j%3 == 0){
                     chaine.append(" | ");
                 }
-                chaine.append("[").append(grille[i][j].getValeur()).append("]");
+                chaine.append("[").append(tableau[i][j].getValeur()).append("]");
             }
             chaine.append("|\n");
 
@@ -156,7 +156,7 @@ public class Grille extends Parent {
     }
 
     public Case getCase(int ligne, int colonne){
-        return grille[ligne][colonne];
+        return tableau[ligne][colonne];
     }
 
     public int getTaille() {
@@ -167,7 +167,7 @@ public class Grille extends Parent {
         boolean correct = true;
         for (int i=0;i<taille && correct;i++){
             for (int j=0;j<taille && correct;j++)
-                correct = verifAlreadyInRow(grille[i][j]) && verifAlreadyInLine(grille[i][j]) && verifAlreadyInBlock(grille[i][j]);
+                correct = verifAlreadyInRow(tableau[i][j]) && verifAlreadyInLine(tableau[i][j]) && verifAlreadyInBlock(tableau[i][j]);
         }
 
         return correct;
@@ -265,12 +265,12 @@ public class Grille extends Parent {
         boolean correct = true;
         int colonne = cas.getColonne();
         for(int k =0; k<taille;k++){
-            if (cas != grille[k][colonne]){
-                if(grille[k][colonne].getValeur() == grille[cas.getLigne()][colonne].getValeur() && grille[k][colonne]!=grille[cas.getLigne()][colonne]){
+            if (cas != tableau[k][colonne]){
+                if(tableau[k][colonne].getValeur() == tableau[cas.getLigne()][colonne].getValeur() && tableau[k][colonne]!= tableau[cas.getLigne()][colonne]){
                     correct = false;
-                    if(difficulte == Difficulte.FACILE) grille[k][colonne].setErrorStyle();
+                    if(difficulte == Difficulte.FACILE) tableau[k][colonne].setErrorStyle();
                 }else{
-                    grille[k][colonne].setDefaultStyle();
+                    tableau[k][colonne].setDefaultStyle();
                 }
             }
         }
@@ -281,12 +281,12 @@ public class Grille extends Parent {
         boolean correct = true;
         int ligne = cas.getLigne();
         for(int k =0; k<taille;k++) {
-            if (cas != grille[ligne][k]) {
-                if (grille[ligne][k].getValeur() == grille[ligne][cas.getColonne()].getValeur() && grille[ligne][k] != grille[ligne][cas.getColonne()]) {
+            if (cas != tableau[ligne][k]) {
+                if (tableau[ligne][k].getValeur() == tableau[ligne][cas.getColonne()].getValeur() && tableau[ligne][k] != tableau[ligne][cas.getColonne()]) {
                     correct = false;
-                    if(difficulte==Difficulte.FACILE) grille[ligne][k].setErrorStyle();
+                    if(difficulte==Difficulte.FACILE) tableau[ligne][k].setErrorStyle();
                 } else {
-                    grille[ligne][k].setDefaultStyle();
+                    tableau[ligne][k].setDefaultStyle();
                 }
             }
         }
@@ -303,7 +303,7 @@ public class Grille extends Parent {
         int col = (cas.getColonne()/sqrtTaille)*sqrtTaille;
 
         for(int i = lig; i< lig+sqrtTaille; i++ ){
-            liste.addAll(Arrays.asList(grille[i]).subList(col, col + sqrtTaille));
+            liste.addAll(Arrays.asList(tableau[i]).subList(col, col + sqrtTaille));
         }
         return liste;
     }
@@ -336,7 +336,7 @@ public class Grille extends Parent {
         for (int l = 0; l < taille ; l++) {
             int temp = 0;
             for (int c = 0; c < taille ; c++) {
-                if (grille[l][c].getValeur() == 0)
+                if (tableau[l][c].getValeur() == 0)
                     temp++;
             }
             if (temp!=0)
@@ -354,7 +354,7 @@ public class Grille extends Parent {
         for (int c = 0; c < taille ; c++) {
             int temp = 0;
             for (int l = 0; l < taille ; l++) {
-                if (grille[l][c].getValeur() == 0)
+                if (tableau[l][c].getValeur() == 0)
                     temp++;
             }
             if (temp!=0)
@@ -374,7 +374,7 @@ public class Grille extends Parent {
 
         for (int l = 0; l < taille ; l++) {
             for (int c = 0; c < taille ; c++) {
-                if (grille[l][c].getValeur() == 0)
+                if (tableau[l][c].getValeur() == 0)
                     sumPerBlock[l/sqrtTaille][c/sqrtTaille] ++;
             }
         }
@@ -390,47 +390,22 @@ public class Grille extends Parent {
         return fin;
     }
 
-    private boolean isFilled() {
-        boolean bool = true;
-        for (int i = 0; i < taille && bool; i++) {
-            for (int j = 0; j < taille && bool; j++) {
-                bool = grille[i][j].getValeur() != 0;
-            }
-        }
-        return bool;
-    }
+//    private boolean isFilled() {
+//        boolean bool = true;
+//        for (int i = 0; i < taille && bool; i++) {
+//            for (int j = 0; j < taille && bool; j++) {
+//                bool = grille[i][j].getValeur() != 0;
+//            }
+//        }
+//        return bool;
+//    }
 
-    public boolean solve(int l, int c){
-        if (isFilled()){
-            return true;
-        }
-        if (c==taille){
-            return solve(ligneSimple(),0);
-        }
-
-        for (int i = 1; i <= taille; i++) {
-            grille[l][c].setValeurGen(i);
-            if (valueIsCorrectgen(grille[l][c])){
-                if (solve(l,c+1)){
-                    return true;
-                }
-            } else {
-                grille[l][c].setValeurGen(0);
-            }
-            grille[l][c].setValeurGen(0);
-        }
-        return false;
-    }
-
-    public boolean remplis() {
+    public boolean estRemplis() {
         boolean b=true;
-        for (int l = 0; l < 9; l++) {
-            for (int c = 0; c < 9; c++) {
-                if (grille[l][c].getValeur() == 0) {
-                    return false;
-                }
+        for (int l = 0; l < taille && b; l++) {
+            for (int c = 0; c < taille && b; c++) {
+                b = tableau[l][c].getValeur() != 0;
             }
-
        }
        return b;
     }
@@ -440,7 +415,7 @@ public class Grille extends Parent {
         for(int j = 0; j<9; j++){
             sudoOut.append(" | ");
             for(int z = 0; z<9; z++){
-                sudoOut.append(grille[j][z].getValeur()).append(" ");
+                sudoOut.append(tableau[j][z].getValeur()).append(" ");
 
                 if(z != 0 && (z+1)%3 == 0 && z+1 < 9){
                     sudoOut.append("| ");
@@ -468,7 +443,7 @@ public class Grille extends Parent {
         for (int i =0;i<taille; i++){
             for(int j=0;j<taille;j++){
                 Case case1 = new Case(0,this,i,j,false);
-                grille[i][j] = case1;
+                tableau[i][j] = case1;
             }
         }
 
@@ -488,32 +463,34 @@ public class Grille extends Parent {
             aleatoireValeur=r.nextInt(taille) + 1;
             aleatoireLigne=r.nextInt(taille);
             aleatoireColr=r.nextInt(taille);
-            if (grille[aleatoireLigne][aleatoireColr].getValeur() == 0) {
-                grille[aleatoireLigne][aleatoireColr].setValeurGen(aleatoireValeur);
+            if (tableau[aleatoireLigne][aleatoireColr].getValeur() == 0) {
+                tableau[aleatoireLigne][aleatoireColr].setValeurGen(aleatoireValeur);
                 i++;
-                if (!valueIsCorrectgen(grille[aleatoireLigne][aleatoireColr])){
-                    grille[aleatoireLigne][aleatoireColr].setValeurGen(0);
+                if (!valueIsCorrectgen(tableau[aleatoireLigne][aleatoireColr])){
+                    tableau[aleatoireLigne][aleatoireColr].setValeurGen(0);
                     i--;
                 }
             }
         }
 
-        solve(ligneSimple(),0);
+        BackTrackingSolver backTrackingSolver = new BackTrackingSolver(this,tableau);
+        backTrackingSolver.solve();
+
 
         i=0;
         while (i < NBcaseVide ) {
             aleatoireLigne=r.nextInt(taille);
             aleatoireColr=r.nextInt(taille);
-            if (grille[aleatoireLigne][aleatoireColr].getValeur()!=0){
-                grille[aleatoireLigne][aleatoireColr].setValeurGen(0);
+            if (tableau[aleatoireLigne][aleatoireColr].getValeur()!=0){
+                tableau[aleatoireLigne][aleatoireColr].setValeurGen(0);
                 i++;
             }
         }
 
         for (int i2 = 0; i2 < taille; i2++) {
             for (int j = 0; j < taille; j++) {
-                if (grille[i2][j].getValeur()!=0)
-                    grille[i2][j].setInitiale(true);
+                if (tableau[i2][j].getValeur()!=0)
+                    tableau[i2][j].setInitiale(true);
             }
 
         }

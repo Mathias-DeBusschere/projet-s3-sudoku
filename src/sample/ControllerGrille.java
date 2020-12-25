@@ -10,6 +10,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
+import sample.solver.BackTrackingSolver;
 
 import java.io.IOException;
 
@@ -17,8 +18,8 @@ import static java.lang.Math.sqrt;
 
 public class ControllerGrille {
 
-    private int taille;
-    private Difficulte difficulte;
+    private final int taille;
+    private final Difficulte difficulte;
 
     public ControllerGrille(int taille, Difficulte difficulte) {
         this.difficulte = difficulte;
@@ -31,8 +32,7 @@ public class ControllerGrille {
 
         g.setParent(this);
 
-        //noinspection IntegerDivisionInFloatingPointContext
-        double size = (600/taille)*taille;
+        double size = (600.0/taille)*taille;
         this.grille.setPrefSize(size,size);
 
         addElement(g);
@@ -116,7 +116,8 @@ public class ControllerGrille {
 
     @FXML
     private void abandonner(MouseEvent event) {
-        g.solve(0,0);
+        BackTrackingSolver backTrackingSolver = new BackTrackingSolver(g, g.getTableau());
+        backTrackingSolver.solve();
     }
 
     @FXML
@@ -140,7 +141,7 @@ public class ControllerGrille {
         else
             note.setStyle("-fx-background-color: white");
 
-    };
+    }
 
 
     @FXML
