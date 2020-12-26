@@ -1,0 +1,252 @@
+package fr.umontpellier.iut.M3302.sudoku;
+
+
+import fr.umontpellier.iut.M3302.UI.GameController;
+import javafx.concurrent.Task;
+import javafx.geometry.Pos;
+import javafx.scene.Parent;
+import javafx.scene.Node;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
+
+import javax.sound.sampled.*;
+import java.io.IOException;
+
+
+public class Game extends Parent {
+
+    private Case [][] tableau;
+    private final int taille;
+    private Case caseselectionne;
+    private Difficulty difficulty;
+    private GameController parent;
+    private boolean noteMode = false;
+
+    public Game(int length, Difficulty difficulty) {
+        this.taille = length;
+        this.difficulty = difficulty;
+        this.tableau = new Case[taille][taille];
+        this.caseselectionne=null;
+
+
+        GridPane gridPane = new GridPane();
+        gridPane.setPrefSize((600.0/taille)*taille,(600.0/taille)*taille);
+        gridPane.setAlignment(Pos.CENTER);
+
+        boolean caseinitiale;
+
+        generateNewSudoku();
+
+        for (int i = 0; i < taille; i++) {
+            for (int j = 0; j < taille; j++) {
+                gridPane.add(tableau[j][i],i,j);
+            }
+        }
+        System.out.println(gridPane);
+//        gridPane.setStyle("-fx-border-color: red; -fx-border-width: 5");
+
+        getChildren().add(gridPane);
+        tableau[0][0].action();
+
+
+        //PROBLEME DE PERTE DE FOCUS
+        this.setOnKeyPressed(keyEvent -> {
+            String caractere = keyEvent.getText();
+//            System.out.println("code: " + keyEvent.getCode());
+//            System.out.println("text: " + keyEvent.getText().equals(" "));
+//            System.out.println("char: " + keyEvent.getCharacter());
+            switch (caractere) {
+                case "1" -> caseselectionne.setValeur(1);
+                case "2" -> caseselectionne.setValeur(2);
+                case "3" -> caseselectionne.setValeur(3);
+                case "4" -> caseselectionne.setValeur(4);
+                case "5" -> caseselectionne.setValeur(5);
+                case "6" -> caseselectionne.setValeur(6);
+                case "7" -> caseselectionne.setValeur(7);
+                case "8" -> caseselectionne.setValeur(8);
+                case "9" -> caseselectionne.setValeur(9);
+            }
+
+//            System.out.println(caseselectionne.getColonne()+"|"+caseselectionne.getLigne());
+            if(caseselectionne!=null) {
+                switch (keyEvent.getCode()) {
+                    case BACK_SPACE -> caseselectionne.deleteValeur();
+                    case UP, Z -> {if(caseselectionne.getLigne() >= 1) tableau[caseselectionne.getLigne()-1][caseselectionne.getColonne()].action();
+                    else tableau[taille-1][caseselectionne.getColonne()].action();}
+
+                    case DOWN, S -> {if(caseselectionne.getLigne() < taille-1) tableau[caseselectionne.getLigne()+1][caseselectionne.getColonne()].action();
+                    else tableau[0][caseselectionne.getColonne()].action();}
+
+                    case RIGHT, D -> {if(caseselectionne.getColonne() < taille-1) tableau[caseselectionne.getLigne()][caseselectionne.getColonne()+1].action();
+                    else tableau[caseselectionne.getLigne()][0].action();}
+
+                    case LEFT, Q -> {if(caseselectionne.getColonne() >= 1) tableau[caseselectionne.getLigne()][caseselectionne.getColonne()-1].action();
+                    else tableau[caseselectionne.getLigne()][taille-1].action();}
+
+                    case TAB -> {
+                        if(caseselectionne.getColonne() < taille-1){
+                            tableau[caseselectionne.getLigne()][caseselectionne.getColonne()+1].action();
+                        }else if(caseselectionne.getLigne() < taille-1)
+                            tableau[caseselectionne.getLigne()+1][0].action();
+                        else
+                            tableau[0][0].action();
+                    }
+
+                }
+                keyEvent.consume();
+            }
+
+        });
+
+    }
+
+    public Case[][] getTableau() {
+        return tableau;
+    }
+
+    public boolean isNoteMode() {
+        return noteMode;
+    }
+
+    public void setNoteMode(boolean noteMode) {
+        this.noteMode = noteMode;
+    }
+
+    public void setParent(GameController parent) {
+        this.parent = parent;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder separator = new StringBuilder(" ");
+        separator.append("-".repeat(Math.max(0, taille * 4)));
+        StringBuilder chaine = new StringBuilder(separator + "\n");
+        for(int i=0;i<taille;i++){
+            for (int j=0; j<taille;j++){
+                if(j%3 == 0){
+                    chaine.append(" | ");
+                }
+                chaine.append("[").append(tableau[i][j].getValeur()).append("]");
+            }
+            chaine.append("|\n");
+
+            if((i+1)%3 == 0){
+                chaine.append(separator).append("\n");
+            }
+
+        }
+        return chaine.toString();
+    }
+
+    public void setDifficulte(Difficulty difficulty){
+        this.difficulty = difficulty;
+    }
+
+    public void setCaseselectionne(Case caseselectionne) {
+        this.caseselectionne = caseselectionne;
+    }
+
+    public Case getCaseselectionne() {
+        return caseselectionne;
+    }
+
+    public Case getCase(int ligne, int colonne){
+        return tableau[ligne][colonne];
+    }
+
+    public int getTaille() {
+        return taille;
+    }
+
+    public void isCorrectAnimation(boolean correct) {
+        if(correct){
+            Clip sonVictoire;
+            try {
+                sonVictoire = AudioSystem.getClip();
+                AudioInputStream inputStream = AudioSystem.getAudioInputStream(getClass().getResourceAsStream("/sons/victoire.wav"));
+                sonVictoire.open(inputStream);
+                sonVictoire.start();
+            } catch (LineUnavailableException | UnsupportedAudioFileException | IOException e) {
+                e.printStackTrace();
+            }
+
+
+            ImageView img = new ImageView(new Image(getClass().getResourceAsStream("congratulations.png")));
+            img.setPreserveRatio(true);
+            //noinspection IntegerDivisionInFloatingPointContext
+            img.setFitWidth(600-600/taille);
+            img.setTranslateY(-100);
+//            img.setY(600/9);
+
+            Label labelTimer = new Label();
+            labelTimer.setText("39.56 min");
+            labelTimer.setStyle("-fx-background-color:rgba(31,31,31,0.95);-fx-font-size:30px;-fx-padding: 20;-fx-text-fill: white;-fx-border-width: 3px;-fx-border-color: white");
+            labelTimer.setTranslateY(50);
+//            labelTimer.setTranslateX((600/taille)*((taille)/2.5));
+//            labelTimer.setTranslateY((600/2)+ 20);
+
+            Label labelScore = new Label();
+            labelScore.setText("9670 points");
+            labelScore.setStyle("-fx-background-color:rgba(31,31,31,0.95);-fx-font-size:30px;-fx-padding: 20;-fx-text-fill: white;-fx-border-width: 3px;-fx-border-color: white");
+            labelScore.setTranslateY(150);
+//            labelScore.setTranslateX((600/taille)*((taille)/2.5));
+//            labelScore.setTranslateY((600/2)+ 120);
+
+
+            Task<Void> sleep500ms = new Task<>() {
+                @Override
+                protected Void call() {
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    return null;
+                }
+            };
+            sleep500ms.setOnSucceeded(workerStateEvent -> parent.addElement(labelTimer));
+
+            Task<Void> sleep1000ms = new Task<>() {
+                @Override
+                protected Void call() {
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    return null;
+                }
+            };
+            sleep1000ms.setOnSucceeded(workerStateEvent -> parent.addElement(labelScore));
+
+            parent.addElement(img);
+            new Thread(sleep500ms).start();
+            new Thread(sleep1000ms).start();
+        }
+    }
+
+    public String toString2(){
+        StringBuilder sudoOut = new StringBuilder();
+        for(int j = 0; j<9; j++){
+            sudoOut.append(" | ");
+            for(int z = 0; z<9; z++){
+                sudoOut.append(tableau[j][z].getValeur()).append(" ");
+
+                if(z != 0 && (z+1)%3 == 0 && z+1 < 9){
+                    sudoOut.append("| ");
+                }
+            }
+            sudoOut.append("|\n");
+
+            if(j != 0 && (j+1)%3 == 0 && j+1 < 9){
+                sudoOut = new StringBuilder(sudoOut.toString());
+            }
+
+        }
+        sudoOut = new StringBuilder(sudoOut.toString());
+        return sudoOut.toString();
+    }
+
+}
