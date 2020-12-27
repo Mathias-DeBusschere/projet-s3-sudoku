@@ -9,6 +9,7 @@ public class Case {
     private boolean initial = false;
     private boolean hint = false;
     private boolean error = false;
+    private boolean algoSolved = false;
 
     public Case(int value, int nbOfPossibilities) {
         this.value = value;
@@ -32,13 +33,16 @@ public class Case {
             this.value = value;
     }
 
-    public void toggleValue(int i) {
-        if (!initial)
-            if (value == i) {
-                value = 0;
-            } else {
-                value = i;
-            }
+    public boolean[] getNotes() {
+        return notes;
+    }
+
+    public void toggleNote(int i) {
+        notes[i - 1] = !notes[i - 1];
+    }
+
+    public void clearNotes() {
+        Arrays.fill(notes, false);
     }
 
     public boolean isInitial() {
@@ -57,26 +61,6 @@ public class Case {
         this.hint = hint;
     }
 
-    public boolean[] getNotes() {
-        return notes;
-    }
-
-    public void addNote(int value) {
-        notes[value - 1] = true;
-    }
-
-    public void removeNote(int value) {
-        notes[value - 1] = false;
-    }
-
-    public void toggleNote(int i) {
-        notes[i - 1] = !notes[i - 1];
-    }
-
-    public void clearNotes() {
-        Arrays.fill(notes, false);
-    }
-
     public boolean isError() {
         return error;
     }
@@ -85,4 +69,16 @@ public class Case {
         this.error = error;
     }
 
+    public boolean isAlgoSolved() {
+        return algoSolved;
+    }
+
+    public void setAlgoSolved(boolean algoSolved) {
+        this.algoSolved = algoSolved;
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(value);
+    }
 }

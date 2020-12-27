@@ -52,11 +52,8 @@ public class Game {
     public void addIndice(int i, int j) throws Throwable {
         if (checker.getDifficulty() == Difficulty.EASY) {
             int[] coord = SolverHelper.crossSimplestRowColumn(cases);
-            System.out.println("passed ?");
             cases[coord[0]][coord[1]].setValue(solver.addHint(cases, coord[0], coord[1]));
-            System.out.println("passed...");
             cases[coord[0]][coord[1]].setHint(true);
-            System.out.println("wut ?");
         } else if (checker.getDifficulty() == Difficulty.NORMAL) {
             cases[i][j].setValue(solver.addHint(cases, i, j));
             cases[i][j].setHint(true);
@@ -64,7 +61,7 @@ public class Game {
             for (int k = 1; k <= getSize(); k++) {
                 cases[i][j].setValue(k);
                 if (checker.checkCase(cases, i, j))
-                    cases[i][j].addNote(k);
+                    cases[i][j].toggleNote(k);
             }
             cases[i][j].setValue(0);
         }

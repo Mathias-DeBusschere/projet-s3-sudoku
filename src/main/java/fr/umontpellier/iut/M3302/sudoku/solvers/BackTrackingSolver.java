@@ -3,10 +3,14 @@ package fr.umontpellier.iut.M3302.sudoku.solvers;
 import fr.umontpellier.iut.M3302.sudoku.Case;
 import fr.umontpellier.iut.M3302.sudoku.checkers.Checker;
 
+import java.util.Arrays;
+
 /**
  * Back tracking solving algorithm.
  */
 public class BackTrackingSolver extends Solver {
+    private Case[][] solution;
+
     /**
      * Default constructor.
      * @param checker is a set of rules.
@@ -17,13 +21,13 @@ public class BackTrackingSolver extends Solver {
 
     @Override
     public Case[][] solve(Case[][] cases) {
-        Case[][] solution = new Case[cases.length][cases.length];
+        solution = new Case[cases.length][cases.length];
         for (int i = 0; i < cases.length; i++) {
             for (int j = 0; j < cases[i].length; j++) {
                 solution[i][j] = new Case(cases[i][j]);
             }
         }
-        solve(solution, SolverHelper.simplestRow(cases), 0);
+        solve(SolverHelper.simplestRow(cases), 0);
         for (int i = 0; i < getChecker().getSize(); i++) {
             for (int j = 0; j < getChecker().getSize(); j++) {
                 solution[i][j].setError(false);
@@ -37,24 +41,25 @@ public class BackTrackingSolver extends Solver {
         return solve(cases)[i][j].getValue();
     }
 
-    private boolean solve(Case[][] cases, int l, int c) {
-        if (SolverHelper.isFilled(cases)) {
+    private boolean solve(int l, int c) {
+        if (SolverHelper.isFilled(solution)) {
             return true;
         }
-        if (c == cases.length) {
-            return solve(cases, SolverHelper.simplestRow(cases), 0);
+        if (c == solution.length) {
+            return solve(SolverHelper.simplestRow(solution), 0);
         }
 
-        for (int i = 1; i <= cases.length; i++) {
-            cases[l][c].setValue(i);
-            if (getChecker().checkCase(cases, l, c)) {
-                if (solve(cases, l, c + 1)) {
+        for (int i = 1; i <= solution.length; i++) {
+            System.out.println(Arrays.deepToString(solution));
+            solution[l][c].setValue(i);
+            if (getChecker().checkCase(solution, l, c)) {
+                if (solve(l, c + 1)) {
                     return true;
                 }
             } else {
-                cases[l][c].setValue(0);
+                solution[l][c].setValue(0);
             }
-            cases[l][c].setValue(0);
+            solution[l][c].setValue(0);
         }
         return false;
     }

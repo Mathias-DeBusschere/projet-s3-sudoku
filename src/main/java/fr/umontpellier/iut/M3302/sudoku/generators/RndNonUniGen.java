@@ -83,8 +83,11 @@ public class RndNonUniGen extends Generator {
 
         for (int i2 = 0; i2 < getSize(); i2++) {
             for (int j = 0; j < getSize(); j++) {
-                if (cases[i2][j].getValue() != 0)
+                if (cases[i2][j].getValue() != 0) {
                     cases[i2][j].setInitial(true);
+                    cases[i2][j].setAlgoSolved(false);
+                    cases[i2][j].setError(false);
+                }
             }
 
         }

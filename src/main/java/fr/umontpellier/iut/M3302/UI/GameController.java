@@ -32,6 +32,8 @@ import static java.lang.Math.sqrt;
 public class GameController {
     private final Game game;
     private boolean annotating = false;
+    private boolean solved = false;
+    private boolean validated = false;
     private int currentRow = 0, currentCol = 0;
 
     @FXML
@@ -253,11 +255,11 @@ public class GameController {
                 cPane.setStyle(cPane.getStyle() + "-fx-font-weight: bold;");
             else
                 cPane.setStyle(cPane.getStyle() + "-fx-font-weight: normal;");
-            if (c.isHint()) {
-                System.out.println(cPane.getChildren());
+            if (c.isHint())
                 ((Text) cPane.getChildren().get(0)).setFill(new Color(0, 0.75, 0, 1));
-            } else
-                cPane.setStyle(cPane.getStyle());
+            if (c.isAlgoSolved())
+                ((Text) cPane.getChildren().get(0)).setFill(new Color(0.75, 0, 0, 1));
+
 
         } else {
             GridPane gridPane = new GridPane();
@@ -277,8 +279,11 @@ public class GameController {
     }
 
     @FXML
-    private void recommencer(MouseEvent event) {
+    private void restart(MouseEvent event) {
+        gameBoard.getChildren().remove(gameBoard.getChildren().size() - 2, gameBoard.getChildren().size());
         game.restart();
+        validated = false;
+        solved = false;
         updateAllCases();
     }
 
@@ -306,13 +311,19 @@ public class GameController {
 
     @FXML
     private void giveUp(MouseEvent event) {
-        game.solve();
-        updateAllCases();
+        if (!solved) {
+            game.solve();
+            updateAllCases();
+            solved = true;
+        }
     }
 
     @FXML
     private void validate(MouseEvent event) {
-        finished(game.validate());
+        if (!validated) {
+            validated = true;
+            finished(game.validate());
+        }
     }
 
     public void finished(boolean correct) {
@@ -384,7 +395,6 @@ public class GameController {
             note.setStyle("-fx-background-color: grey");
         else
             note.setStyle("-fx-background-color: white");
-        updateAllCases();
     }
 
     @FXML

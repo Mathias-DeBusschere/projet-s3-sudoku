@@ -20,7 +20,7 @@
             prefHeight="36.0" prefWidth="100.0" style="-fx-background-color: white;" text="Valider"/>
     <Button layoutX="725.0" layoutY="145.0" mnemonicParsing="false" onMouseClicked="#giveUp"
             prefHeight="36.0" prefWidth="100.0" style="-fx-background-color: white;" text="Abandonner"/>
-    <Button layoutX="725.0" layoutY="190.0" mnemonicParsing="false" onMouseClicked="#recommencer"
+    <Button layoutX="725.0" layoutY="190.0" mnemonicParsing="false" onMouseClicked="#restart"
             prefHeight="36.0" prefWidth="100.0" style="-fx-background-color: white;" text="Recommencer"/>
     <Button layoutX="670.0" layoutY="235.0" mnemonicParsing="false" onMouseClicked="#pause"
             prefHeight="36.0" prefWidth="100.0" style="-fx-background-color: white;" text="Pause"/>
