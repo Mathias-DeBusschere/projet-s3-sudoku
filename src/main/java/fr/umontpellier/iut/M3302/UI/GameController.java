@@ -3,6 +3,7 @@ package fr.umontpellier.iut.M3302.UI;
 import fr.umontpellier.iut.M3302.sudoku.Case;
 import fr.umontpellier.iut.M3302.sudoku.Game;
 import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
@@ -10,44 +11,32 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import javax.sound.sampled.*;
 import java.io.IOException;
 
 import static java.lang.Math.sqrt;
 
 public class GameController {
     private final Game game;
+    private boolean annotating = false;
+    private int currentRow = 0, currentCol = 0;
 
     @FXML
     private StackPane gameBoard;
     @FXML
-    private Game g;
-    @FXML
-    private Button valider;
-    @FXML
-    private Button recommencer;
-    @FXML
-    private Button fermerJeu;
-    @FXML
-    private Button pause;
-    @FXML
-    private Button reprendre;
-    @FXML
-    private Button indice;
-    @FXML
-    private Button abandonner;
-    @FXML
     private Button note;
-
-    private boolean annotating = false;
-    private int currentRow = 0, currentCol = 0;
 
     public GameController(Game game) {
         this.game = game;
@@ -79,8 +68,7 @@ public class GameController {
                 gridPane.add(stackPane, j, i);
             }
         }
-        affichageLigneBlock();
-
+        printBlockSeparator();
     }
 
     public void caseClicked(int i, int j) {
@@ -97,7 +85,7 @@ public class GameController {
                         "3;");
     }
 
-    private void affichageLigneBlock() {
+    private void printBlockSeparator() {
         double block = 600.0 / game.getSize() * sqrt(game.getSize());
         double size = (600.0 / game.getSize()) * game.getSize();
 
@@ -176,8 +164,6 @@ public class GameController {
             updateAllCases();
             keyEvent.consume();
         }
-
-
     }
 
     public void updateAllCases() {
@@ -204,10 +190,9 @@ public class GameController {
             else
                 cPane.setStyle(cPane.getStyle() + "-fx-font-weight: normal;");
             if (c.isHint()) {
-                cPane.getChildren().get(0).setStyle("-fx-text-fill: green;");
-                System.out.println("in");
-            }
-            else
+                System.out.println(cPane.getChildren());
+                ((Text) cPane.getChildren().get(0)).setFill(new Color(0, 0.75, 0, 1));
+            } else
                 cPane.setStyle(cPane.getStyle());
 
         } else {
@@ -216,8 +201,11 @@ public class GameController {
             for (int i = 0; i < game.getSize(); i++) {
                 StackPane stackPane = new StackPane();
                 stackPane.setPrefSize(600.0 / Math.pow(game.getSize(), 1.5), 600.0 / Math.pow(game.getSize(), 1.5));
-                if (c.getNotes()[i])
-                    stackPane.getChildren().add(new Text(String.valueOf(i + 1)));
+                if (c.getNotes()[i]) {
+                    Text text = new Text((String.valueOf(i + 1)));
+                    text.setStyle("-fx-font-size: " + ((int) 600.0 / Math.pow(game.getSize(), 1.75)) + ";");
+                    stackPane.getChildren().add(text);
+                }
                 gridPane.add(stackPane, (int) (i % Math.sqrt(game.getSize())), (int) (i / Math.sqrt(game.getSize())));
             }
             cPane.getChildren().add(gridPane);
@@ -260,8 +248,70 @@ public class GameController {
     }
 
     @FXML
-    private void valider(MouseEvent event) {
-        System.out.println(game.validate());
+    private void validate(MouseEvent event) {
+        finished(game.validate());
+    }
+
+    public void finished(boolean correct) {
+        if (correct) {
+            Clip sonVictoire;
+            try {
+                sonVictoire = AudioSystem.getClip();
+                AudioInputStream inputStream =
+                        AudioSystem.getAudioInputStream(getClass().getResourceAsStream("/sons/victoire.wav"));
+                sonVictoire.open(inputStream);
+                sonVictoire.start();
+            } catch (LineUnavailableException | UnsupportedAudioFileException | IOException e) {
+                e.printStackTrace();
+            }
+
+
+            ImageView img = new ImageView(new Image(getClass().getResourceAsStream("congratulations.png")));
+            img.setPreserveRatio(true);
+            img.setFitWidth(600 - (600.0 / game.getSize()));
+            img.setTranslateY(-100);
+
+            Label labelTimer = new Label();
+            labelTimer.setText("39.56 min");
+            labelTimer.setStyle(
+                    "-fx-background-color:rgba(31,31,31,0.95);-fx-font-size:30px;-fx-padding: 20;-fx-text-fill: white;-fx-border-width: 3px;-fx-border-color: white");
+            labelTimer.setTranslateY(50);
+
+//            Label labelScore = new Label();
+//            labelScore.setText("9670 points");
+//            labelScore.setStyle("-fx-background-color:rgba(31,31,31,0.95);-fx-font-size:30px;-fx-padding: 20;-fx-text-fill: white;-fx-border-width: 3px;-fx-border-color: white");
+//            labelScore.setTranslateY(150);
+
+            Task<Void> sleep500ms = new Task<>() {
+                @Override
+                protected Void call() {
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    return null;
+                }
+            };
+            sleep500ms.setOnSucceeded(workerStateEvent -> gameBoard.getChildren().add(labelTimer));
+
+//            Task<Void> sleep1000ms = new Task<>() {
+//                @Override
+//                protected Void call() {
+//                    try {
+//                        Thread.sleep(1000);
+//                    } catch (InterruptedException e) {
+//                        e.printStackTrace();
+//                    }
+//                    return null;
+//                }
+//            };
+//            sleep1000ms.setOnSucceeded(workerStateEvent -> gameBoard.getChildren().add(labelScore));
+
+            gameBoard.getChildren().add(img);
+            new Thread(sleep500ms).start();
+//            new Thread(sleep1000ms).start();
+        }
     }
 
     @FXML
@@ -395,5 +445,4 @@ public class GameController {
     private void fermerJeu(MouseEvent event) {
         Platform.exit();
     }
-
 }

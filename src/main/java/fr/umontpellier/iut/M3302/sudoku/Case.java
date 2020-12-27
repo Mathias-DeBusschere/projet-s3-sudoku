@@ -28,7 +28,7 @@ public class Case {
     }
 
     public void setValue(int value) {
-        if (!initial)
+        if (!initial && !hint)
             this.value = value;
     }
 
@@ -74,9 +74,7 @@ public class Case {
     }
 
     public void clearNotes() {
-        for (int i = 0; i < notes.length; i++) {
-            notes[i] = false;
-        }
+        Arrays.fill(notes, false);
     }
 
     public boolean isError() {
