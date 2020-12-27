@@ -27,6 +27,7 @@ public class Game {
 
     public void setValue(int value, int i, int j) {
         checker.cleanError(cases,i,j);
+        cases[i][j].setError(false);
         if (value > 0 && value <= size) {
             cases[i][j].setValue(value);
             checker.checkCase(cases, i, j);

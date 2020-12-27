@@ -18,7 +18,7 @@
     </Label>
     <Button layoutX="725.0" layoutY="100.0" mnemonicParsing="false" onMouseClicked="#validate"
             prefHeight="36.0" prefWidth="100.0" style="-fx-background-color: white;" text="Valider"/>
-    <Button layoutX="725.0" layoutY="145.0" mnemonicParsing="false" onMouseClicked="#abandonner"
+    <Button layoutX="725.0" layoutY="145.0" mnemonicParsing="false" onMouseClicked="#giveUp"
             prefHeight="36.0" prefWidth="100.0" style="-fx-background-color: white;" text="Abandonner"/>
     <Button layoutX="725.0" layoutY="190.0" mnemonicParsing="false" onMouseClicked="#recommencer"
             prefHeight="36.0" prefWidth="100.0" style="-fx-background-color: white;" text="Recommencer"/>
@@ -70,13 +70,13 @@
             style="-fx-background-color: white; -fx-border-color: grey;-fx-border-radius: 5; -fx-font-weight: bold; -fx-background-radius: 5"
             text="9"/>
 
-    <Button layoutX="721.0" layoutY="488.0" mnemonicParsing="false" onMouseClicked="#effacer" prefHeight="36.0"
+    <Button layoutX="721.0" layoutY="488.0" mnemonicParsing="false" onMouseClicked="#erase" prefHeight="36.0"
             prefWidth="108.0"
             style="-fx-background-color: white; -fx-border-color: grey;-fx-border-radius: 5; -fx-font-weight: bold; -fx-background-radius: 5"
             text="Effacer"/>
 
     <Button layoutX="725.0" layoutY="543.0" mnemonicParsing="false" onMouseClicked="#mainMenu"
             prefHeight="36.0" prefWidth="100.0" style="-fx-background-color: white;" text="Menu principal"/>
-    <Button layoutX="725.0" layoutY="587.0" mnemonicParsing="false" onMouseClicked="#fermerJeu"
+    <Button layoutX="725.0" layoutY="587.0" mnemonicParsing="false" onMouseClicked="#quitGame"
             prefHeight="36.0" prefWidth="100.0" style="-fx-background-color: white;" text="Quitter"/>
 </AnchorPane>

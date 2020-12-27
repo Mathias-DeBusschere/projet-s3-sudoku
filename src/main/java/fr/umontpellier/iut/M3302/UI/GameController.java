@@ -25,6 +25,7 @@ import javafx.stage.Stage;
 
 import javax.sound.sampled.*;
 import java.io.IOException;
+import java.util.Random;
 
 import static java.lang.Math.sqrt;
 
@@ -108,20 +109,53 @@ public class GameController {
 
     public void shortcuts(KeyEvent keyEvent) {
         switch (keyEvent.getText()) {
-            case "1" -> game.setValue(1, currentRow, currentCol);
-            case "2" -> game.setValue(2, currentRow, currentCol);
-            case "3" -> game.setValue(3, currentRow, currentCol);
-            case "4" -> game.setValue(4, currentRow, currentCol);
-            case "5" -> game.setValue(5, currentRow, currentCol);
-            case "6" -> game.setValue(6, currentRow, currentCol);
-            case "7" -> game.setValue(7, currentRow, currentCol);
-            case "8" -> game.setValue(8, currentRow, currentCol);
-            case "9" -> game.setValue(9, currentRow, currentCol);
-            case "0" -> game.setValue(0, currentRow, currentCol);
+            case "1" -> {
+                game.setValue(1, currentRow, currentCol);
+                playWriteSound();
+            }
+            case "2" -> {
+                game.setValue(2, currentRow, currentCol);
+                playWriteSound();
+            }
+            case "3" -> {
+                game.setValue(3, currentRow, currentCol);
+                playWriteSound();
+            }
+            case "4" -> {
+                game.setValue(4, currentRow, currentCol);
+                playWriteSound();
+            }
+            case "5" -> {
+                game.setValue(5, currentRow, currentCol);
+                playWriteSound();
+            }
+            case "6" -> {
+                game.setValue(6, currentRow, currentCol);
+                playWriteSound();
+            }
+            case "7" -> {
+                game.setValue(7, currentRow, currentCol);
+                playWriteSound();
+            }
+            case "8" -> {
+                game.setValue(8, currentRow, currentCol);
+                playWriteSound();
+            }
+            case "9" -> {
+                game.setValue(9, currentRow, currentCol);
+                playWriteSound();
+            }
+            case "0" -> {
+                game.setValue(0, currentRow, currentCol);
+                playWriteSound();
+            }
         }
         if (game.getCase(currentRow, currentCol) != null) {
             switch (keyEvent.getCode()) {
-                case BACK_SPACE -> game.setValue(0, currentRow, currentCol);
+                case BACK_SPACE -> {
+                    game.setValue(0, currentRow, currentCol);
+                    playEraseSound();
+                }
                 case UP, Z -> {
                     if (currentRow >= 1)
                         caseClicked(currentRow - 1, currentCol);
@@ -163,6 +197,36 @@ public class GameController {
             }
             updateAllCases();
             keyEvent.consume();
+        }
+    }
+
+    public void playWriteSound() {
+        Clip sonEcriture;
+        try {
+
+            Random random = new Random();
+            int randomInt = random.nextInt(5 - 1) + 1;
+
+            sonEcriture = AudioSystem.getClip();
+            AudioInputStream inputStream =
+                    AudioSystem.getAudioInputStream(getClass().getResourceAsStream("/sons/write" + randomInt + ".wav"));
+            sonEcriture.open(inputStream);
+            sonEcriture.start();
+        } catch (LineUnavailableException | UnsupportedAudioFileException | IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void playEraseSound() {
+        Clip sonEfface;
+        try {
+            sonEfface = AudioSystem.getClip();
+            AudioInputStream inputStream =
+                    AudioSystem.getAudioInputStream(getClass().getResourceAsStream("/sons/efface.wav"));
+            sonEfface.open(inputStream);
+            sonEfface.start();
+        } catch (LineUnavailableException | UnsupportedAudioFileException | IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -218,7 +282,6 @@ public class GameController {
         updateAllCases();
     }
 
-    //
     @FXML
     private void pause(MouseEvent event) {
         //timer stop
@@ -242,7 +305,7 @@ public class GameController {
     }
 
     @FXML
-    private void abandonner(MouseEvent event) {
+    private void giveUp(MouseEvent event) {
         game.solve();
         updateAllCases();
     }
@@ -266,7 +329,7 @@ public class GameController {
             }
 
 
-            ImageView img = new ImageView(new Image(getClass().getResourceAsStream("congratulations.png")));
+            ImageView img = new ImageView(new Image(getClass().getResourceAsStream("/images/congratulations.png")));
             img.setPreserveRatio(true);
             img.setFitWidth(600 - (600.0 / game.getSize()));
             img.setTranslateY(-100);
@@ -321,113 +384,73 @@ public class GameController {
             note.setStyle("-fx-background-color: grey");
         else
             note.setStyle("-fx-background-color: white");
-        updateSelCase();
+        updateAllCases();
     }
 
-    public void updateSelCase() {
-        updateCase(game.getCase(currentRow, currentCol),
-                (StackPane) ((GridPane) (gameBoard.getChildren().get(0))).getChildren()
-                        .get(currentRow * game.getSize() + currentCol));
+    public void actionBoutonRel(int btnNb) {
+        if (annotating) {
+            game.setValue(0, currentRow, currentCol);
+            game.getCase(currentRow, currentCol).toggleNote(btnNb);
+        } else
+            game.setValue(btnNb, currentRow, currentCol);
+        playWriteSound();
+        updateAllCases();
     }
 
     @FXML
     private void actionBouton_1() {
-        if (annotating) {
-            game.getCase(currentRow, currentCol).setValue(0);
-            game.getCase(currentRow, currentCol).toggleNote(1);
-        } else
-            game.getCase(currentRow, currentCol).toggleValue(1);
-        updateSelCase();
+        actionBoutonRel(1);
     }
 
     @FXML
     private void actionBouton_2() {
-        if (annotating) {
-            game.getCase(currentRow, currentCol).setValue(0);
-            game.getCase(currentRow, currentCol).toggleNote(2);
-        } else
-            game.getCase(currentRow, currentCol).toggleValue(2);
-        updateSelCase();
+        actionBoutonRel(2);
     }
 
     @FXML
     private void actionBouton_3() {
-        if (annotating) {
-            game.getCase(currentRow, currentCol).setValue(0);
-            game.getCase(currentRow, currentCol).toggleNote(3);
-        } else
-            game.getCase(currentRow, currentCol).toggleValue(3);
-        updateSelCase();
+        actionBoutonRel(3);
     }
 
     @FXML
     private void actionBouton_4() {
-        if (annotating) {
-            game.getCase(currentRow, currentCol).setValue(0);
-            game.getCase(currentRow, currentCol).toggleNote(4);
-        } else
-            game.getCase(currentRow, currentCol).toggleValue(4);
-        updateSelCase();
+        actionBoutonRel(4);
     }
 
     @FXML
     private void actionBouton_5() {
-        if (annotating) {
-            game.getCase(currentRow, currentCol).setValue(0);
-            game.getCase(currentRow, currentCol).toggleNote(5);
-        } else
-            game.getCase(currentRow, currentCol).toggleValue(5);
-        updateSelCase();
+        actionBoutonRel(5);
     }
 
     @FXML
     private void actionBouton_6() {
-        if (annotating) {
-            game.getCase(currentRow, currentCol).setValue(0);
-            game.getCase(currentRow, currentCol).toggleNote(6);
-        } else
-            game.getCase(currentRow, currentCol).toggleValue(6);
-        updateSelCase();
+        actionBoutonRel(6);
     }
 
     @FXML
     private void actionBouton_7() {
-        if (annotating) {
-            game.getCase(currentRow, currentCol).setValue(0);
-            game.getCase(currentRow, currentCol).toggleNote(7);
-        } else
-            game.getCase(currentRow, currentCol).toggleValue(7);
-        updateSelCase();
+        actionBoutonRel(7);
     }
 
     @FXML
     private void actionBouton_8() {
-        if (annotating) {
-            game.getCase(currentRow, currentCol).setValue(0);
-            game.getCase(currentRow, currentCol).toggleNote(8);
-        } else
-            game.getCase(currentRow, currentCol).toggleValue(8);
-        updateSelCase();
+        actionBoutonRel(8);
     }
 
     @FXML
     private void actionBouton_9() {
-        if (annotating) {
-            game.getCase(currentRow, currentCol).setValue(0);
-            game.getCase(currentRow, currentCol).toggleNote(9);
-        } else
-            game.getCase(currentRow, currentCol).toggleValue(9);
-        updateSelCase();
+        actionBoutonRel(9);
     }
 
     @FXML
-    private void effacer() {
+    private void erase() {
         if (annotating) {
             game.getCase(currentRow, currentCol).setValue(0);
             game.getCase(currentRow, currentCol).clearNotes();
         } else
             game.getCase(currentRow, currentCol).setValue(0);
-        updateSelCase();
+        updateAllCases();
+        playEraseSound();
     }
 
     @FXML
@@ -442,7 +465,7 @@ public class GameController {
     }
 
     @FXML
-    private void fermerJeu(MouseEvent event) {
+    private void quitGame(MouseEvent event) {
         Platform.exit();
     }
 }
