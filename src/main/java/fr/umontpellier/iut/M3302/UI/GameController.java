@@ -67,7 +67,8 @@ public class GameController {
             for (int j = 0; j < game.getSize(); j++) {
                 StackPane stackPane = new StackPane();
                 stackPane.setPrefSize(600.0 / game.getSize(), 600.0 / game.getSize());
-                stackPane.setStyle("-fx-background-color: white; -fx-border-color: grey; -fx-font-size:" + 600.0/game.getSize()/3 +";");
+                stackPane.setStyle("-fx-background-color: white; -fx-border-color: grey; -fx-font-size:" +
+                        ((int) 600.0 / game.getSize() / 3) + ";");
                 int finalI = i;
                 int finalJ = j;
                 stackPane.setOnMouseClicked(event -> caseClicked(finalI, finalJ));
@@ -119,20 +120,20 @@ public class GameController {
 
     public void shortcuts(KeyEvent keyEvent) {
         switch (keyEvent.getText()) {
-            case "1" -> game.setValue(1,currentRow,currentCol);
-            case "2" -> game.setValue(2,currentRow,currentCol);
-            case "3" -> game.setValue(3,currentRow,currentCol);
-            case "4" -> game.setValue(4,currentRow,currentCol);
-            case "5" -> game.setValue(5,currentRow,currentCol);
-            case "6" -> game.setValue(6,currentRow,currentCol);
-            case "7" -> game.setValue(7,currentRow,currentCol);
-            case "8" -> game.setValue(8,currentRow,currentCol);
-            case "9" -> game.setValue(9,currentRow,currentCol);
-            case "0" -> game.setValue(0,currentRow,currentCol);
+            case "1" -> game.setValue(1, currentRow, currentCol);
+            case "2" -> game.setValue(2, currentRow, currentCol);
+            case "3" -> game.setValue(3, currentRow, currentCol);
+            case "4" -> game.setValue(4, currentRow, currentCol);
+            case "5" -> game.setValue(5, currentRow, currentCol);
+            case "6" -> game.setValue(6, currentRow, currentCol);
+            case "7" -> game.setValue(7, currentRow, currentCol);
+            case "8" -> game.setValue(8, currentRow, currentCol);
+            case "9" -> game.setValue(9, currentRow, currentCol);
+            case "0" -> game.setValue(0, currentRow, currentCol);
         }
         if (game.getCase(currentRow, currentCol) != null) {
             switch (keyEvent.getCode()) {
-                case BACK_SPACE -> game.setValue(0,currentRow,currentCol);
+                case BACK_SPACE -> game.setValue(0, currentRow, currentCol);
                 case UP, Z -> {
                     if (currentRow >= 1)
                         caseClicked(currentRow - 1, currentCol);
@@ -179,10 +180,14 @@ public class GameController {
 
     }
 
-    public void updateSelCase() {
-        updateCase(game.getCase(currentRow, currentCol),
-                (StackPane) ((GridPane) (gameBoard.getChildren().get(0))).getChildren()
-                        .get(currentRow * game.getSize() + currentCol));
+    public void updateAllCases() {
+        for (int i = 0; i < game.getSize(); i++) {
+            for (int j = 0; j < game.getSize(); j++) {
+                updateCase(game.getCase(i, j),
+                        (StackPane) ((GridPane) (gameBoard.getChildren().get(0))).getChildren()
+                                .get(i * game.getSize() + j));
+            }
+        }
     }
 
     public void updateCase(Case c, StackPane cPane) {
@@ -194,6 +199,16 @@ public class GameController {
                 cPane.setStyle(cPane.getStyle() + "-fx-background-color: #fd7575;");
             else
                 cPane.setStyle(cPane.getStyle() + "-fx-background-color: white;");
+            if (c.isInitial())
+                cPane.setStyle(cPane.getStyle() + "-fx-font-weight: bold;");
+            else
+                cPane.setStyle(cPane.getStyle() + "-fx-font-weight: normal;");
+            if (c.isHint()) {
+                cPane.getChildren().get(0).setStyle("-fx-text-fill: green;");
+                System.out.println("in");
+            }
+            else
+                cPane.setStyle(cPane.getStyle());
 
         } else {
             GridPane gridPane = new GridPane();
@@ -215,16 +230,6 @@ public class GameController {
         updateAllCases();
     }
 
-    public void updateAllCases() {
-        for (int i = 0; i < game.getSize(); i++) {
-            for (int j = 0; j < game.getSize(); j++) {
-                updateCase(game.getCase(i, j),
-                        (StackPane) ((GridPane) (gameBoard.getChildren().get(0))).getChildren()
-                                .get(i * game.getSize() + j));
-            }
-        }
-    }
-
     //
     @FXML
     private void pause(MouseEvent event) {
@@ -239,9 +244,13 @@ public class GameController {
     }
 
     @FXML
-    private void indice(MouseEvent event) {
-//        g.getCaseselectionne().setValeur(g.getSolution()[g.getCaseselectionne().getLigne()][g.getCaseselectionne().getColonne()]);
-//        g.getCaseselectionne().setIndiceStyle();
+    private void hint(MouseEvent event) {
+        try {
+            game.addIndice(currentRow, currentCol);
+        } catch (Throwable throwable) {
+            System.out.println(throwable.getMessage());
+        }
+        updateAllCases();
     }
 
     @FXML
@@ -263,6 +272,12 @@ public class GameController {
         else
             note.setStyle("-fx-background-color: white");
         updateSelCase();
+    }
+
+    public void updateSelCase() {
+        updateCase(game.getCase(currentRow, currentCol),
+                (StackPane) ((GridPane) (gameBoard.getChildren().get(0))).getChildren()
+                        .get(currentRow * game.getSize() + currentCol));
     }
 
     @FXML

@@ -10,7 +10,7 @@ public class ClassicChecker extends Checker {
     /**
      * Default constructor.
      *
-     * @param size size of grid.
+     * @param size of grid.
      */
     public ClassicChecker(int size, Difficulty difficulty) {
         super(size, difficulty);

@@ -25,6 +25,11 @@ public class BackTrackingSolver extends Solver {
         return solution;
     }
 
+    @Override
+    public int addHint(Case[][] cases, int i, int j) {
+        return solve(cases)[i][j].getValue();
+    }
+
     private boolean solve(Case[][] cases, int l, int c) {
         if (SolverHelper.isFilled(cases)) {
             return true;
@@ -46,5 +51,4 @@ public class BackTrackingSolver extends Solver {
         }
         return false;
     }
-
 }

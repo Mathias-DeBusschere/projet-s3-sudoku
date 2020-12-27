@@ -11,6 +11,13 @@ public abstract class Generator {
     private final Checker checker;
     private final Solver solver;
 
+    /**
+     * Default constructor.
+     * @param size of grid, biggest number.
+     * @param difficulty of Sudoku.
+     * @param checker is the set of rules.
+     * @param solver is the solving algorithm.
+     */
     public Generator(int size, Difficulty difficulty, Checker checker, Solver solver) {
         this.size = size;
         this.difficulty = difficulty;
@@ -18,20 +25,40 @@ public abstract class Generator {
         this.solver = solver;
     }
 
+    /**
+     * Generates a new Sudoku.
+     * @return the initial game board of said Sudoku.
+     */
     public abstract Case[][] generate();
 
+    /**
+     * getter for size.
+     * @return size of grid/sudoku.
+     */
     public int getSize() {
         return size;
     }
 
+    /**
+     * Getter for difficulty.
+     * @return the difficulty of the Sudoku.
+     */
     public Difficulty getDifficulty() {
         return difficulty;
     }
 
+    /**
+     * Getter for checker (set of rules).
+     * @return the checker.
+     */
     public Checker getChecker() {
         return checker;
     }
 
+    /**
+     * Getter for solver
+     * @return the solving algorithm.
+     */
     public Solver getSolver() {
         return solver;
     }

@@ -26,7 +26,7 @@
             prefHeight="36.0" prefWidth="100.0" style="-fx-background-color: white;" text="Pause"/>
     <Button fx:id="reprendre" layoutX="780.0" layoutY="235.0" mnemonicParsing="false" onMouseClicked="#reprendre"
             prefHeight="36.0" prefWidth="100.0" style="-fx-background-color: white;" text="Reprendre"/>
-    <Button fx:id="indice" layoutX="725.0" layoutY="280.0" mnemonicParsing="false" onMouseClicked="#indice"
+    <Button layoutX="725.0" layoutY="280.0" mnemonicParsing="false" onMouseClicked="#hint"
             prefHeight="36.0" prefWidth="100.0" style="-fx-background-color: white;" text="Indice"/>
     <Button fx:id="note" layoutX="725.0" layoutY="325.0" mnemonicParsing="false" onMouseClicked="#note"
             prefHeight="36.0" prefWidth="100.0" style="-fx-background-color: white;" text="Note"/>
