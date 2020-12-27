@@ -4,77 +4,79 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0"
-            prefWidth="880.0" style="-fx-background-color: &quot;lightblue&quot;;"
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0"
+            prefWidth="900.0" style="-fx-background-color: &quot;lightblue&quot;;"
             xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <StackPane fx:id="gameBoard" layoutX="50.0" layoutY="50.0" prefHeight="600.0" prefWidth="600.0"
-               style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 3px; -fx-arc-width: 5; -fx-arc-height: 5;"/>
+               style="-fx-background-color: black; -fx-border-color: black; -fx-border-width: 3px; -fx-arc-width: 5; -fx-arc-height: 5;"/>
 
-    <Label layoutX="715.0" layoutY="57.0" prefHeight="52.0" prefWidth="100.0" text="TIME : 00:00"
+    <Label layoutX="725.0" layoutY="57.0" prefHeight="52.0" prefWidth="100.0" text="TIME : 00:00"
            textAlignment="CENTER">
         <font>
             <Font size="18.0"/>
         </font>
     </Label>
-    <Button fx:id="valider" layoutX="715.0" layoutY="100.0" mnemonicParsing="false" onMouseClicked="#valider"
+    <Button fx:id="valider" layoutX="725.0" layoutY="100.0" mnemonicParsing="false" onMouseClicked="#valider"
             prefHeight="36.0" prefWidth="100.0" style="-fx-background-color: white;" text="Valider"/>
-    <Button fx:id="abandonner" layoutX="715.0" layoutY="145.0" mnemonicParsing="false" onMouseClicked="#abandonner"
+    <Button fx:id="abandonner" layoutX="725.0" layoutY="145.0" mnemonicParsing="false" onMouseClicked="#abandonner"
             prefHeight="36.0" prefWidth="100.0" style="-fx-background-color: white;" text="Abandonner"/>
-    <Button fx:id="recommencer" layoutX="715.0" layoutY="190.0" mnemonicParsing="false" onMouseClicked="#recommencer"
+    <Button fx:id="recommencer" layoutX="725.0" layoutY="190.0" mnemonicParsing="false" onMouseClicked="#recommencer"
             prefHeight="36.0" prefWidth="100.0" style="-fx-background-color: white;" text="Recommencer"/>
-    <Button fx:id="pause" layoutX="660.0" layoutY="235.0" mnemonicParsing="false" onMouseClicked="#pause"
+    <Button fx:id="pause" layoutX="670.0" layoutY="235.0" mnemonicParsing="false" onMouseClicked="#pause"
             prefHeight="36.0" prefWidth="100.0" style="-fx-background-color: white;" text="Pause"/>
-    <Button fx:id="reprendre" layoutX="770.0" layoutY="235.0" mnemonicParsing="false" onMouseClicked="#reprendre"
+    <Button fx:id="reprendre" layoutX="780.0" layoutY="235.0" mnemonicParsing="false" onMouseClicked="#reprendre"
             prefHeight="36.0" prefWidth="100.0" style="-fx-background-color: white;" text="Reprendre"/>
-    <Button fx:id="indice" layoutX="715.0" layoutY="280.0" mnemonicParsing="false" onMouseClicked="#indice"
+    <Button fx:id="indice" layoutX="725.0" layoutY="280.0" mnemonicParsing="false" onMouseClicked="#indice"
             prefHeight="36.0" prefWidth="100.0" style="-fx-background-color: white;" text="Indice"/>
-    <Button fx:id="note" layoutX="715.0" layoutY="325.0" mnemonicParsing="false" onMouseClicked="#note"
+    <Button fx:id="note" layoutX="725.0" layoutY="325.0" mnemonicParsing="false" onMouseClicked="#note"
             prefHeight="36.0" prefWidth="100.0" style="-fx-background-color: white;" text="Note"/>
 
-    <Button layoutX="711.0" layoutY="391.0" mnemonicParsing="false" onMouseClicked="#actionBouton_1" prefHeight="36.0"
+    <Button layoutX="721.0" layoutY="380.0" mnemonicParsing="false" onMouseClicked="#actionBouton_1" prefHeight="36.0"
             prefWidth="36.0"
             style="-fx-background-color: white; -fx-border-color: grey;-fx-border-radius: 5; -fx-font-weight: bold; -fx-background-radius: 5"
             text="1"/>
-    <Button layoutX="747.0" layoutY="391.0" mnemonicParsing="false" onMouseClicked="#actionBouton_2" prefHeight="36.0"
+    <Button layoutX="757.0" layoutY="380.0" mnemonicParsing="false" onMouseClicked="#actionBouton_2" prefHeight="36.0"
             prefWidth="36.0"
             style="-fx-background-color: white; -fx-border-color: grey;-fx-border-radius: 5; -fx-font-weight: bold; -fx-background-radius: 5"
             text="2"/>
-    <Button layoutX="784.0" layoutY="391.0" mnemonicParsing="false" onMouseClicked="#actionBouton_3" prefHeight="36.0"
+    <Button layoutX="794.0" layoutY="380.0" mnemonicParsing="false" onMouseClicked="#actionBouton_3" prefHeight="36.0"
             prefWidth="36.0"
             style="-fx-background-color: white; -fx-border-color: grey;-fx-border-radius: 5; -fx-font-weight: bold; -fx-background-radius: 5"
             text="3"/>
 
-    <Button layoutX="711.0" layoutY="427.0" mnemonicParsing="false" onMouseClicked="#actionBouton_4" prefHeight="36.0"
+    <Button layoutX="721.0" layoutY="416.0" mnemonicParsing="false" onMouseClicked="#actionBouton_4" prefHeight="36.0"
             prefWidth="36.0"
             style="-fx-background-color: white; -fx-border-color: grey;-fx-border-radius: 5; -fx-font-weight: bold; -fx-background-radius: 5"
             text="4"/>
-    <Button layoutX="747.0" layoutY="427.0" mnemonicParsing="false" onMouseClicked="#actionBouton_5" prefHeight="36.0"
+    <Button layoutX="757.0" layoutY="416.0" mnemonicParsing="false" onMouseClicked="#actionBouton_5" prefHeight="36.0"
             prefWidth="36.0"
             style="-fx-background-color: white; -fx-border-color: grey;-fx-border-radius: 5; -fx-font-weight: bold; -fx-background-radius: 5"
             text="5"/>
-    <Button layoutX="784.0" layoutY="427.0" mnemonicParsing="false" onMouseClicked="#actionBouton_6" prefHeight="36.0"
+    <Button layoutX="794.0" layoutY="416.0" mnemonicParsing="false" onMouseClicked="#actionBouton_6" prefHeight="36.0"
             prefWidth="36.0"
             style="-fx-background-color: white; -fx-border-color: grey;-fx-border-radius: 5; -fx-font-weight: bold; -fx-background-radius: 5"
             text="6"/>
 
-    <Button layoutX="711.0" layoutY="463.0" mnemonicParsing="false" onMouseClicked="#actionBouton_7" prefHeight="36.0"
+    <Button layoutX="721.0" layoutY="452.0" mnemonicParsing="false" onMouseClicked="#actionBouton_7" prefHeight="36.0"
             prefWidth="36.0"
             style="-fx-background-color: white; -fx-border-color: grey;-fx-border-radius: 5; -fx-font-weight: bold; -fx-background-radius: 5"
             text="7"/>
-    <Button layoutX="747.0" layoutY="463.0" mnemonicParsing="false" onMouseClicked="#actionBouton_8" prefHeight="36.0"
+    <Button layoutX="757.0" layoutY="452.0" mnemonicParsing="false" onMouseClicked="#actionBouton_8" prefHeight="36.0"
             prefWidth="36.0"
             style="-fx-background-color: white; -fx-border-color: grey;-fx-border-radius: 5; -fx-font-weight: bold; -fx-background-radius: 5"
             text="8"/>
-    <Button layoutX="784.0" layoutY="463.0" mnemonicParsing="false" onMouseClicked="#actionBouton_9" prefHeight="36.0"
+    <Button layoutX="794.0" layoutY="452.0" mnemonicParsing="false" onMouseClicked="#actionBouton_9" prefHeight="36.0"
             prefWidth="36.0"
             style="-fx-background-color: white; -fx-border-color: grey;-fx-border-radius: 5; -fx-font-weight: bold; -fx-background-radius: 5"
             text="9"/>
 
-    <Button layoutX="711.0" layoutY="499.0" mnemonicParsing="false" onMouseClicked="#effacer" prefHeight="36.0"
+    <Button layoutX="721.0" layoutY="488.0" mnemonicParsing="false" onMouseClicked="#effacer" prefHeight="36.0"
             prefWidth="108.0"
             style="-fx-background-color: white; -fx-border-color: grey;-fx-border-radius: 5; -fx-font-weight: bold; -fx-background-radius: 5"
             text="Effacer"/>
 
-    <Button fx:id="fermerJeu" layoutX="715.0" layoutY="583.0" mnemonicParsing="false" onMouseClicked="#fermerJeu"
+    <Button layoutX="725.0" layoutY="543.0" mnemonicParsing="false" onMouseClicked="#mainMenu"
+            prefHeight="36.0" prefWidth="100.0" style="-fx-background-color: white;" text="Menu principal"/>
+    <Button fx:id="fermerJeu" layoutX="725.0" layoutY="587.0" mnemonicParsing="false" onMouseClicked="#fermerJeu"
             prefHeight="36.0" prefWidth="100.0" style="-fx-background-color: white;" text="Quitter"/>
 </AnchorPane>

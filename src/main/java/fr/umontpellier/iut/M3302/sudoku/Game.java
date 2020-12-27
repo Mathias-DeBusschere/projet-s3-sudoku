@@ -26,12 +26,15 @@ public class Game {
 
 
     public void setValue(int value, int i, int j) {
-        if (value > 0 && value <= size)
+        checker.cleanError(cases,i,j);
+        if (value > 0 && value <= size) {
             cases[i][j].setValue(value);
-        else
+            checker.checkCase(cases, i, j);
+        } else {
             cases[i][j].setValue(0);
+            cases[i][j].setError(false);
+        }
         //TODO: throw error ?
-
     }
 
     public boolean hasValue(int i, int j) {

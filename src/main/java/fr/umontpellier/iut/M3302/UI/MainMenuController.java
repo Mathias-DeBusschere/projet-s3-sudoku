@@ -47,7 +47,7 @@ public class MainMenuController {
 
     @FXML
     private void launchGame(MouseEvent event) throws IOException {
-        Checker checker = new ClassicChecker(size.getValue());
+        Checker checker = new ClassicChecker(size.getValue(),difficulty.getValue());
         Solver solver = new BackTrackingSolver(checker);
         Generator generator = new RndNonUniGen(size.getValue(), difficulty.getValue(), checker, solver);
         Game game = new Game(size.getValue(), generator, checker, solver);
@@ -59,7 +59,7 @@ public class MainMenuController {
 
         Parent gamePane = gameLoader.load();
 
-        Scene sceneGrille = new Scene(gamePane, 880, 720);
+        Scene sceneGrille = new Scene(gamePane, 900, 720);
         Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         primaryStage.setScene(sceneGrille);
 

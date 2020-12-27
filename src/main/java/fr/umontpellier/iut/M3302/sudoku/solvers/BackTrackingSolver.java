@@ -16,7 +16,12 @@ public class BackTrackingSolver extends Solver {
                 solution[i][j] = new Case(cases[i][j]);
             }
         }
-        solve(solution, 0, 0);
+        solve(solution, SolverHelper.simplestRow(cases), 0);
+        for (int i = 0; i < getChecker().getSize(); i++) {
+            for (int j = 0; j < getChecker().getSize(); j++) {
+                solution[i][j].setError(false);
+            }
+        }
         return solution;
     }
 

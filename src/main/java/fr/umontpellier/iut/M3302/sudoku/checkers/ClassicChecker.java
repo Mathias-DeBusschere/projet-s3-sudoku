@@ -1,6 +1,7 @@
 package fr.umontpellier.iut.M3302.sudoku.checkers;
 
 import fr.umontpellier.iut.M3302.sudoku.Case;
+import fr.umontpellier.iut.M3302.sudoku.Difficulty;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,8 +12,8 @@ public class ClassicChecker extends Checker {
      *
      * @param size size of grid.
      */
-    public ClassicChecker(int size) {
-        super(size);
+    public ClassicChecker(int size, Difficulty difficulty) {
+        super(size, difficulty);
     }
 
     @Override
@@ -39,7 +40,46 @@ public class ClassicChecker extends Checker {
 //                cas.setDefaultStyle();
 //        }
         boolean correct = correctBlock && correctColumn && correctRow;
-        cases[i][j].setError(!correct);
+        if (getDifficulty() != Difficulty.HARD)
+            cases[i][j].setError(!correct);
+        return correct;
+    }
+
+    @Override
+    public void cleanError(Case[][] cases, int i, int j) {
+        for (int k = 0; k < getSize(); k++) {
+            if (cases[k][j].getValue() == cases[i][j].getValue())
+                cases[k][j].setError(false);
+        }
+        for (int k = 0; k < getSize(); k++) {
+            if (cases[i][k].getValue() == cases[i][j].getValue())
+                cases[i][k].setError(false);
+        }
+        for (Case c : getCaseInBlock(cases, i, j)) {
+            if (c.getValue() == cases[i][j].getValue())
+                c.setError(false);
+        }
+
+    }
+
+    /**
+     * TODO:
+     * @param cases
+     * @param i
+     * @param j
+     * @return
+     */
+    private boolean verifAlreadyInRow(Case[][] cases, int i, int j) {
+        boolean correct = true;
+        for (int k = 0; k < getSize(); k++) {
+            if (k != j) {
+                if (cases[i][k].getValue() == cases[i][j].getValue()) {
+                    if (getDifficulty() == Difficulty.EASY)
+                        cases[i][k].setError(true);
+                    correct = false;
+                }
+            }
+        }
         return correct;
     }
 
@@ -55,27 +95,8 @@ public class ClassicChecker extends Checker {
         for (int k = 0; k < getSize(); k++) {
             if (k != i) {
                 if (cases[k][j].getValue() == cases[i][j].getValue()) {
-                    cases[k][j].setError(true);
-                    correct = false;
-                }
-            }
-        }
-        return correct;
-    }
-
-    /**
-     * TODO:
-     * @param cases
-     * @param i
-     * @param j
-     * @return
-     */
-    private boolean verifAlreadyInRow(Case[][] cases, int i, int j) {
-        boolean correct = true;
-        for (int k = 0; k < getSize(); k++) {
-            if (k != j) {
-                if (cases[i][k].getValue() == cases[i][j].getValue()) {
-                    cases[i][k].setError(true);
+                    if (getDifficulty() == Difficulty.EASY)
+                        cases[k][j].setError(true);
                     correct = false;
                 }
             }
@@ -96,7 +117,8 @@ public class ClassicChecker extends Checker {
         for (Case c : list)
             if (c != cases[i][j]) {
                 if (c.getValue() == cases[i][j].getValue()) {
-                    c.setError(true);
+                    if (getDifficulty() == Difficulty.EASY)
+                        c.setError(true);
                     correct = false;
                 }
             }

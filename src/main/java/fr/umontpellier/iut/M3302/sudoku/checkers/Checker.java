@@ -1,19 +1,23 @@
 package fr.umontpellier.iut.M3302.sudoku.checkers;
 
 import fr.umontpellier.iut.M3302.sudoku.Case;
+import fr.umontpellier.iut.M3302.sudoku.Difficulty;
 
 /**
  * Abstract representation of a grid checker.
  */
 public abstract class Checker {
     private final int size;
+    private final Difficulty difficulty;
 
     /**
      * Default constructor.
-     * @param size size of grid.
+     * @param size of grid.
+     * @param difficulty of Sudoku.
      */
-    public Checker(int size) {
+    public Checker(int size, Difficulty difficulty) {
         this.size = size;
+        this.difficulty = difficulty;
     }
 
     /**
@@ -33,10 +37,26 @@ public abstract class Checker {
     public abstract boolean checkCase(Case[][] cases, int i, int j);
 
     /**
+     * Removes unwanted errors on number linked to case i,j.
+     * @param cases array of cases.
+     * @param i row.
+     * @param j column.
+     */
+    public abstract void cleanError(Case[][] cases, int i, int j);
+
+    /**
      * Getter for size.
-     * @return size
+     * @return size.
      */
     public int getSize() {
         return size;
+    }
+
+    /**
+     * Getter for difficulty.
+     * @return difficulty.
+     */
+    public Difficulty getDifficulty() {
+        return difficulty;
     }
 }

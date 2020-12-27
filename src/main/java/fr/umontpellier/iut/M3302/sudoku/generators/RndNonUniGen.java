@@ -16,40 +16,40 @@ public class RndNonUniGen extends Generator {
     @Override
     public Case[][] generate() {
         Case[][] cases = new Case[getSize()][getSize()];
-        int NBcaseVide;
-        int aleatoireValeur;
-        int aleatoireLigne;
-        int aleatoireColr;
+        int nbEmptyCase;
+        int rndValue;
+        int rndRow;
+        int rndColumn;
         Random r = new Random();
 
         for (int i = 0; i < getSize(); i++) {
             for (int j = 0; j < getSize(); j++) {
-                Case case1 = new Case(0, getSize());
-                cases[i][j] = case1;
+                Case c = new Case(0, getSize());
+                cases[i][j] = c;
             }
         }
 
         if (getDifficulty() == Difficulty.EASY) {
-            NBcaseVide = getSize() * getSize() * 4 / 10;
+            nbEmptyCase = getSize() * getSize() * 4 / 10;
         } else if (getDifficulty() == Difficulty.NORMAL) {
-            NBcaseVide = getSize() * getSize() * 5 / 10;
+            nbEmptyCase = getSize() * getSize() * 5 / 10;
         } else if (getDifficulty() == Difficulty.HARD) {
-            NBcaseVide = getSize() * getSize() * 6 / 10;
+            nbEmptyCase = getSize() * getSize() * 6 / 10;
         } else {
-            NBcaseVide = getSize() * getSize() * 5 / 10;
+            nbEmptyCase = getSize() * getSize() * 5 / 10;
         }
 
         int i = 0;
-        int quanOfRanNb = r.nextInt(getSize()) + 2;
+        int quanOfRanNb = r.nextInt((int) Math.sqrt(getSize())) + 1;
         while (i < quanOfRanNb) {
-            aleatoireValeur = r.nextInt(getSize()) + 1;
-            aleatoireLigne = r.nextInt(getSize());
-            aleatoireColr = r.nextInt(getSize());
-            if (cases[aleatoireLigne][aleatoireColr].getValue() == 0) {
-                cases[aleatoireLigne][aleatoireColr].setValue(aleatoireValeur);
+            rndValue = r.nextInt(getSize()) + 1;
+            rndRow = r.nextInt(getSize());
+            rndColumn = r.nextInt(getSize());
+            if (cases[rndRow][rndColumn].getValue() == 0) {
+                cases[rndRow][rndColumn].setValue(rndValue);
                 i++;
-                if (!getChecker().checkCase(cases, aleatoireLigne, aleatoireColr)) {
-                    cases[aleatoireLigne][aleatoireColr].setValue(0);
+                if (!getChecker().checkCase(cases, rndRow, rndColumn)) {
+                    cases[rndRow][rndColumn].setValue(0);
                     i--;
                 }
             }
@@ -58,11 +58,11 @@ public class RndNonUniGen extends Generator {
         cases = getSolver().solve(cases);
 
         i = 0;
-        while (i < NBcaseVide) {
-            aleatoireLigne = r.nextInt(getSize());
-            aleatoireColr = r.nextInt(getSize());
-            if (cases[aleatoireLigne][aleatoireColr].getValue() != 0) {
-                cases[aleatoireLigne][aleatoireColr].setValue(0);
+        while (i < nbEmptyCase) {
+            rndRow = r.nextInt(getSize());
+            rndColumn = r.nextInt(getSize());
+            if (cases[rndRow][rndColumn].getValue() != 0) {
+                cases[rndRow][rndColumn].setValue(0);
                 i++;
             }
         }
@@ -74,6 +74,7 @@ public class RndNonUniGen extends Generator {
             }
 
         }
+        System.out.println("generated!");
         return cases;
     }
 
