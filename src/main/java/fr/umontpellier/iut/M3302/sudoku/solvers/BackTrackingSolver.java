@@ -3,7 +3,14 @@ package fr.umontpellier.iut.M3302.sudoku.solvers;
 import fr.umontpellier.iut.M3302.sudoku.Case;
 import fr.umontpellier.iut.M3302.sudoku.checkers.Checker;
 
+/**
+ * Back tracking solving algorithm.
+ */
 public class BackTrackingSolver extends Solver {
+    /**
+     * Default constructor.
+     * @param checker is a set of rules.
+     */
     public BackTrackingSolver(Checker checker) {
         super(checker);
     }

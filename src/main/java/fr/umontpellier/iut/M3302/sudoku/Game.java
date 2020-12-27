@@ -26,7 +26,7 @@ public class Game {
 
 
     public void setValue(int value, int i, int j) {
-        checker.cleanError(cases,i,j);
+        checker.cleanError(cases, i, j);
         cases[i][j].setError(false);
         if (value > 0 && value <= size) {
             cases[i][j].setValue(value);
@@ -35,7 +35,6 @@ public class Game {
             cases[i][j].setValue(0);
             cases[i][j].setError(false);
         }
-        //TODO: throw error ?
     }
 
     public boolean hasValue(int i, int j) {
@@ -54,17 +53,17 @@ public class Game {
         if (checker.getDifficulty() == Difficulty.EASY) {
             int[] coord = SolverHelper.crossSimplestRowColumn(cases);
             System.out.println("passed ?");
-            cases[coord[0]][coord[1]].setValue(solver.addHint(cases,coord[0],coord[1]));
+            cases[coord[0]][coord[1]].setValue(solver.addHint(cases, coord[0], coord[1]));
             System.out.println("passed...");
             cases[coord[0]][coord[1]].setHint(true);
             System.out.println("wut ?");
         } else if (checker.getDifficulty() == Difficulty.NORMAL) {
-            cases[i][j].setValue(solver.addHint(cases,i,j));
+            cases[i][j].setValue(solver.addHint(cases, i, j));
             cases[i][j].setHint(true);
         } else {
             for (int k = 1; k <= getSize(); k++) {
                 cases[i][j].setValue(k);
-                if (checker.checkCase(cases,i,j))
+                if (checker.checkCase(cases, i, j))
                     cases[i][j].addNote(k);
             }
             cases[i][j].setValue(0);

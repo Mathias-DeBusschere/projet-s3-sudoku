@@ -387,6 +387,11 @@ public class GameController {
         updateAllCases();
     }
 
+    @FXML
+    private void actionBouton_1() {
+        actionBoutonRel(1);
+    }
+
     public void actionBoutonRel(int btnNb) {
         if (annotating) {
             game.setValue(0, currentRow, currentCol);
@@ -395,11 +400,6 @@ public class GameController {
             game.setValue(btnNb, currentRow, currentCol);
         playWriteSound();
         updateAllCases();
-    }
-
-    @FXML
-    private void actionBouton_1() {
-        actionBoutonRel(1);
     }
 
     @FXML

@@ -6,6 +6,9 @@ import fr.umontpellier.iut.M3302.sudoku.Difficulty;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * Checker representing the basic set of rules of a Sudoku.
+ */
 public class ClassicChecker extends Checker {
     /**
      * Default constructor.
@@ -32,13 +35,6 @@ public class ClassicChecker extends Checker {
         boolean correctRow = verifAlreadyInRow(cases, i, j);
         boolean correctColumn = verifAlreadyInColumn(cases, i, j);
         boolean correctBlock = verifAlreadyInBlock(cases, i, j);
-        //TODO: set error style
-//        if (difficulties == Difficulty.NORMAL || difficulties == Difficulty.EASY) {
-//            if(!correct)
-//                cas.setErrorStyle();
-//            else
-//                cas.setDefaultStyle();
-//        }
         boolean correct = correctBlock && correctColumn && correctRow;
         if (getDifficulty() != Difficulty.HARD)
             cases[i][j].setError(!correct);
@@ -63,11 +59,11 @@ public class ClassicChecker extends Checker {
     }
 
     /**
-     * TODO:
-     * @param cases
-     * @param i
-     * @param j
-     * @return
+     * Checks if value in given case is present in other cases in row.
+     * @param cases is the grid of cases.
+     * @param i row.
+     * @param j column.
+     * @return true if not present, false if found 1 or more.
      */
     private boolean verifAlreadyInRow(Case[][] cases, int i, int j) {
         boolean correct = true;
@@ -84,11 +80,11 @@ public class ClassicChecker extends Checker {
     }
 
     /**
-     * TODO:
-     * @param cases
-     * @param i
-     * @param j
-     * @return
+     * Checks if value in given case is present in other cases in column.
+     * @param cases is the grid of cases.
+     * @param i row.
+     * @param j column.
+     * @return true if not present, false if found 1 or more.
      */
     private boolean verifAlreadyInColumn(Case[][] cases, int i, int j) {
         boolean correct = true;
@@ -105,11 +101,11 @@ public class ClassicChecker extends Checker {
     }
 
     /**
-     * TODO:
-     * @param cases
-     * @param i
-     * @param j
-     * @return
+     * Checks if value in given case is present in other cases in block.
+     * @param cases is the grid of cases.
+     * @param i row.
+     * @param j column.
+     * @return true if not present, false if found 1 or more.
      */
     private boolean verifAlreadyInBlock(Case[][] cases, int i, int j) {
         ArrayList<Case> list = getCaseInBlock(cases, i, j);
@@ -126,11 +122,11 @@ public class ClassicChecker extends Checker {
     }
 
     /**
-     * TODO:
-     * @param cases
-     * @param i
-     * @param j
-     * @return
+     * Finds all the cases in the same block of given case.
+     * @param cases grid of cases.
+     * @param i row.
+     * @param j column.
+     * @return an ArrayList of cases.
      */
     private ArrayList<Case> getCaseInBlock(Case[][] cases, int i, int j) {
         ArrayList<Case> liste = new ArrayList<>();

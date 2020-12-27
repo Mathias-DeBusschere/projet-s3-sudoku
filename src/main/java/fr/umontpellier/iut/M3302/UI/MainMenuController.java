@@ -47,7 +47,7 @@ public class MainMenuController {
 
     @FXML
     private void launchGame(MouseEvent event) throws IOException {
-        Checker checker = new ClassicChecker(size.getValue(),difficulty.getValue());
+        Checker checker = new ClassicChecker(size.getValue(), difficulty.getValue());
         Solver solver = new BackTrackingSolver(checker);
         Generator generator = new RndNonUniGen(size.getValue(), difficulty.getValue(), checker, solver);
         Game game = new Game(size.getValue(), generator, checker, solver);

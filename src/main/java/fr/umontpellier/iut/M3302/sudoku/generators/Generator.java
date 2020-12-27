@@ -5,6 +5,9 @@ import fr.umontpellier.iut.M3302.sudoku.Difficulty;
 import fr.umontpellier.iut.M3302.sudoku.checkers.Checker;
 import fr.umontpellier.iut.M3302.sudoku.solvers.Solver;
 
+/**
+ * Abstract representation of a generator.
+ */
 public abstract class Generator {
     private final int size;
     private final Difficulty difficulty;

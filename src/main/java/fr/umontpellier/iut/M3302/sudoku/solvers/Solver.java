@@ -30,6 +30,10 @@ public abstract class Solver {
      */
     public abstract int addHint(Case[][] cases, int i, int j);
 
+    /**
+     * Getter for the checker.
+     * @return the checker.
+     */
     public Checker getChecker() {
         return checker;
     }

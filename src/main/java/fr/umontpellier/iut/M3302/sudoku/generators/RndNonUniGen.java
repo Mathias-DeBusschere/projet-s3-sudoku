@@ -7,8 +7,22 @@ import fr.umontpellier.iut.M3302.sudoku.solvers.Solver;
 
 import java.util.Random;
 
+/**
+ * Random generator in 4 steps:
+ * 1) Selects between 1 and sqrt(size) of case to fill.
+ * 2) Fill given cases with a random number between 1 and size.
+ * 3) Solve resulting Sudoku using given solver.
+ * 4) Empty set number of cases depending on difficulty.
+ */
 public class RndNonUniGen extends Generator {
 
+    /**
+     * Default constructor.
+     * @param size of grid, biggest number.
+     * @param difficulty of Sudoku.
+     * @param checker is the set of rules.
+     * @param solver is the solving algorithm.
+     */
     public RndNonUniGen(int size, Difficulty difficulty, Checker checker, Solver solver) {
         super(size, difficulty, checker, solver);
     }
@@ -74,7 +88,6 @@ public class RndNonUniGen extends Generator {
             }
 
         }
-        System.out.println("generated!");
         return cases;
     }
 
