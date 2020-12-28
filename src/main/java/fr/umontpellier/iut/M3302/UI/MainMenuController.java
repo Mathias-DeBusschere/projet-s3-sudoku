@@ -63,7 +63,13 @@ public class MainMenuController {
         Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         primaryStage.setScene(sceneGrille);
 
-        primaryStage.getScene().setOnKeyReleased(gameController::shortcuts);
+        primaryStage.getScene().setOnKeyReleased(keyEvent -> {
+            try {
+                gameController.shortcuts(keyEvent);
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
+        });
     }
 
     @FXML

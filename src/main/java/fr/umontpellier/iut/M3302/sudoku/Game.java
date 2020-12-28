@@ -11,6 +11,8 @@ public class Game {
     private final Checker checker;
     private final Solver solver;
     private Case[][] cases;
+    private boolean solved = false;
+    private boolean validated = false;
 
     public Game(int size, Generator generator, Checker checker, Solver solver) {
         this.size = size;
@@ -28,13 +30,35 @@ public class Game {
     public void setValue(int value, int i, int j) {
         checker.cleanError(cases, i, j);
         cases[i][j].setError(false);
-        if (value > 0 && value <= size) {
-            cases[i][j].setValue(value);
-            checker.checkCase(cases, i, j);
+        if (cases[i][j].getValue() * 10 < size && cases[i][j].getValue() != 0) {
+            int tempNb = cases[i][j].getValue() * 10 + value;
+            if (tempNb <= size) {
+                cases[i][j].setValue(tempNb);
+                checker.checkCase(cases, i, j);
+            } else {
+                if (value > 0 && value <= size) {
+                    cases[i][j].setValue(value);
+                    checker.checkCase(cases, i, j);
+                } else {
+                    cases[i][j].setValue(0);
+                    cases[i][j].setError(false);
+                }
+            }
         } else {
-            cases[i][j].setValue(0);
-            cases[i][j].setError(false);
+            if (value > 0 && value <= size) {
+                cases[i][j].setValue(value);
+                checker.checkCase(cases, i, j);
+            } else {
+                cases[i][j].setValue(0);
+                cases[i][j].setError(false);
+            }
         }
+    }
+
+    public void eraseValue(int i, int j) {
+        checker.cleanError(cases, i, j);
+        cases[i][j].setValue(0);
+        cases[i][j].setError(false);
     }
 
     public boolean hasValue(int i, int j) {
@@ -42,11 +66,14 @@ public class Game {
     }
 
     public void restart() {
+        validated = false;
+        solved = false;
         cases = this.generator.generate();
     }
 
     public void solve() {
         cases = solver.solve(cases);
+        solved = true;
     }
 
     public void addIndice(int i, int j) throws Throwable {
@@ -58,6 +85,7 @@ public class Game {
             cases[i][j].setValue(solver.addHint(cases, i, j));
             cases[i][j].setHint(true);
         } else {
+            cases[i][j].clearNotes();
             for (int k = 1; k <= getSize(); k++) {
                 cases[i][j].setValue(k);
                 if (checker.checkCase(cases, i, j))
@@ -71,7 +99,24 @@ public class Game {
         return size;
     }
 
+    public boolean isNotSolved() {
+        return !solved;
+    }
+
+    public void setSolved(boolean solved) {
+        this.solved = solved;
+    }
+
+    public boolean isValidated() {
+        return validated;
+    }
+
+    public void setValidated(boolean validated) {
+        this.validated = validated;
+    }
+
     public boolean validate() {
-        return SolverHelper.isFilled(cases) && checker.checkGrid(cases);
+        validated = SolverHelper.isFilled(cases) && checker.checkGrid(cases);
+        return validated;
     }
 }

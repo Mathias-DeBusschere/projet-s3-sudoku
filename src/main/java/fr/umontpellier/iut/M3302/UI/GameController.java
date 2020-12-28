@@ -32,20 +32,32 @@ import static java.lang.Math.sqrt;
 public class GameController {
     private final Game game;
     private boolean annotating = false;
-    private boolean solved = false;
-    private boolean validated = false;
     private int currentRow = 0, currentCol = 0;
 
     @FXML
     private StackPane gameBoard;
     @FXML
     private Button note;
+    @FXML
+    private Button button0;
+    @FXML
+    private Button buttonErase;
+    @FXML
+    private Button mainMenu;
+    @FXML
+    private Button quitGame;
 
     public GameController(Game game) {
         this.game = game;
     }
 
     public void initialize() {
+        if (game.getSize() > 10) {
+            button0.setVisible(true);
+            buttonErase.setLayoutY(buttonErase.getLayoutY() + 36.0);
+            mainMenu.setLayoutY(mainMenu.getLayoutY() + 36.0);
+            quitGame.setLayoutY(quitGame.getLayoutY() + 36.0);
+        }
         double size = (600.0 / game.getSize()) * game.getSize();
         this.gameBoard.setPrefSize(size, size);
         this.gameBoard.setMaxSize(size, size);
@@ -71,6 +83,7 @@ public class GameController {
                 gridPane.add(stackPane, j, i);
             }
         }
+        caseClicked(0,0);
         printBlockSeparator();
     }
 
@@ -86,6 +99,45 @@ public class GameController {
         stackPane.setStyle(
                 stackPane.getStyle() + "-fx-border-width: 2px;" + "-fx-border-color: orange;" + "-fx-border-radius: " +
                         "3;");
+    }
+
+    public void updateCase(Case c, StackPane cPane) {
+        cPane.getChildren().clear();
+
+        if (c.isError())
+            cPane.setStyle(cPane.getStyle() + "-fx-background-color: #fd7575;");
+        else
+            cPane.setStyle(cPane.getStyle() + "-fx-background-color: white;");
+        if (c.isInitial())
+            cPane.setStyle(cPane.getStyle() + "-fx-font-weight: bold;");
+        else
+            cPane.setStyle(cPane.getStyle() + "-fx-font-weight: normal;");
+
+        if (c.getValue() != 0) {
+            Text text = new Text(String.valueOf(c.getValue()));
+            cPane.getChildren().add(text);
+
+            if (c.isHint())
+                ((Text) cPane.getChildren().get(0)).setFill(new Color(0, 0.75, 0, 1));
+            if (c.isAlgoSolved())
+                ((Text) cPane.getChildren().get(0)).setFill(new Color(0.75, 0, 0, 1));
+
+
+        } else {
+            GridPane gridPane = new GridPane();
+            gridPane.setAlignment(Pos.CENTER);
+            for (int i = 0; i < game.getSize(); i++) {
+                StackPane stackPane = new StackPane();
+                stackPane.setPrefSize(600.0 / Math.pow(game.getSize(), 1.5), 600.0 / Math.pow(game.getSize(), 1.5));
+                if (c.getNotes()[i]) {
+                    Text text = new Text((String.valueOf(i + 1)));
+                    text.setStyle("-fx-font-size: " + ((int) 600.0 / Math.pow(game.getSize(), 1.75)) + ";");
+                    stackPane.getChildren().add(text);
+                }
+                gridPane.add(stackPane, (int) (i % Math.sqrt(game.getSize())), (int) (i / Math.sqrt(game.getSize())));
+            }
+            cPane.getChildren().add(gridPane);
+        }
     }
 
     private void printBlockSeparator() {
@@ -109,53 +161,27 @@ public class GameController {
         }
     }
 
-    public void shortcuts(KeyEvent keyEvent) {
+    public void shortcuts(KeyEvent keyEvent) throws IOException {
         switch (keyEvent.getText()) {
-            case "1" -> {
-                game.setValue(1, currentRow, currentCol);
-                playWriteSound();
-            }
-            case "2" -> {
-                game.setValue(2, currentRow, currentCol);
-                playWriteSound();
-            }
-            case "3" -> {
-                game.setValue(3, currentRow, currentCol);
-                playWriteSound();
-            }
-            case "4" -> {
-                game.setValue(4, currentRow, currentCol);
-                playWriteSound();
-            }
-            case "5" -> {
-                game.setValue(5, currentRow, currentCol);
-                playWriteSound();
-            }
-            case "6" -> {
-                game.setValue(6, currentRow, currentCol);
-                playWriteSound();
-            }
-            case "7" -> {
-                game.setValue(7, currentRow, currentCol);
-                playWriteSound();
-            }
-            case "8" -> {
-                game.setValue(8, currentRow, currentCol);
-                playWriteSound();
-            }
-            case "9" -> {
-                game.setValue(9, currentRow, currentCol);
-                playWriteSound();
-            }
-            case "0" -> {
-                game.setValue(0, currentRow, currentCol);
-                playWriteSound();
-            }
+            case "1" -> nbPressed(1);
+            case "2" -> nbPressed(2);
+            case "3" -> nbPressed(3);
+            case "4" -> nbPressed(4);
+            case "5" -> nbPressed(5);
+            case "6" -> nbPressed(6);
+            case "7" -> nbPressed(7);
+            case "8" -> nbPressed(8);
+            case "9" -> nbPressed(9);
+            case "0" -> nbPressed(0);
         }
         if (game.getCase(currentRow, currentCol) != null) {
             switch (keyEvent.getCode()) {
                 case BACK_SPACE -> {
-                    game.setValue(0, currentRow, currentCol);
+                    if (annotating)
+                        game.getCase(currentRow, currentCol).clearNotes();
+                    else
+                        game.eraseValue(currentRow, currentCol);
+                    updateAllCases();
                     playEraseSound();
                 }
                 case UP, Z -> {
@@ -196,40 +222,65 @@ public class GameController {
                     }
                 }
 
+                case N -> {
+                    annotating = !annotating;
+                    if (annotating)
+                        note.setStyle("-fx-background-color: grey");
+                    else
+                        note.setStyle("-fx-background-color: white");
+                }
+
+                case A -> {
+                    if (game.isNotSolved()) {
+                        game.solve();
+                        updateAllCases();
+                    }
+                }
+
+                case V -> {
+                    if (!game.isValidated()) {
+                        finished(game.validate());
+                    }
+                }
+
+                case I -> {
+                    try {
+                        game.addIndice(currentRow, currentCol);
+                    } catch (Throwable throwable) {
+                        System.out.println(throwable.getMessage());
+                    }
+                    updateAllCases();
+                }
+
+                case R -> {
+                    if (game.isValidated())
+                        gameBoard.getChildren()
+                                .remove(gameBoard.getChildren().size() - 2, gameBoard.getChildren().size());
+                    game.restart();
+                    updateAllCases();
+                }
+
+                case M -> {
+                    FXMLLoader gameLoader = new FXMLLoader(getClass().getResource("/fxml/MainMenu.fxml"));
+
+                    Parent gamePane = gameLoader.load();
+
+                    Scene sceneGrille = new Scene(gamePane, 900, 720);
+                    Stage primaryStage = (Stage) ((Node) keyEvent.getTarget()).getScene().getWindow();
+                    primaryStage.setScene(sceneGrille);
+                }
             }
             updateAllCases();
             keyEvent.consume();
         }
     }
 
-    public void playWriteSound() {
-        Clip sonEcriture;
-        try {
-
-            Random random = new Random();
-            int randomInt = random.nextInt(5 - 1) + 1;
-
-            sonEcriture = AudioSystem.getClip();
-            AudioInputStream inputStream =
-                    AudioSystem.getAudioInputStream(getClass().getResourceAsStream("/sons/write" + randomInt + ".wav"));
-            sonEcriture.open(inputStream);
-            sonEcriture.start();
-        } catch (LineUnavailableException | UnsupportedAudioFileException | IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void playEraseSound() {
-        Clip sonEfface;
-        try {
-            sonEfface = AudioSystem.getClip();
-            AudioInputStream inputStream =
-                    AudioSystem.getAudioInputStream(getClass().getResourceAsStream("/sons/efface.wav"));
-            sonEfface.open(inputStream);
-            sonEfface.start();
-        } catch (LineUnavailableException | UnsupportedAudioFileException | IOException e) {
-            e.printStackTrace();
-        }
+    @FXML
+    private void restart(MouseEvent event) {
+        if (game.isValidated())
+            gameBoard.getChildren().remove(gameBoard.getChildren().size() - 2, gameBoard.getChildren().size());
+        game.restart();
+        updateAllCases();
     }
 
     public void updateAllCases() {
@@ -240,51 +291,6 @@ public class GameController {
                                 .get(i * game.getSize() + j));
             }
         }
-    }
-
-    public void updateCase(Case c, StackPane cPane) {
-        cPane.getChildren().clear();
-        if (c.getValue() != 0) {
-            Text text = new Text(String.valueOf(c.getValue()));
-            cPane.getChildren().add(text);
-            if (c.isError())
-                cPane.setStyle(cPane.getStyle() + "-fx-background-color: #fd7575;");
-            else
-                cPane.setStyle(cPane.getStyle() + "-fx-background-color: white;");
-            if (c.isInitial())
-                cPane.setStyle(cPane.getStyle() + "-fx-font-weight: bold;");
-            else
-                cPane.setStyle(cPane.getStyle() + "-fx-font-weight: normal;");
-            if (c.isHint())
-                ((Text) cPane.getChildren().get(0)).setFill(new Color(0, 0.75, 0, 1));
-            if (c.isAlgoSolved())
-                ((Text) cPane.getChildren().get(0)).setFill(new Color(0.75, 0, 0, 1));
-
-
-        } else {
-            GridPane gridPane = new GridPane();
-            gridPane.setAlignment(Pos.CENTER);
-            for (int i = 0; i < game.getSize(); i++) {
-                StackPane stackPane = new StackPane();
-                stackPane.setPrefSize(600.0 / Math.pow(game.getSize(), 1.5), 600.0 / Math.pow(game.getSize(), 1.5));
-                if (c.getNotes()[i]) {
-                    Text text = new Text((String.valueOf(i + 1)));
-                    text.setStyle("-fx-font-size: " + ((int) 600.0 / Math.pow(game.getSize(), 1.75)) + ";");
-                    stackPane.getChildren().add(text);
-                }
-                gridPane.add(stackPane, (int) (i % Math.sqrt(game.getSize())), (int) (i / Math.sqrt(game.getSize())));
-            }
-            cPane.getChildren().add(gridPane);
-        }
-    }
-
-    @FXML
-    private void restart(MouseEvent event) {
-        gameBoard.getChildren().remove(gameBoard.getChildren().size() - 2, gameBoard.getChildren().size());
-        game.restart();
-        validated = false;
-        solved = false;
-        updateAllCases();
     }
 
     @FXML
@@ -311,17 +317,15 @@ public class GameController {
 
     @FXML
     private void giveUp(MouseEvent event) {
-        if (!solved) {
+        if (game.isNotSolved()) {
             game.solve();
             updateAllCases();
-            solved = true;
         }
     }
 
     @FXML
     private void validate(MouseEvent event) {
-        if (!validated) {
-            validated = true;
+        if (!game.isValidated()) {
             finished(game.validate());
         }
     }
@@ -398,69 +402,102 @@ public class GameController {
     }
 
     @FXML
-    private void actionBouton_1() {
-        actionBoutonRel(1);
+    private void actionBouton_0() {
+        nbPressed(0);
     }
 
-    public void actionBoutonRel(int btnNb) {
+    public void nbPressed(int value) {
         if (annotating) {
-            game.setValue(0, currentRow, currentCol);
-            game.getCase(currentRow, currentCol).toggleNote(btnNb);
+            game.getCase(currentRow, currentCol).toggleNote(value);
         } else
-            game.setValue(btnNb, currentRow, currentCol);
+            game.setValue(value, currentRow, currentCol);
         playWriteSound();
         updateAllCases();
     }
 
+    public void playWriteSound() {
+        Clip sonEcriture;
+        try {
+
+            Random random = new Random();
+            int randomInt = random.nextInt(5 - 1) + 1;
+
+            sonEcriture = AudioSystem.getClip();
+            AudioInputStream inputStream =
+                    AudioSystem.getAudioInputStream(getClass().getResourceAsStream("/sons/write" + randomInt + ".wav"));
+            sonEcriture.open(inputStream);
+            sonEcriture.start();
+        } catch (LineUnavailableException | UnsupportedAudioFileException | IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void actionBouton_1() {
+        nbPressed(1);
+    }
+
     @FXML
     private void actionBouton_2() {
-        actionBoutonRel(2);
+        nbPressed(2);
     }
 
     @FXML
     private void actionBouton_3() {
-        actionBoutonRel(3);
+        nbPressed(3);
     }
 
     @FXML
     private void actionBouton_4() {
-        actionBoutonRel(4);
+        nbPressed(4);
     }
 
     @FXML
     private void actionBouton_5() {
-        actionBoutonRel(5);
+        nbPressed(5);
     }
 
     @FXML
     private void actionBouton_6() {
-        actionBoutonRel(6);
+        nbPressed(6);
     }
 
     @FXML
     private void actionBouton_7() {
-        actionBoutonRel(7);
+        nbPressed(7);
     }
 
     @FXML
     private void actionBouton_8() {
-        actionBoutonRel(8);
+        nbPressed(8);
     }
 
     @FXML
     private void actionBouton_9() {
-        actionBoutonRel(9);
+        nbPressed(9);
     }
 
     @FXML
     private void erase() {
-        if (annotating) {
-            game.getCase(currentRow, currentCol).setValue(0);
+        if (annotating)
             game.getCase(currentRow, currentCol).clearNotes();
-        } else
-            game.getCase(currentRow, currentCol).setValue(0);
+        else
+            game.eraseValue(currentRow, currentCol);
         updateAllCases();
         playEraseSound();
+    }
+
+    public void playEraseSound() {
+        Clip sonEfface;
+        try {
+            sonEfface = AudioSystem.getClip();
+            AudioInputStream inputStream =
+                    AudioSystem.getAudioInputStream(getClass().getResourceAsStream("/sons/efface.wav"));
+            sonEfface.open(inputStream);
+            sonEfface.start();
+        } catch (LineUnavailableException | UnsupportedAudioFileException | IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML

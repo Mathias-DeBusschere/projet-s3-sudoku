@@ -3,8 +3,6 @@ package fr.umontpellier.iut.M3302.sudoku.solvers;
 import fr.umontpellier.iut.M3302.sudoku.Case;
 import fr.umontpellier.iut.M3302.sudoku.checkers.Checker;
 
-import java.util.Arrays;
-
 /**
  * Back tracking solving algorithm.
  */
@@ -48,9 +46,11 @@ public class BackTrackingSolver extends Solver {
         if (c == solution.length) {
             return solve(SolverHelper.simplestRow(solution), 0);
         }
+        if (solution[l][c].isInitial())
+            return solve(l, c + 1);
 
         for (int i = 1; i <= solution.length; i++) {
-            System.out.println(Arrays.deepToString(solution));
+//            System.out.println(Arrays.deepToString(solution));
             solution[l][c].setValue(i);
             if (getChecker().checkCase(solution, l, c)) {
                 if (solve(l, c + 1)) {
