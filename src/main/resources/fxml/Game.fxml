@@ -1,76 +1,105 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0"
-            prefWidth="900.0" style="-fx-background-color: &quot;lightblue&quot;;"
-            xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
-    <StackPane fx:id="gameBoard" layoutX="50.0" layoutY="50.0" prefHeight="600.0" prefWidth="600.0"
-               style="-fx-background-color: black; -fx-border-color: black; -fx-border-width: 3px; -fx-arc-width: 5; -fx-arc-height: 5;"/>
 
-    <Label layoutX="725.0" layoutY="57.0" prefHeight="52.0" prefWidth="100.0" text="TIME : 00:00"
-           textAlignment="CENTER">
-        <font>
-            <Font size="18.0"/>
-        </font>
-    </Label>
-    <Button layoutX="725.0" layoutY="100.0" mnemonicParsing="false" onMouseClicked="#validate"
-            prefHeight="36.0" prefWidth="100.0" style="-fx-background-color: white;" text="Valider"/>
-    <Button layoutX="725.0" layoutY="145.0" mnemonicParsing="false" onMouseClicked="#giveUp"
-            prefHeight="36.0" prefWidth="100.0" style="-fx-background-color: white;" text="Abandonner"/>
-    <Button layoutX="725.0" layoutY="190.0" mnemonicParsing="false" onMouseClicked="#restart"
-            prefHeight="36.0" prefWidth="100.0" style="-fx-background-color: white;" text="Recommencer"/>
-    <Button layoutX="670.0" layoutY="235.0" mnemonicParsing="false" onMouseClicked="#pause"
-            prefHeight="36.0" prefWidth="100.0" style="-fx-background-color: white;" text="Pause"/>
-    <Button layoutX="780.0" layoutY="235.0" mnemonicParsing="false" onMouseClicked="#reprendre"
-            prefHeight="36.0" prefWidth="100.0" style="-fx-background-color: white;" text="Reprendre"/>
-    <Button layoutX="725.0" layoutY="280.0" mnemonicParsing="false" onMouseClicked="#hint"
-            prefHeight="36.0" prefWidth="100.0" style="-fx-background-color: white;" text="Indice"/>
-    <Button fx:id="note" layoutX="725.0" layoutY="325.0" mnemonicParsing="false" onMouseClicked="#note"
-            prefHeight="36.0" prefWidth="100.0" style="-fx-background-color: white;" text="Note"/>
 
-    <Button layoutX="721.0" layoutY="380.0" mnemonicParsing="false" onMouseClicked="#actionBouton_1" prefHeight="36.0"
-            prefWidth="36.0" text="1"
-            style="-fx-background-color: white; -fx-border-color: grey;-fx-border-radius: 5; -fx-font-weight: bold; -fx-background-radius: 5"/>
-    <Button layoutX="757.0" layoutY="380.0" mnemonicParsing="false" onMouseClicked="#actionBouton_2" prefHeight="36.0"
-            prefWidth="36.0" text="2"
-            style="-fx-background-color: white; -fx-border-color: grey;-fx-border-radius: 5; -fx-font-weight: bold; -fx-background-radius: 5"/>
-    <Button layoutX="794.0" layoutY="380.0" mnemonicParsing="false" onMouseClicked="#actionBouton_3" prefHeight="36.0"
-            prefWidth="36.0" text="3"
-            style="-fx-background-color: white; -fx-border-color: grey;-fx-border-radius: 5; -fx-font-weight: bold; -fx-background-radius: 5"/>
+<BorderPane prefHeight="720.0" prefWidth="900.0" style="-fx-background-color: lightblue" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+       <StackPane fx:id="gameBoard" style="-fx-background-color: black; -fx-border-color: black; -fx-border-width: 3px; -fx-arc-width: 5; -fx-arc-height: 5;" BorderPane.alignment="CENTER">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </StackPane>
+   </center>
+   <right>
+       <VBox alignment="CENTER" prefWidth="250.0" spacing="10.0" BorderPane.alignment="BOTTOM_LEFT">
+           <Label prefHeight="52.0" prefWidth="100.0" text="TIME : 00:00" textAlignment="CENTER">
+               <font>
+                   <Font size="18.0"/>
+               </font>
+           </Label>
+           <Button mnemonicParsing="false" onMouseClicked="#validate" prefHeight="36.0" prefWidth="100.0"
+                   style="-fx-background-color: white;" text="Valider"/>
+           <Button mnemonicParsing="false" onMouseClicked="#giveUp" prefHeight="36.0" prefWidth="100.0"
+                   style="-fx-background-color: white;" text="Abandonner"/>
+           <Button mnemonicParsing="false" onMouseClicked="#restart" prefHeight="36.0" prefWidth="100.0"
+                   style="-fx-background-color: white;" text="Recommencer"/>
+           <HBox alignment="CENTER" fillHeight="false" spacing="10.0" VBox.vgrow="NEVER">
+               <Button mnemonicParsing="false" onMouseClicked="#pause" prefHeight="36.0" prefWidth="100.0"
+                       style="-fx-background-color: white;" text="Pause"/>
+               <Button mnemonicParsing="false" onMouseClicked="#reprendre" prefHeight="36.0" prefWidth="100.0"
+                       style="-fx-background-color: white;" text="Reprendre"/>
+           </HBox>
+           <Button mnemonicParsing="false" onMouseClicked="#hint" prefHeight="36.0" prefWidth="100.0"
+                   style="-fx-background-color: white;" text="Indice"/>
+           <Button fx:id="note" mnemonicParsing="false" onMouseClicked="#note" prefHeight="36.0" prefWidth="100.0"
+                   style="-fx-background-color: white;" text="Note"/>
+           <GridPane alignment="CENTER" translateY="5.0" VBox.vgrow="NEVER">
+               <columnConstraints>
+                   <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="NEVER"/>
+                   <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="NEVER"/>
+                   <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="NEVER"/>
+               </columnConstraints>
+               <rowConstraints>
+                   <RowConstraints fillHeight="false" valignment="CENTER" vgrow="NEVER"/>
+                   <RowConstraints fillHeight="false" valignment="CENTER" vgrow="NEVER"/>
+                   <RowConstraints fillHeight="false" valignment="CENTER" vgrow="NEVER"/>
+               </rowConstraints>
+               <Button mnemonicParsing="false" onMouseClicked="#actionBouton_3" prefHeight="36.0" prefWidth="36.0"
+                       style="-fx-background-color: white; -fx-border-color: grey;-fx-border-radius: 5; -fx-font-weight: bold; -fx-background-radius: 5"
+                       text="3" GridPane.columnIndex="2"/>
 
-    <Button layoutX="721.0" layoutY="416.0" mnemonicParsing="false" onMouseClicked="#actionBouton_4" prefHeight="36.0"
-            prefWidth="36.0" text="4"
-            style="-fx-background-color: white; -fx-border-color: grey;-fx-border-radius: 5; -fx-font-weight: bold; -fx-background-radius: 5"/>
-    <Button layoutX="757.0" layoutY="416.0" mnemonicParsing="false" onMouseClicked="#actionBouton_5" prefHeight="36.0"
-            prefWidth="36.0" text="5"
-            style="-fx-background-color: white; -fx-border-color: grey;-fx-border-radius: 5; -fx-font-weight: bold; -fx-background-radius: 5"/>
-    <Button layoutX="794.0" layoutY="416.0" mnemonicParsing="false" onMouseClicked="#actionBouton_6" prefHeight="36.0"
-            prefWidth="36.0" text="6"
-            style="-fx-background-color: white; -fx-border-color: grey;-fx-border-radius: 5; -fx-font-weight: bold; -fx-background-radius: 5"/>
+               <Button mnemonicParsing="false" onMouseClicked="#actionBouton_1" prefHeight="36.0" prefWidth="36.0"
+                       style="-fx-background-color: white; -fx-border-color: grey;-fx-border-radius: 5; -fx-font-weight: bold; -fx-background-radius: 5"
+                       text="1"/>
+               <Button mnemonicParsing="false" onMouseClicked="#actionBouton_2" prefHeight="36.0" prefWidth="36.0"
+                       style="-fx-background-color: white; -fx-border-color: grey;-fx-border-radius: 5; -fx-font-weight: bold; -fx-background-radius: 5"
+                       text="2" GridPane.columnIndex="1"/>
 
-    <Button layoutX="721.0" layoutY="452.0" mnemonicParsing="false" onMouseClicked="#actionBouton_7" prefHeight="36.0"
-            prefWidth="36.0" text="7"
-            style="-fx-background-color: white; -fx-border-color: grey;-fx-border-radius: 5; -fx-font-weight: bold; -fx-background-radius: 5"/>
-    <Button layoutX="757.0" layoutY="452.0" mnemonicParsing="false" onMouseClicked="#actionBouton_8" prefHeight="36.0"
-            prefWidth="36.0" text="8"
-            style="-fx-background-color: white; -fx-border-color: grey;-fx-border-radius: 5; -fx-font-weight: bold; -fx-background-radius: 5"/>
-    <Button layoutX="794.0" layoutY="452.0" mnemonicParsing="false" onMouseClicked="#actionBouton_9" prefHeight="36.0"
-            prefWidth="36.0" text="9"
-            style="-fx-background-color: white; -fx-border-color: grey;-fx-border-radius: 5; -fx-font-weight: bold; -fx-background-radius: 5"/>
-    <Button fx:id="button0" layoutX="721.0" layoutY="488.0" mnemonicParsing="false" onMouseClicked="#actionBouton_0"
-            prefHeight="36.0" prefWidth="108.0" visible="false" text="0"
-            style="-fx-background-color: white; -fx-border-color: grey;-fx-border-radius: 5; -fx-font-weight: bold; -fx-background-radius: 5"/>
+               <Button mnemonicParsing="false" onMouseClicked="#actionBouton_4" prefHeight="36.0" prefWidth="36.0"
+                       style="-fx-background-color: white; -fx-border-color: grey;-fx-border-radius: 5; -fx-font-weight: bold; -fx-background-radius: 5"
+                       text="4" GridPane.rowIndex="1"/>
+               <Button mnemonicParsing="false" onMouseClicked="#actionBouton_5" prefHeight="36.0" prefWidth="36.0"
+                       style="-fx-background-color: white; -fx-border-color: grey;-fx-border-radius: 5; -fx-font-weight: bold; -fx-background-radius: 5"
+                       text="5" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+               <Button mnemonicParsing="false" onMouseClicked="#actionBouton_6" prefHeight="36.0" prefWidth="36.0"
+                       style="-fx-background-color: white; -fx-border-color: grey;-fx-border-radius: 5; -fx-font-weight: bold; -fx-background-radius: 5"
+                       text="6" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
 
-    <Button fx:id="buttonErase" layoutX="721.0" layoutY="488.0" mnemonicParsing="false" onMouseClicked="#erase"
-            prefHeight="36.0" prefWidth="108.0"
-            style="-fx-background-color: white; -fx-border-color: grey;-fx-border-radius: 5; -fx-font-weight: bold; -fx-background-radius: 5"
-            text="Effacer"/>
+               <Button mnemonicParsing="false" onMouseClicked="#actionBouton_7" prefHeight="36.0" prefWidth="36.0"
+                       style="-fx-background-color: white; -fx-border-color: grey;-fx-border-radius: 5; -fx-font-weight: bold; -fx-background-radius: 5"
+                       text="7" GridPane.rowIndex="2"/>
+               <Button mnemonicParsing="false" onMouseClicked="#actionBouton_8" prefHeight="36.0" prefWidth="36.0"
+                       style="-fx-background-color: white; -fx-border-color: grey;-fx-border-radius: 5; -fx-font-weight: bold; -fx-background-radius: 5"
+                       text="8" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+               <Button mnemonicParsing="false" onMouseClicked="#actionBouton_9" prefHeight="36.0" prefWidth="36.0"
+                       style="-fx-background-color: white; -fx-border-color: grey;-fx-border-radius: 5; -fx-font-weight: bold; -fx-background-radius: 5"
+                       text="9" GridPane.columnIndex="2" GridPane.rowIndex="2"/>
+           </GridPane>
+           <Button fx:id="button0" mnemonicParsing="false" onMouseClicked="#actionBouton_0" prefHeight="36.0"
+                   prefWidth="108.0"
+                   style="-fx-background-color: white; -fx-border-color: grey;-fx-border-radius: 5; -fx-font-weight: bold; -fx-background-radius: 5"
+                   text="0" translateY="-5.0" visible="false"/>
 
-    <Button fx:id="mainMenu" layoutX="725.0" layoutY="543.0" mnemonicParsing="false" onMouseClicked="#mainMenu"
-            prefHeight="36.0" prefWidth="100.0" style="-fx-background-color: white;" text="Menu principal"/>
-    <Button fx:id="quitGame" layoutX="725.0" layoutY="587.0" mnemonicParsing="false" onMouseClicked="#quitGame"
-            prefHeight="36.0" prefWidth="100.0" style="-fx-background-color: white;" text="Quitter"/>
-</AnchorPane>
+           <Button fx:id="buttonErase" mnemonicParsing="false" onMouseClicked="#erase" prefHeight="36.0"
+                   prefWidth="108.0"
+                   style="-fx-background-color: white; -fx-border-color: grey;-fx-border-radius: 5; -fx-font-weight: bold; -fx-background-radius: 5"
+                   text="Effacer" translateY="-50.0"/>
+
+           <Button fx:id="mainMenu" mnemonicParsing="false" onMouseClicked="#mainMenu" prefHeight="36.0"
+                   prefWidth="100.0" style="-fx-background-color: white;" text="Menu principal" translateY="-40.0"/>
+           <Button fx:id="quitGame" mnemonicParsing="false" onMouseClicked="#quitGame" prefHeight="36.0"
+                   prefWidth="100.0" style="-fx-background-color: white;" text="Quitter" translateY="-40.0"/>
+       </VBox>
+   </right>
+</BorderPane>

@@ -13,7 +13,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.input.MouseEvent;
@@ -33,8 +32,6 @@ public class MainMenuController {
     private ChoiceBox<Difficulty> difficulty;
     @FXML
     private ChoiceBox<Integer> size;
-    @FXML
-    private AnchorPane contain;
 
 
     @FXML
@@ -59,14 +56,19 @@ public class MainMenuController {
 
         Parent gamePane = gameLoader.load();
 
-        Scene sceneGrille = new Scene(gamePane, 900, 720);
         Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        primaryStage.setScene(sceneGrille);
+        primaryStage.getScene().setRoot(gamePane);
 
+//        primaryStage.getScene().widthProperty().addListener(((observable) -> gameController.resize(primaryStage)));
+//        primaryStage.getScene().heightProperty().addListener(((observable) -> gameController.resize(primaryStage)));
+        primaryStage.getScene().heightProperty().addListener((observable, oldValue, newValue) -> gameController.resize(
+                newValue.doubleValue()));
+        primaryStage.getScene().widthProperty().addListener((observable, oldValue, newValue) -> gameController.resize(
+                newValue.doubleValue()));
         primaryStage.getScene().setOnKeyReleased(keyEvent -> {
             try {
                 gameController.shortcuts(keyEvent);
-            } catch (IOException e) {
+            } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
         });

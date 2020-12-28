@@ -22,6 +22,7 @@ public class Case {
         this.initial = c.initial;
         this.hint = c.hint;
         this.error = c.error;
+        this.algoSolved = c.algoSolved;
     }
 
     public int getValue() {
@@ -37,8 +38,11 @@ public class Case {
         return notes;
     }
 
-    public void toggleNote(int i) {
+    public void toggleNote(int i) throws Exception {
+        if (i != 0)
         notes[i - 1] = !notes[i - 1];
+        else
+            throw new Exception("0 can't be added as a note");
     }
 
     public void clearNotes() {

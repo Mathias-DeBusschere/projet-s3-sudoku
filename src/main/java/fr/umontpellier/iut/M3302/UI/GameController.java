@@ -9,14 +9,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
@@ -27,13 +28,14 @@ import javax.sound.sampled.*;
 import java.io.IOException;
 import java.util.Random;
 
+import static java.lang.Math.min;
 import static java.lang.Math.sqrt;
 
 public class GameController {
+    private static Double screenSize;
     private final Game game;
     private boolean annotating = false;
     private int currentRow = 0, currentCol = 0;
-
     @FXML
     private StackPane gameBoard;
     @FXML
@@ -54,13 +56,18 @@ public class GameController {
     public void initialize() {
         if (game.getSize() > 10) {
             button0.setVisible(true);
-            buttonErase.setLayoutY(buttonErase.getLayoutY() + 36.0);
-            mainMenu.setLayoutY(mainMenu.getLayoutY() + 36.0);
-            quitGame.setLayoutY(quitGame.getLayoutY() + 36.0);
+            buttonErase.setTranslateY(-15);
+            mainMenu.setTranslateY(-15);
+            quitGame.setTranslateY(-15);
         }
-        double size = (600.0 / game.getSize()) * game.getSize();
+
+        if (screenSize == null) {
+            screenSize = 700 * 0.9;
+        }
+
+        double size = (screenSize / game.getSize()) * game.getSize();
         this.gameBoard.setPrefSize(size, size);
-        this.gameBoard.setMaxSize(size, size);
+        this.gameBoard.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
 
         GridPane gridPane = new GridPane();
         gridPane.setAlignment(Pos.CENTER);
@@ -70,9 +77,9 @@ public class GameController {
         for (int i = 0; i < game.getSize(); i++) {
             for (int j = 0; j < game.getSize(); j++) {
                 StackPane stackPane = new StackPane();
-                stackPane.setPrefSize(600.0 / game.getSize(), 600.0 / game.getSize());
+                stackPane.setPrefSize(screenSize / game.getSize(), screenSize / game.getSize());
                 stackPane.setStyle("-fx-background-color: white; -fx-border-color: grey; -fx-font-size:" +
-                        ((int) 600.0 / game.getSize() / 3) + ";");
+                        (screenSize / game.getSize() / 3) + ";");
                 int finalI = i;
                 int finalJ = j;
                 stackPane.setOnMouseClicked(event -> caseClicked(finalI, finalJ));
@@ -83,8 +90,9 @@ public class GameController {
                 gridPane.add(stackPane, j, i);
             }
         }
-        caseClicked(0,0);
-        printBlockSeparator();
+
+        caseClicked(0, 0);
+        printBlockSeparator(screenSize);
     }
 
     public void caseClicked(int i, int j) {
@@ -101,7 +109,59 @@ public class GameController {
                         "3;");
     }
 
-    public void updateCase(Case c, StackPane cPane) {
+    private void printBlockSeparator(double value) {
+        double block = value / game.getSize() * sqrt(game.getSize());
+        double size = value / game.getSize() * game.getSize();
+
+        for (int i = 1; i < (int) sqrt(game.getSize()); i++) {
+            Line linev = new Line();
+            Line lineh = new Line();
+
+            linev.setEndY(size);
+            linev.setTranslateX(-size / 2 + i * block);
+            linev.setStrokeWidth(3);
+
+            lineh.setEndX(size);
+            lineh.setTranslateY(-size / 2 + i * block);
+            lineh.setStrokeWidth(3);
+
+            gameBoard.getChildren().add(linev);
+            gameBoard.getChildren().add(lineh);
+        }
+    }
+
+    public void resize(double size) {
+//        double width = stage.getWidth();
+//        double height = stage.getHeight();
+//        double smallestBorder = Math.min(stage.getHeight() * 0.9, stage.getWidth() * 750 / 900 * 0.9);
+        screenSize = min(((BorderPane) gameBoard.getParent()).getHeight() * 0.9,
+                ((BorderPane) gameBoard.getParent()).getWidth() * 0.9);
+        gameBoard.setPrefSize(screenSize, screenSize);
+        gameBoard.getChildren().remove(1, gameBoard.getChildren().size());
+        printBlockSeparator(screenSize);
+        updateAllCases(screenSize);
+//        for (int i = 0; i < ((GridPane) gameBoard.getChildren().get(0)).getChildren().size(); i++) {
+//            StackPane stackPane = ((StackPane) ((GridPane) (gameBoard.getChildren().get(0))).getChildren().get(i));
+//            stackPane.setPrefSize(value / game.getSize(), value / game.getSize());
+//            stackPane.setStyle(stackPane.getStyle() + "-fx-font-size: " + ((int) value / game.getSize() / 3) + ";");
+//
+//        }
+//        gameBoard.getChildren().get(0);
+//        System.out.println(gameBoard.getChildren());
+    }
+
+    public void updateAllCases(double size) {
+        for (int i = 0; i < game.getSize(); i++) {
+            for (int j = 0; j < game.getSize(); j++) {
+                updateCase(game.getCase(i, j),
+                        (StackPane) ((GridPane) (gameBoard.getChildren().get(0))).getChildren()
+                                .get(i * game.getSize() + j), size);
+            }
+        }
+    }
+
+    public void updateCase(Case c, StackPane cPane, double size) {
+        cPane.setPrefSize(size / game.getSize(), size / game.getSize());
         cPane.getChildren().clear();
 
         if (c.isError())
@@ -128,10 +188,10 @@ public class GameController {
             gridPane.setAlignment(Pos.CENTER);
             for (int i = 0; i < game.getSize(); i++) {
                 StackPane stackPane = new StackPane();
-                stackPane.setPrefSize(600.0 / Math.pow(game.getSize(), 1.5), 600.0 / Math.pow(game.getSize(), 1.5));
+                stackPane.setPrefSize(size / Math.pow(game.getSize(), 1.5), size / Math.pow(game.getSize(), 1.5));
                 if (c.getNotes()[i]) {
                     Text text = new Text((String.valueOf(i + 1)));
-                    text.setStyle("-fx-font-size: " + ((int) 600.0 / Math.pow(game.getSize(), 1.75)) + ";");
+                    text.setStyle("-fx-font-size: " + ((int) size / Math.pow(game.getSize(), 1.75)) + ";");
                     stackPane.getChildren().add(text);
                 }
                 gridPane.add(stackPane, (int) (i % Math.sqrt(game.getSize())), (int) (i / Math.sqrt(game.getSize())));
@@ -140,28 +200,7 @@ public class GameController {
         }
     }
 
-    private void printBlockSeparator() {
-        double block = 600.0 / game.getSize() * sqrt(game.getSize());
-        double size = (600.0 / game.getSize()) * game.getSize();
-
-        for (int i = 1; i < (int) sqrt(game.getSize()); i++) {
-            Line linev = new Line();
-            Line lineh = new Line();
-
-            linev.setEndY(size);
-            linev.setTranslateX(-size / 2 + i * block);
-            linev.setStrokeWidth(3);
-
-            lineh.setEndX(size);
-            lineh.setTranslateY(-size / 2 + i * block);
-            lineh.setStrokeWidth(3);
-
-            gameBoard.getChildren().add(linev);
-            gameBoard.getChildren().add(lineh);
-        }
-    }
-
-    public void shortcuts(KeyEvent keyEvent) throws IOException {
+    public void shortcuts(KeyEvent keyEvent) throws Exception {
         switch (keyEvent.getText()) {
             case "1" -> nbPressed(1);
             case "2" -> nbPressed(2);
@@ -181,7 +220,6 @@ public class GameController {
                         game.getCase(currentRow, currentCol).clearNotes();
                     else
                         game.eraseValue(currentRow, currentCol);
-                    updateAllCases();
                     playEraseSound();
                 }
                 case UP, Z -> {
@@ -233,7 +271,6 @@ public class GameController {
                 case A -> {
                     if (game.isNotSolved()) {
                         game.solve();
-                        updateAllCases();
                     }
                 }
 
@@ -249,7 +286,6 @@ public class GameController {
                     } catch (Throwable throwable) {
                         System.out.println(throwable.getMessage());
                     }
-                    updateAllCases();
                 }
 
                 case R -> {
@@ -257,20 +293,17 @@ public class GameController {
                         gameBoard.getChildren()
                                 .remove(gameBoard.getChildren().size() - 2, gameBoard.getChildren().size());
                     game.restart();
-                    updateAllCases();
                 }
 
                 case M -> {
                     FXMLLoader gameLoader = new FXMLLoader(getClass().getResource("/fxml/MainMenu.fxml"));
 
                     Parent gamePane = gameLoader.load();
-
-                    Scene sceneGrille = new Scene(gamePane, 900, 720);
                     Stage primaryStage = (Stage) ((Node) keyEvent.getTarget()).getScene().getWindow();
-                    primaryStage.setScene(sceneGrille);
+                    primaryStage.getScene().setRoot(gamePane);
                 }
             }
-            updateAllCases();
+            updateAllCases(screenSize);
             keyEvent.consume();
         }
     }
@@ -280,17 +313,7 @@ public class GameController {
         if (game.isValidated())
             gameBoard.getChildren().remove(gameBoard.getChildren().size() - 2, gameBoard.getChildren().size());
         game.restart();
-        updateAllCases();
-    }
-
-    public void updateAllCases() {
-        for (int i = 0; i < game.getSize(); i++) {
-            for (int j = 0; j < game.getSize(); j++) {
-                updateCase(game.getCase(i, j),
-                        (StackPane) ((GridPane) (gameBoard.getChildren().get(0))).getChildren()
-                                .get(i * game.getSize() + j));
-            }
-        }
+        updateAllCases(screenSize);
     }
 
     @FXML
@@ -312,14 +335,14 @@ public class GameController {
         } catch (Throwable throwable) {
             System.out.println(throwable.getMessage());
         }
-        updateAllCases();
+        updateAllCases(screenSize);
     }
 
     @FXML
     private void giveUp(MouseEvent event) {
         if (game.isNotSolved()) {
             game.solve();
-            updateAllCases();
+            updateAllCases(screenSize);
         }
     }
 
@@ -346,14 +369,14 @@ public class GameController {
 
             ImageView img = new ImageView(new Image(getClass().getResourceAsStream("/images/congratulations.png")));
             img.setPreserveRatio(true);
-            img.setFitWidth(600 - (600.0 / game.getSize()));
+            img.setFitWidth(screenSize - (screenSize / game.getSize()));
             img.setTranslateY(-100);
 
             Label labelTimer = new Label();
             labelTimer.setText("39.56 min");
             labelTimer.setStyle(
                     "-fx-background-color:rgba(31,31,31,0.95);-fx-font-size:30px;-fx-padding: 20;-fx-text-fill: white;-fx-border-width: 3px;-fx-border-color: white");
-            labelTimer.setTranslateY(50);
+            labelTimer.setTranslateY(screenSize / 12);
 
 //            Label labelScore = new Label();
 //            labelScore.setText("9670 points");
@@ -402,17 +425,20 @@ public class GameController {
     }
 
     @FXML
-    private void actionBouton_0() {
+    private void actionBouton_0() throws Exception {
         nbPressed(0);
     }
 
-    public void nbPressed(int value) {
+    public void nbPressed(int value) throws Exception {
         if (annotating) {
-            game.getCase(currentRow, currentCol).toggleNote(value);
+            if (value <= game.getSize())
+                game.toggleNote(value, currentRow, currentCol);
+            else
+                throw new Exception("not a correct value");
         } else
             game.setValue(value, currentRow, currentCol);
         playWriteSound();
-        updateAllCases();
+        updateAllCases(screenSize);
     }
 
     public void playWriteSound() {
@@ -433,47 +459,47 @@ public class GameController {
     }
 
     @FXML
-    private void actionBouton_1() {
+    private void actionBouton_1() throws Exception {
         nbPressed(1);
     }
 
     @FXML
-    private void actionBouton_2() {
+    private void actionBouton_2() throws Exception {
         nbPressed(2);
     }
 
     @FXML
-    private void actionBouton_3() {
+    private void actionBouton_3() throws Exception {
         nbPressed(3);
     }
 
     @FXML
-    private void actionBouton_4() {
+    private void actionBouton_4() throws Exception {
         nbPressed(4);
     }
 
     @FXML
-    private void actionBouton_5() {
+    private void actionBouton_5() throws Exception {
         nbPressed(5);
     }
 
     @FXML
-    private void actionBouton_6() {
+    private void actionBouton_6() throws Exception {
         nbPressed(6);
     }
 
     @FXML
-    private void actionBouton_7() {
+    private void actionBouton_7() throws Exception {
         nbPressed(7);
     }
 
     @FXML
-    private void actionBouton_8() {
+    private void actionBouton_8() throws Exception {
         nbPressed(8);
     }
 
     @FXML
-    private void actionBouton_9() {
+    private void actionBouton_9() throws Exception {
         nbPressed(9);
     }
 
@@ -483,7 +509,7 @@ public class GameController {
             game.getCase(currentRow, currentCol).clearNotes();
         else
             game.eraseValue(currentRow, currentCol);
-        updateAllCases();
+        updateAllCases(screenSize);
         playEraseSound();
     }
 
@@ -505,10 +531,11 @@ public class GameController {
         FXMLLoader gameLoader = new FXMLLoader(getClass().getResource("/fxml/MainMenu.fxml"));
 
         Parent gamePane = gameLoader.load();
-
-        Scene sceneGrille = new Scene(gamePane, 900, 720);
         Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        primaryStage.setScene(sceneGrille);
+
+        double width = primaryStage.getWidth();
+        double height = primaryStage.getHeight();
+        primaryStage.getScene().setRoot(gamePane);
     }
 
     @FXML

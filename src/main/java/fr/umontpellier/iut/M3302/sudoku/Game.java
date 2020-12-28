@@ -119,4 +119,14 @@ public class Game {
         validated = SolverHelper.isFilled(cases) && checker.checkGrid(cases);
         return validated;
     }
+
+    public void toggleNote(int value, int i, int j) throws Exception {
+        int tmpValue = 10 + value;
+        if (cases[i][j].getNotes()[0] && tmpValue <= size)
+            cases[i][j].toggleNote(tmpValue);
+        else
+            cases[i][j].toggleNote(value);
+
+
+    }
 }
