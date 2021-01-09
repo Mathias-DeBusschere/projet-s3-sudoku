@@ -76,7 +76,6 @@ public class MainMenuController {
 
     @FXML
     private void rules(MouseEvent event) throws IOException {
-        //TODO: display rules.
         Parent rulesLoad = FXMLLoader.load(getClass().getResource("/fxml/Rules.fxml"));
         Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         primaryStage.getScene().setRoot(rulesLoad);
