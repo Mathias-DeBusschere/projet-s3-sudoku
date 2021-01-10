@@ -16,7 +16,6 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -51,7 +50,7 @@ public class MainMenuController {
 
         GameController gameController = new GameController(game);
 
-        FXMLLoader gameLoader = new FXMLLoader(getClass().getResource("/fxml/Game.fxml"));
+        FXMLLoader gameLoader = new FXMLLoader(getClass().getResource("/fr.umontpellier.iut.M3302/fxml/Game.fxml"));
         gameLoader.setController(gameController);
 
         Parent gamePane = gameLoader.load();
@@ -76,7 +75,7 @@ public class MainMenuController {
 
     @FXML
     private void rules(MouseEvent event) throws IOException {
-        Parent rulesLoad = FXMLLoader.load(getClass().getResource("/fxml/Rules.fxml"));
+        Parent rulesLoad = FXMLLoader.load(getClass().getResource("/fr.umontpellier.iut.M3302/fxml/Rules.fxml"));
         Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         primaryStage.getScene().setRoot(rulesLoad);
     }

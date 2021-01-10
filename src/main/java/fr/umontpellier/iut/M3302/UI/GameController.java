@@ -307,7 +307,8 @@ public class GameController {
                 }
 
                 case M -> {
-                    FXMLLoader gameLoader = new FXMLLoader(getClass().getResource("/fxml/MainMenu.fxml"));
+                    FXMLLoader gameLoader = new FXMLLoader(getClass().getResource(
+                            "/fr.umontpellier.iut.M3302/fxml/MainMenu.fxml"));
 
                     Parent gamePane = gameLoader.load();
                     Stage primaryStage = (Stage) ((Node) keyEvent.getTarget()).getScene().getWindow();
@@ -370,7 +371,8 @@ public class GameController {
             try {
                 sonVictoire = AudioSystem.getClip();
                 AudioInputStream inputStream =
-                        AudioSystem.getAudioInputStream(getClass().getResourceAsStream("/sons/victoire.wav"));
+                        AudioSystem.getAudioInputStream(getClass().getResourceAsStream(
+                                "/fr.umontpellier.iut.M3302/sons/victoire.wav"));
                 sonVictoire.open(inputStream);
                 sonVictoire.start();
             } catch (LineUnavailableException | UnsupportedAudioFileException | IOException e) {
@@ -378,7 +380,9 @@ public class GameController {
             }
 
 
-            ImageView img = new ImageView(new Image(getClass().getResourceAsStream("/images/congratulations.png")));
+            ImageView img =
+                    new ImageView(new Image(
+                            getClass().getResourceAsStream("/fr.umontpellier.iut.M3302/images/congratulations.png")));
             img.setPreserveRatio(true);
             img.setFitWidth(screenSize - (screenSize / game.getSize()));
             img.setTranslateY(-100);
@@ -461,7 +465,8 @@ public class GameController {
 
             sonEcriture = AudioSystem.getClip();
             AudioInputStream inputStream =
-                    AudioSystem.getAudioInputStream(getClass().getResourceAsStream("/sons/write" + randomInt + ".wav"));
+                    AudioSystem.getAudioInputStream(getClass().getResourceAsStream(
+                            "/fr.umontpellier.iut.M3302/sons/write" + randomInt + ".wav"));
             sonEcriture.open(inputStream);
             sonEcriture.start();
         } catch (LineUnavailableException | UnsupportedAudioFileException | IOException e) {
@@ -529,7 +534,8 @@ public class GameController {
         try {
             sonEfface = AudioSystem.getClip();
             AudioInputStream inputStream =
-                    AudioSystem.getAudioInputStream(getClass().getResourceAsStream("/sons/efface.wav"));
+                    AudioSystem.getAudioInputStream(getClass().getResourceAsStream(
+                            "/fr.umontpellier.iut.M3302/sons/efface.wav"));
             sonEfface.open(inputStream);
             sonEfface.start();
         } catch (LineUnavailableException | UnsupportedAudioFileException | IOException e) {
@@ -539,7 +545,7 @@ public class GameController {
 
     @FXML
     private void mainMenu(MouseEvent event) throws IOException {
-        FXMLLoader gameLoader = new FXMLLoader(getClass().getResource("/fxml/MainMenu.fxml"));
+        FXMLLoader gameLoader = new FXMLLoader(getClass().getResource("/fr.umontpellier.iut.M3302/fxml/MainMenu.fxml"));
 
         Parent gamePane = gameLoader.load();
         Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();

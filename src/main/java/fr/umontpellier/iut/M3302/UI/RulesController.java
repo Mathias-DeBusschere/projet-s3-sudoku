@@ -16,7 +16,7 @@ public class RulesController {
     public Button mainMenu;
     @FXML
     private void mainMenu(MouseEvent event) throws IOException {
-        Parent mainMenuLoad = FXMLLoader.load(getClass().getResource("/fxml/MainMenu.fxml"));
+        Parent mainMenuLoad = FXMLLoader.load(getClass().getResource("/fr.umontpellier.iut.M3302/fxml/MainMenu.fxml"));
         Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         primaryStage.getScene().setRoot(mainMenuLoad);
     }
