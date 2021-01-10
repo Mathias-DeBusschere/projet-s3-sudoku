@@ -202,20 +202,30 @@ public class GameController {
     }
 
     public void shortcuts(KeyEvent keyEvent) throws Exception {
-        switch (keyEvent.getText()) {
-            case "1" -> nbPressed(1);
-            case "2" -> nbPressed(2);
-            case "3" -> nbPressed(3);
-            case "4" -> nbPressed(4);
-            case "5" -> nbPressed(5);
-            case "6" -> nbPressed(6);
-            case "7" -> nbPressed(7);
-            case "8" -> nbPressed(8);
-            case "9" -> nbPressed(9);
-            case "0" -> nbPressed(0);
-        }
         if (game.getCase(currentRow, currentCol) != null) {
             switch (keyEvent.getCode()) {
+                case DIGIT0 ->  nbPressed(0);
+                case DIGIT1 ->  nbPressed(1);
+                case DIGIT2 ->  nbPressed(2);
+                case DIGIT3 ->  nbPressed(3);
+                case DIGIT4 ->  nbPressed(4);
+                case DIGIT5 ->  nbPressed(5);
+                case DIGIT6 ->  nbPressed(6);
+                case DIGIT7 ->  nbPressed(7);
+                case DIGIT8 ->  nbPressed(8);
+                case DIGIT9 ->  nbPressed(9);
+
+                case NUMPAD0 ->  nbPressed(0);
+                case NUMPAD1 ->  nbPressed(1);
+                case NUMPAD2 ->  nbPressed(2);
+                case NUMPAD3 ->  nbPressed(3);
+                case NUMPAD4 ->  nbPressed(4);
+                case NUMPAD5 ->  nbPressed(5);
+                case NUMPAD6 ->  nbPressed(6);
+                case NUMPAD7 ->  nbPressed(7);
+                case NUMPAD8 ->  nbPressed(8);
+                case NUMPAD9 ->  nbPressed(9);
+
                 case BACK_SPACE -> {
                     if (annotating)
                         game.getCase(currentRow, currentCol).clearNotes();
