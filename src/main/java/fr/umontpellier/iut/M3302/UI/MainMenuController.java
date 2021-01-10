@@ -3,11 +3,11 @@ package fr.umontpellier.iut.M3302.UI;
 import fr.umontpellier.iut.M3302.sudoku.Difficulty;
 import fr.umontpellier.iut.M3302.sudoku.Game;
 import fr.umontpellier.iut.M3302.sudoku.checkers.Checker;
-import fr.umontpellier.iut.M3302.sudoku.checkers.ClassicChecker;
+import fr.umontpellier.iut.M3302.sudoku.checkers.CheckerFactory;
 import fr.umontpellier.iut.M3302.sudoku.generators.Generator;
-import fr.umontpellier.iut.M3302.sudoku.generators.RndNonUniGen;
-import fr.umontpellier.iut.M3302.sudoku.solvers.BackTrackingSolver;
+import fr.umontpellier.iut.M3302.sudoku.generators.GeneratorFactory;
 import fr.umontpellier.iut.M3302.sudoku.solvers.Solver;
+import fr.umontpellier.iut.M3302.sudoku.solvers.SolverFactory;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -43,9 +43,10 @@ public class MainMenuController {
 
     @FXML
     private void launchGame(MouseEvent event) throws IOException {
-        Checker checker = new ClassicChecker(size.getValue(), difficulty.getValue());
-        Solver solver = new BackTrackingSolver(checker);
-        Generator generator = new RndNonUniGen(size.getValue(), difficulty.getValue(), checker, solver);
+        Checker checker = CheckerFactory.makeChecker("clasic", size.getValue(), difficulty.getValue());
+        Solver solver = SolverFactory.makeSolver("backTackingSolver",checker);
+        Generator generator = GeneratorFactory.makeGenerator("rndNonUniGen", size.getValue(), difficulty.getValue(),
+                checker, solver);
         Game game = new Game(size.getValue(), generator, checker, solver);
 
         GameController gameController = new GameController(game);

@@ -9,7 +9,7 @@ import java.util.Arrays;
 /**
  * Checker representing the basic set of rules of a Sudoku.
  */
-public class ClassicChecker extends Checker {
+class ClassicChecker extends Checker {
     /**
      * Default constructor.
      *

@@ -6,7 +6,7 @@ import fr.umontpellier.iut.M3302.sudoku.checkers.Checker;
 /**
  * Back tracking solving algorithm.
  */
-public class BackTrackingSolver extends Solver {
+class BackTrackingSolver extends Solver {
     private Case[][] solution;
 
     /**

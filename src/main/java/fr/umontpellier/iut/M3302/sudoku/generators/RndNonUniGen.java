@@ -14,7 +14,7 @@ import java.util.Random;
  * 3) Solve resulting Sudoku using given solver.
  * 4) Empty set number of cases depending on difficulty.
  */
-public class RndNonUniGen extends Generator {
+class RndNonUniGen extends Generator {
 
     /**
      * Default constructor.
