@@ -2,6 +2,8 @@ package fr.umontpellier.iut.M3302.UI;
 
 import fr.umontpellier.iut.M3302.sudoku.Case;
 import fr.umontpellier.iut.M3302.sudoku.Game;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
@@ -23,6 +25,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import javax.sound.sampled.*;
 import java.io.IOException;
@@ -36,6 +39,7 @@ public class GameController {
     private final Game game;
     private boolean annotating = false;
     private int currentRow = 0, currentCol = 0;
+    private Timeline stopwatchRunning;
     @FXML
     private StackPane gameBoard;
     @FXML
@@ -48,6 +52,8 @@ public class GameController {
     private Button mainMenu;
     @FXML
     private Button quitGame;
+    @FXML
+    private Label stopWatchDisplay;
 
     public GameController(Game game) {
         this.game = game;
@@ -91,6 +97,7 @@ public class GameController {
             }
         }
 
+        displayStopWatch();
         caseClicked(0, 0);
         printBlockSeparator(screenSize);
         updateAllCases(size);
@@ -131,24 +138,11 @@ public class GameController {
         }
     }
 
-    public void resize(double size) {
-//        double width = stage.getWidth();
-//        double height = stage.getHeight();
-//        double smallestBorder = Math.min(stage.getHeight() * 0.9, stage.getWidth() * 750 / 900 * 0.9);
-        screenSize = min(((BorderPane) gameBoard.getParent()).getHeight() * 0.9,
-                ((BorderPane) gameBoard.getParent()).getWidth() * 0.9);
-        gameBoard.setPrefSize(screenSize, screenSize);
-        gameBoard.getChildren().remove(1, gameBoard.getChildren().size());
-        printBlockSeparator(screenSize);
-        updateAllCases(screenSize);
-//        for (int i = 0; i < ((GridPane) gameBoard.getChildren().get(0)).getChildren().size(); i++) {
-//            StackPane stackPane = ((StackPane) ((GridPane) (gameBoard.getChildren().get(0))).getChildren().get(i));
-//            stackPane.setPrefSize(value / game.getSize(), value / game.getSize());
-//            stackPane.setStyle(stackPane.getStyle() + "-fx-font-size: " + ((int) value / game.getSize() / 3) + ";");
-//
-//        }
-//        gameBoard.getChildren().get(0);
-//        System.out.println(gameBoard.getChildren());
+    public void displayStopWatch() {
+        stopwatchRunning = new Timeline(new KeyFrame(Duration.seconds(1), actionEvent -> updateStopWatch()));
+        stopwatchRunning.setCycleCount(Timeline.INDEFINITE);
+        stopwatchRunning.setAutoReverse(false);
+        stopwatchRunning.play();
     }
 
     public void updateAllCases(double size) {
@@ -159,6 +153,12 @@ public class GameController {
                                 .get(i * game.getSize() + j), size);
             }
         }
+    }
+
+    public void updateStopWatch() {
+        stopWatchDisplay.setText((int) game.getStopWatch().getElapsedTimeSecs() / 3600 + "h " +
+                (int) (game.getStopWatch().getElapsedTimeSecs() % 3600) / 60 + "min " +
+                (int) (game.getStopWatch().getElapsedTimeSecs() % 3600) % 60 + "s");
     }
 
     public void updateCase(Case c, StackPane cPane, double size) {
@@ -201,30 +201,50 @@ public class GameController {
         }
     }
 
+    public void resize(double size) {
+//        double width = stage.getWidth();
+//        double height = stage.getHeight();
+//        double smallestBorder = Math.min(stage.getHeight() * 0.9, stage.getWidth() * 750 / 900 * 0.9);
+        screenSize = min(((BorderPane) gameBoard.getParent()).getHeight() * 0.9,
+                ((BorderPane) gameBoard.getParent()).getWidth() * 0.9);
+        gameBoard.setPrefSize(screenSize, screenSize);
+        gameBoard.getChildren().remove(1, gameBoard.getChildren().size());
+        printBlockSeparator(screenSize);
+        updateAllCases(screenSize);
+//        for (int i = 0; i < ((GridPane) gameBoard.getChildren().get(0)).getChildren().size(); i++) {
+//            StackPane stackPane = ((StackPane) ((GridPane) (gameBoard.getChildren().get(0))).getChildren().get(i));
+//            stackPane.setPrefSize(value / game.getSize(), value / game.getSize());
+//            stackPane.setStyle(stackPane.getStyle() + "-fx-font-size: " + ((int) value / game.getSize() / 3) + ";");
+//
+//        }
+//        gameBoard.getChildren().get(0);
+//        System.out.println(gameBoard.getChildren());
+    }
+
     public void shortcuts(KeyEvent keyEvent) throws Exception {
         if (game.getCase(currentRow, currentCol) != null) {
             switch (keyEvent.getCode()) {
-                case DIGIT0 ->  nbPressed(0);
-                case DIGIT1 ->  nbPressed(1);
-                case DIGIT2 ->  nbPressed(2);
-                case DIGIT3 ->  nbPressed(3);
-                case DIGIT4 ->  nbPressed(4);
-                case DIGIT5 ->  nbPressed(5);
-                case DIGIT6 ->  nbPressed(6);
-                case DIGIT7 ->  nbPressed(7);
-                case DIGIT8 ->  nbPressed(8);
-                case DIGIT9 ->  nbPressed(9);
+                case DIGIT0 -> nbPressed(0);
+                case DIGIT1 -> nbPressed(1);
+                case DIGIT2 -> nbPressed(2);
+                case DIGIT3 -> nbPressed(3);
+                case DIGIT4 -> nbPressed(4);
+                case DIGIT5 -> nbPressed(5);
+                case DIGIT6 -> nbPressed(6);
+                case DIGIT7 -> nbPressed(7);
+                case DIGIT8 -> nbPressed(8);
+                case DIGIT9 -> nbPressed(9);
 
-                case NUMPAD0 ->  nbPressed(0);
-                case NUMPAD1 ->  nbPressed(1);
-                case NUMPAD2 ->  nbPressed(2);
-                case NUMPAD3 ->  nbPressed(3);
-                case NUMPAD4 ->  nbPressed(4);
-                case NUMPAD5 ->  nbPressed(5);
-                case NUMPAD6 ->  nbPressed(6);
-                case NUMPAD7 ->  nbPressed(7);
-                case NUMPAD8 ->  nbPressed(8);
-                case NUMPAD9 ->  nbPressed(9);
+                case NUMPAD0 -> nbPressed(0);
+                case NUMPAD1 -> nbPressed(1);
+                case NUMPAD2 -> nbPressed(2);
+                case NUMPAD3 -> nbPressed(3);
+                case NUMPAD4 -> nbPressed(4);
+                case NUMPAD5 -> nbPressed(5);
+                case NUMPAD6 -> nbPressed(6);
+                case NUMPAD7 -> nbPressed(7);
+                case NUMPAD8 -> nbPressed(8);
+                case NUMPAD9 -> nbPressed(9);
 
                 case BACK_SPACE -> {
                     if (annotating)
@@ -325,19 +345,21 @@ public class GameController {
         if (game.isValidated())
             gameBoard.getChildren().remove(gameBoard.getChildren().size() - 2, gameBoard.getChildren().size());
         game.restart();
+        updateStopWatch();
+        stopwatchRunning.play();
         updateAllCases(screenSize);
     }
 
     @FXML
     private void pause(MouseEvent event) {
-        //timer stop
-        //timer required
+        game.getStopWatch().pause();
+        stopwatchRunning.pause();
     }
 
     @FXML
     private void reprendre(MouseEvent event) {
-        //timer play
-        //timer required
+        game.getStopWatch().resume();
+        stopwatchRunning.play();
     }
 
     @FXML
@@ -362,6 +384,8 @@ public class GameController {
     private void validate(MouseEvent event) {
         if (!game.isValidated()) {
             finished(game.validate());
+            game.getStopWatch().stop();
+            stopwatchRunning.stop();
         }
     }
 
@@ -388,15 +412,10 @@ public class GameController {
             img.setTranslateY(-100);
 
             Label labelTimer = new Label();
-            labelTimer.setText("39.56 min");
+            labelTimer.setText(game.getStopWatch().toString());
             labelTimer.setStyle(
                     "-fx-background-color:rgba(31,31,31,0.95);-fx-font-size:30px;-fx-padding: 20;-fx-text-fill: white;-fx-border-width: 3px;-fx-border-color: white");
             labelTimer.setTranslateY(screenSize / 12);
-
-//            Label labelScore = new Label();
-//            labelScore.setText("9670 points");
-//            labelScore.setStyle("-fx-background-color:rgba(31,31,31,0.95);-fx-font-size:30px;-fx-padding: 20;-fx-text-fill: white;-fx-border-width: 3px;-fx-border-color: white");
-//            labelScore.setTranslateY(150);
 
             Task<Void> sleep500ms = new Task<>() {
                 @Override
@@ -411,22 +430,8 @@ public class GameController {
             };
             sleep500ms.setOnSucceeded(workerStateEvent -> gameBoard.getChildren().add(labelTimer));
 
-//            Task<Void> sleep1000ms = new Task<>() {
-//                @Override
-//                protected Void call() {
-//                    try {
-//                        Thread.sleep(1000);
-//                    } catch (InterruptedException e) {
-//                        e.printStackTrace();
-//                    }
-//                    return null;
-//                }
-//            };
-//            sleep1000ms.setOnSucceeded(workerStateEvent -> gameBoard.getChildren().add(labelScore));
-
             gameBoard.getChildren().add(img);
             new Thread(sleep500ms).start();
-//            new Thread(sleep1000ms).start();
         }
     }
 
@@ -545,6 +550,7 @@ public class GameController {
 
     @FXML
     private void mainMenu(MouseEvent event) throws IOException {
+        stopwatchRunning.stop();
         FXMLLoader gameLoader = new FXMLLoader(getClass().getResource("/fr.umontpellier.iut.M3302/fxml/MainMenu.fxml"));
 
         Parent gamePane = gameLoader.load();

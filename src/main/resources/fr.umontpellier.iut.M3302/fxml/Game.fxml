@@ -22,8 +22,9 @@
       </StackPane>
    </center>
    <right>
-       <VBox alignment="CENTER" prefWidth="250.0" spacing="10.0" BorderPane.alignment="BOTTOM_LEFT">
-           <Label prefHeight="52.0" prefWidth="100.0" text="TIME : 00:00" textAlignment="CENTER">
+   <VBox alignment="CENTER" prefWidth="250.0" spacing="10.0" BorderPane.alignment="BOTTOM_LEFT">
+           <Label fx:id="stopWatchDisplay" prefHeight="52.0" prefWidth="100.0" text="0h 0min 0s"
+                  textAlignment="CENTER">
                <font>
                    <Font size="18.0"/>
                </font>

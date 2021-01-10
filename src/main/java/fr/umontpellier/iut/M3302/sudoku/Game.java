@@ -10,6 +10,7 @@ public class Game {
     private final Generator generator;
     private final Checker checker;
     private final Solver solver;
+    private final StopWatch stopWatch;
     private Case[][] cases;
     private boolean solved = false;
     private boolean validated = false;
@@ -20,6 +21,8 @@ public class Game {
         this.checker = checker;
         this.solver = solver;
         cases = this.generator.generate();
+        stopWatch = new StopWatch();
+        stopWatch.start();
     }
 
     public Case getCase(int i, int j) {
@@ -69,6 +72,7 @@ public class Game {
         validated = false;
         solved = false;
         cases = this.generator.generate();
+        stopWatch.reset();
     }
 
     public void solve() {
@@ -126,7 +130,25 @@ public class Game {
             cases[i][j].toggleNote(tmpValue);
         else
             cases[i][j].toggleNote(value);
+    }
 
+    public void play() {
+        stopWatch.start();
+    }
 
+    public void resume() {
+        stopWatch.resume();
+    }
+
+    public void pause() {
+        stopWatch.pause();
+    }
+
+    public void stop() {
+        stopWatch.stop();
+    }
+
+    public StopWatch getStopWatch() {
+        return stopWatch;
     }
 }
