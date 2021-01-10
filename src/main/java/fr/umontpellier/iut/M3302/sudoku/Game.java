@@ -68,11 +68,22 @@ public class Game {
         return cases[i][j].getValue() != 0;
     }
 
-    public void restart() {
+    public void newGame() {
         validated = false;
         solved = false;
         cases = this.generator.generate();
         stopWatch.reset();
+    }
+
+    public void restart() {
+        validated = false;
+        solved = false;
+        for (Case[] c : cases) {
+            for (Case c1 : c) {
+                if (!c1.isInitial())
+                    c1.setValue(0);
+            }
+        }
     }
 
     public void solve() {

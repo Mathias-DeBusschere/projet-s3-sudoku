@@ -6,6 +6,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
@@ -17,10 +18,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
@@ -202,23 +200,12 @@ public class GameController {
     }
 
     public void resize(double size) {
-//        double width = stage.getWidth();
-//        double height = stage.getHeight();
-//        double smallestBorder = Math.min(stage.getHeight() * 0.9, stage.getWidth() * 750 / 900 * 0.9);
         screenSize = min(((BorderPane) gameBoard.getParent()).getHeight() * 0.9,
                 ((BorderPane) gameBoard.getParent()).getWidth() * 0.9);
         gameBoard.setPrefSize(screenSize, screenSize);
         gameBoard.getChildren().remove(1, gameBoard.getChildren().size());
         printBlockSeparator(screenSize);
         updateAllCases(screenSize);
-//        for (int i = 0; i < ((GridPane) gameBoard.getChildren().get(0)).getChildren().size(); i++) {
-//            StackPane stackPane = ((StackPane) ((GridPane) (gameBoard.getChildren().get(0))).getChildren().get(i));
-//            stackPane.setPrefSize(value / game.getSize(), value / game.getSize());
-//            stackPane.setStyle(stackPane.getStyle() + "-fx-font-size: " + ((int) value / game.getSize() / 3) + ";");
-//
-//        }
-//        gameBoard.getChildren().get(0);
-//        System.out.println(gameBoard.getChildren());
     }
 
     public void shortcuts(KeyEvent keyEvent) throws Exception {
@@ -323,7 +310,7 @@ public class GameController {
                     if (game.isValidated())
                         gameBoard.getChildren()
                                 .remove(gameBoard.getChildren().size() - 2, gameBoard.getChildren().size());
-                    game.restart();
+                    game.newGame();
                 }
 
                 case M -> {
@@ -342,9 +329,9 @@ public class GameController {
 
     @FXML
     private void restart(MouseEvent event) {
-        if (game.isValidated())
-            gameBoard.getChildren().remove(gameBoard.getChildren().size() - 2, gameBoard.getChildren().size());
-        game.restart();
+        gameBoard.getChildren().remove(1, gameBoard.getChildren().size());
+        printBlockSeparator(screenSize);
+        game.newGame();
         updateStopWatch();
         stopwatchRunning.play();
         updateAllCases(screenSize);
@@ -432,6 +419,41 @@ public class GameController {
 
             gameBoard.getChildren().add(img);
             new Thread(sleep500ms).start();
+        } else {
+            ImageView img =
+                    new ImageView(new Image(
+                            getClass().getResourceAsStream("/fr.umontpellier.iut.M3302/images/failure.png")));
+            img.setPreserveRatio(true);
+            img.setFitWidth(screenSize - (screenSize / game.getSize()));
+            img.setTranslateY(-100);
+
+            Button newGame = new Button();
+            newGame.setText("Nouvelle Partie");
+            newGame.setStyle(
+                    "-fx-background-color:rgba(31,31,31,0.95);-fx-font-size:20px;-fx-padding: 20;-fx-text-fill: white;-fx-border-width: 3px;-fx-border-color: white");
+            newGame.setOnMouseClicked(this::restart);
+
+            Button reset = new Button();
+            reset.setText("Recommencer");
+            reset.setStyle(
+                    "-fx-background-color:rgba(31,31,31,0.95);-fx-font-size:20px;-fx-padding: 20;-fx-text-fill: white;-fx-border-width: 3px;-fx-border-color: white");
+            reset.setOnMouseClicked(event -> {
+                gameBoard.getChildren().remove(gameBoard.getChildren().size() - 2, gameBoard.getChildren().size());
+                game.restart();
+                updateStopWatch();
+                stopwatchRunning.play();
+                updateAllCases(screenSize);
+            });
+
+            HBox hBox = new HBox();
+            hBox.getChildren().add(0, newGame);
+            hBox.getChildren().add(1, reset);
+            hBox.setSpacing(10.0);
+
+            hBox.setTranslateY(screenSize / 2 - 150);
+            hBox.setAlignment(Pos.CENTER);
+            gameBoard.getChildren().add(img);
+            gameBoard.getChildren().add(hBox);
         }
     }
 
