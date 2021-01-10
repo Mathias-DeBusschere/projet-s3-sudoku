@@ -21,7 +21,7 @@
             <Text text="Le but du jeu est de remplir toutes les cases avec des chiffres allant de 1 à 9. " />
             <Text text="Cependant, un chiffre ne doit figurer qu'une seule fois parmi sa ligne, sa colonne et son carré de 9 cases." />
             <Text text="Chaque ligne, chaque colonne et chaque carré de 3x3 cases doivent alors contenir tous les chiffres de 1 à 9." />
-            <Text text="La difficulté choisie fait varier le nombre de cases à remplir. Plus c'est difficile, plus vous devez remplir de cases."></Text>
+            <Text text="Plus la difficulté est élevée, plus vous aurez de cases à remplir."></Text>
             <Text text="Des indices sont à votre disposition, leur aide varie selon la difficulté du jeu.">
                <VBox.margin>
                   <Insets top="30.0" />
@@ -39,7 +39,7 @@
    </center>
    <bottom>
       <Button text="Retour" BorderPane.alignment="CENTER"
-              fx:id="mainMenu" mnemonicParsing="false" onMouseClicked="#mainMenu" prefHeight="36.0"
+              mnemonicParsing="false" onMouseClicked="#mainMenu" prefHeight="36.0"
               prefWidth="100.0" style="-fx-background-color: white;">
          <BorderPane.margin>
             <Insets bottom="20.0" />
