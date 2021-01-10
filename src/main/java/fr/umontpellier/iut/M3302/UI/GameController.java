@@ -93,6 +93,7 @@ public class GameController {
 
         caseClicked(0, 0);
         printBlockSeparator(screenSize);
+        updateAllCases(size);
     }
 
     public void caseClicked(int i, int j) {
