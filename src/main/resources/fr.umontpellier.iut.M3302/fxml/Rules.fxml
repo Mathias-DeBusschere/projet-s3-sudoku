@@ -17,24 +17,24 @@
    </top>
    <center>
       <VBox alignment="CENTER_LEFT" style="-fx-font-size: 19.0;">
-         <children>
-            <Text text="Le but du jeu est de remplir toutes les cases avec des chiffres allant de 1 à 9. " />
-            <Text text="Cependant, un chiffre ne doit figurer qu'une seule fois parmi sa ligne, sa colonne et son carré de 9 cases." />
-            <Text text="Chaque ligne, chaque colonne et chaque carré de 3x3 cases doivent alors contenir tous les chiffres de 1 à 9." />
-            <Text text="Plus la difficulté est élevée, plus vous aurez de cases à remplir."></Text>
-            <Text text="Des indices sont à votre disposition, leur aide varie selon la difficulté du jeu.">
-               <VBox.margin>
-                  <Insets top="30.0" />
-               </VBox.margin></Text>
-            <Text text="Vous pouvez aussi activer le mode note pour garder en mémoire les éventuels chiffres qui vont dans une case." />
-            <Text text="Ces règles sont extensibles aux différentes tailles de grille.">
-               <VBox.margin>
-                  <Insets top="30.0" />
-               </VBox.margin></Text>
-         </children>
          <BorderPane.margin>
-            <Insets left="20.0" right="30.0" />
+            <Insets left="20.0" right="30.0"/>
          </BorderPane.margin>
+         <Text text="Le but du jeu est de remplir toutes les cases avec des chiffres allant de 1 à 9. "/>
+         <Text text="Cependant, un chiffre ne doit figurer qu'une seule fois parmi sa ligne, sa colonne et son carré de 9 cases."/>
+         <Text text="Chaque ligne, chaque colonne et chaque carré de 3x3 cases doivent alors contenir tous les chiffres de 1 à 9."/>
+         <Text text="Plus la difficulté est élevée, plus vous aurez de cases à remplir."/>
+         <Text text="Des indices sont à votre disposition, leur aide varie selon la difficulté du jeu.">
+            <VBox.margin>
+               <Insets top="30.0"/>
+            </VBox.margin>
+         </Text>
+         <Text text="Vous pouvez aussi activer le mode note pour garder en mémoire les éventuels chiffres qui vont dans une case."/>
+         <Text text="Ces règles sont extensibles aux différentes tailles de grille.">
+            <VBox.margin>
+               <Insets top="30.0"/>
+            </VBox.margin>
+         </Text>
       </VBox>
    </center>
    <bottom>
