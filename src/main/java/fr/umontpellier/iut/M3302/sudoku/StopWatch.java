@@ -1,9 +1,9 @@
 package fr.umontpellier.iut.M3302.sudoku;
 
 public class StopWatch {
-    private transient long startTime;
-    private transient long stopTime;
-    private transient boolean running;
+    private long startTime;
+    private long stopTime;
+    private boolean running;
     private long elapsedTimeMillis;
 
     public StopWatch() {
@@ -43,10 +43,14 @@ public class StopWatch {
 
     @Override
     public String toString() {
-        return (int)getElapsedTimeSecs()/3600 + " h " + (int)(getElapsedTimeSecs()%3600)/60 + " min " + (int)(getElapsedTimeSecs()%3600)%60 + " sec";
+        return (int)getElapsedTimeSecs()/3600 + " h " + (int)(getElapsedTimeSecs()%3600)/60 + " m " + (int)(getElapsedTimeSecs()%3600)%60 + " s";
     }
 
     public void reset() {
         start();
+    }
+
+    public boolean isRunning() {
+        return running;
     }
 }

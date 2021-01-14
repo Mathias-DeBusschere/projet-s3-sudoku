@@ -20,7 +20,9 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Line;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -155,7 +157,7 @@ public class GameController {
 
     public void updateStopWatch() {
         stopWatchDisplay.setText((int) game.getStopWatch().getElapsedTimeSecs() / 3600 + "h " +
-                (int) (game.getStopWatch().getElapsedTimeSecs() % 3600) / 60 + "min " +
+                (int) (game.getStopWatch().getElapsedTimeSecs() % 3600) / 60 + "m " +
                 (int) (game.getStopWatch().getElapsedTimeSecs() % 3600) % 60 + "s");
     }
 
@@ -210,6 +212,7 @@ public class GameController {
 
     public void shortcuts(KeyEvent keyEvent) throws Exception {
         if (game.getCase(currentRow, currentCol) != null) {
+            System.out.println("key pressed: " + keyEvent.getCode());
             switch (keyEvent.getCode()) {
                 case DIGIT0 -> nbPressed(0);
                 case DIGIT1 -> nbPressed(1);
@@ -339,14 +342,26 @@ public class GameController {
 
     @FXML
     private void pause(MouseEvent event) {
-        game.getStopWatch().pause();
-        stopwatchRunning.pause();
+        if (!game.isPaused()) {
+            stopWatchDisplay.setTextFill(Color.RED);
+            Rectangle rectangle = new Rectangle();
+            rectangle.setFill(Color.color(0, 0, 0, 0.5));
+            rectangle.setHeight(screenSize);
+            rectangle.setWidth(screenSize);
+            gameBoard.getChildren().add(rectangle);
+            game.getStopWatch().pause();
+            stopwatchRunning.pause();
+        }
     }
 
     @FXML
     private void reprendre(MouseEvent event) {
-        game.getStopWatch().resume();
-        stopwatchRunning.play();
+        if (game.isPaused()) {
+            stopWatchDisplay.setTextFill(Color.BLACK);
+            gameBoard.getChildren().remove(gameBoard.getChildren().size() - 1);
+            game.getStopWatch().resume();
+            stopwatchRunning.play();
+        }
     }
 
     @FXML
@@ -472,15 +487,17 @@ public class GameController {
     }
 
     public void nbPressed(int value) throws Exception {
-        if (annotating) {
-            if (value <= game.getSize())
-                game.toggleNote(value, currentRow, currentCol);
-            else
-                throw new Exception("not a correct value");
-        } else
-            game.setValue(value, currentRow, currentCol);
-        playWriteSound();
-        updateAllCases(screenSize);
+        if (!game.isPaused()) {
+            if (annotating) {
+                if (value <= game.getSize())
+                    game.toggleNote(value, currentRow, currentCol);
+                else
+                    throw new Exception("not a correct value");
+            } else
+                game.setValue(value, currentRow, currentCol);
+            playWriteSound();
+            updateAllCases(screenSize);
+        }
     }
 
     public void playWriteSound() {

@@ -82,6 +82,9 @@ public class Game {
             for (Case c1 : c) {
                 if (!c1.isInitial())
                     c1.setValue(0);
+                c1.setError(false);
+                c1.setHint(false);
+                c1.setAlgoSolved(false);
             }
         }
     }
@@ -161,5 +164,9 @@ public class Game {
 
     public StopWatch getStopWatch() {
         return stopWatch;
+    }
+
+    public boolean isPaused() {
+        return !stopWatch.isRunning();
     }
 }
